@@ -1,0 +1,14 @@
+{
+  "NewConfirmed" : "Daily confirmed",
+  "TotalConfirmed" : "Total confirmed",
+  "NewDeaths" : "Daily death",
+  "TotalDeaths" : "Total deaths",
+  "NewRecovered" : "Daily recovered",
+  "TotalRecovered" : "Total recovered",
+  "100kTotalConfirmed" : "Total confirmed on 100k",
+  "100kTotalDead" : "Total deaths on 100k",
+  "100kTotalRecovered" : "Total recovered on 100k",
+  "100kDailyConfirmed" : "Daily confirmed on 100k",
+  "100kDailyDead" : "Daily deaths on 100k",
+  "100kDailyRecovered" : "Daily recovered on 100k"
+}

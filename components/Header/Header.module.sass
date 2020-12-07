@@ -1,0 +1,45 @@
+@import ../../styles/partials/colors
+@import ../../styles/partials/displays
+@import ../../styles/partials/fonts
+  
+.root
+  +flex()
+  height: 50px
+  width: 100%
+  background-color: $dark-blue
+  position: relative
+
+.logo
+  width: 45px
+  height: 45px
+  margin: 0
+  background-image: url(/virus.gif)
+
+.title
+  height: 100%
+  +flex
+
+  h1
+    margin: 0
+    +mainFont(22px)
+
+.ru
+  width: 30px
+  height: 30px
+  background-image: url(/icons/russia.png)
+  background-size: cover
+
+.en
+  width: 30px
+  height: 30px
+  background-image: url(/icons/english.png)
+  background-size: cover
+
+.language
+  position: absolute
+  top: 5px
+  right: 20px
+  height: 40px
+
+#dropdown-basic-button
+  background: none !important
