@@ -5,10 +5,14 @@
   "TotalDeaths" : "Всего умершие",
   "NewRecovered" : "Новые выздоровевшие",
   "TotalRecovered" : "Всего выздоровевших",
-  "100kTotalConfirmed" : "Всего заболевших на 100 тыс.",
-  "100kTotalDead" : "Всего умерших на 100 тыс.",
-  "100kTotalRecovered" : "Всего выздоровевших на 100 тыс.",
-  "100kDailyConfirmed" : "Заболевших за день на 100 тыс.",
-  "100kDailyDead" : "Умерших за день на 100 тыс.",
-  "100kDailyRecovered" : "Выздоровевших за день на 100 тыс."
+  "HundredKTotalConfirmed" : "Всего заболевших на 100 тыс.",
+  "HundredKTotalDead" : "Всего умерших на 100 тыс.",
+  "HundredKTotalRecovered" : "Всего выздоровевших на 100 тыс.",
+  "HundredKDailyConfirmed" : "Заболевших за день на 100 тыс.",
+  "HundredKDailyDead" : "Умерших за день на 100 тыс.",
+  "HundredKDailyRecovered" : "Выздоровевших за день на 100 тыс.",
+  "Allworld" : "Весь мир",
+  "Find" : "Найти",
+  "ChooseCountry" : "Выбрать страну",
+  "Country" : "Страна"
 }
