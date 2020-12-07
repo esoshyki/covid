@@ -12,5 +12,6 @@ export default {
     }
   }),
   getContries: async () => await axios.get(covidApi + "countries"),
-  getWorldPopulation: async () => await axios.get(populationApi + worldPopulation)
+  getByCountry: async country => await axios.get(`${covidApi}country/${country}/status/confirmed`),
+  getWorldPopulation: async () => await axios.get(populationApi + worldPopulation),
 }

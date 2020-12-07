@@ -20,6 +20,7 @@ const GlobalTable = ({data, state, setState}) => {
 
   const [toFind, setToFind] = useState(false);
   const [contries, setCountries] = useState(null);
+  const [covidData, setCovidData] = useState(data);
 
   const setCountry = (country) => {
     setState({
@@ -55,7 +56,6 @@ const GlobalTable = ({data, state, setState}) => {
     animation(cityInput.current, styles.fadeOut)
   }, [toFind])
 
-
   const globalLine = (key, value) => {
 
     return (key !== 'population' && key !== "countries") ? (
@@ -67,7 +67,7 @@ const GlobalTable = ({data, state, setState}) => {
   }
   
   return <div ref={root} className={styles.root}>
-  {data && <div className className={styles.global}>
+  {covidData && <div className className={styles.global}>
     <ListGroup className={styles["list-group"]}>
       {data && Object.keys(data).map(key => globalLine(key, data[key])) }
       {globalLine("HundredKTotalConfirmed", get100k(TotalConfirmed))}
@@ -79,13 +79,13 @@ const GlobalTable = ({data, state, setState}) => {
       <ListGroup.Item action variant="dark" onClick={findCountrie} className={styles['global-line']}>
         <span className={styles.dataKey}>{state.country || t("Allworld")}</span>
       </ListGroup.Item>
-        <div ref={cityInput}>
+        <div className={styles.countries} ref={cityInput}>
           {toFind && <Counties contries={contries} setCountry={setCountry}/>}
       </div>
     </ListGroup>
   </div>}
     
-  {!data && <div className={styles.loading}>Loading...</div>}
+  {!covidData && <div className={styles.loading}>Loading...</div>}
 </div>
 } 
 

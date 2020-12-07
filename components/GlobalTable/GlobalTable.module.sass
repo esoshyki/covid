@@ -40,14 +40,19 @@
   margin-left: 20px
 
 .dataKey, .dataValue
-  font-size: 0.95vw
+  font-size: 18px
 
 .list-group
   width: 100% !important
   height: 100% !important
-  display: grid
-  grid-template-rows: repeat(12, 1fr)
+  +flex(column, flex-start, center)  
 
 .dropdown
   height: 400px
   overflow-y: scroll
+
+.countries
+  width: 100%
+
+  div.dropdown
+    width: 100%

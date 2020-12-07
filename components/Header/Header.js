@@ -7,24 +7,28 @@ import { useState } from 'react'
 
 const Header = () => {
 
-    useTranslation();
-    const [language, setLanguage] = useState(i18n.language || 'en');
+  useTranslation();
+  const [language, setLanguage] = useState(i18n.language || 'en');
 
-    const handleChange = eventKey => {
-        setLanguage(eventKey)
-        i18n.changeLanguage(eventKey)
-    }
+  const handleChange = eventKey => {
+    setLanguage(eventKey)
+    i18n.changeLanguage(eventKey)
+  }
 
-    return <header className={style.root}>
-        <img alt="logo" src="/virus.gif" className={style.logo} />
-        <div className={style.title}>
-            <h1>Covid Center</h1>
-        </div>
-        <DropdownButton id="dropdown-basic-button" className={style.language} title={language}>
-            <DropdownItem eventKey='en' onSelect={handleChange}><div className={style.en}></div></DropdownItem>
-            <DropdownItem eventKey='ru' onSelect={handleChange}><div className={style.ru}></div></DropdownItem>
-        </DropdownButton>
-    </header>
+  return <header className={style.root}>
+    <img alt="logo" src="/virus.gif" className={style.logo} />
+    <div className={style.title}>
+    	<h1>Covid Center</h1>
+    </div>
+    <DropdownButton 
+			id="dropdown-basic-button"
+			size="sm"
+			className={style.language}
+      title={language} >
+			<DropdownItem eventKey='en' onSelect={handleChange}><div className={style.en}></div></DropdownItem>
+			<DropdownItem eventKey='ru' onSelect={handleChange}><div className={style.ru}></div></DropdownItem>
+    </DropdownButton>
+  </header>
 }
 
 export default Header

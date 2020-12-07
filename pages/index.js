@@ -10,7 +10,6 @@ export default function Home({data}) {
     country: null
   })
 
-  console.log(data)
   return (
     <div>
       <Head>

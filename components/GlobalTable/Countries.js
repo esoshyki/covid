@@ -15,10 +15,10 @@ export default function Counties ({contries, setCountry}) {
   const handleChange = ({target} )=> setFiltString(target.value)
 
   return (
-    <div>
+    <div className={styles.countries}>
       {contries && (
-        <Dropdown onSelect={chooseCountry}>
-          <Dropdown.Toggle variant="secondary">
+        <Dropdown onSelect={chooseCountry} className={styles.countries}>
+          <Dropdown.Toggle variant="primary" className={styles.countries}>
             {t("ChooseCountry")}
             <InputGroup className="mb-3">
             <FormControl onChange={handleChange}
