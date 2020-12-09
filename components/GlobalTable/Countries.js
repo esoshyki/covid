@@ -28,6 +28,7 @@ export default function Counties ({contries, setCountry}) {
           </InputGroup>
           </Dropdown.Toggle>
             <Dropdown.Menu className={styles.dropdown}>
+              <Dropdown.Item eventKey={null} key={'null'}>{t("Allworld")}</Dropdown.Item>
               {contries
                 .filter(con => con.toLowerCase().includes(filtString.toLowerCase()))
                 .map(con => <Dropdown.Item eventKey={con} key={con}>{con}</Dropdown.Item>)}

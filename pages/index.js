@@ -2,10 +2,9 @@ import Head from 'next/head'
 import styles from '../styles/Home.module.sass'
 import Layout from '../components/Layout/Layout'
 import GlobalTable from '../components/GlobalTable/GlobalTable'
-import covidService from '../services/covid.service'
 import { useState } from 'react'
 
-export default function Home({data}) {
+export default function Home() {
   const [state, setState] = useState({
     country: null
   })
@@ -20,7 +19,7 @@ export default function Home({data}) {
       <Layout>
         <div className={styles.container}>
           <div className={styles.leftPart}>
-            <GlobalTable data={data} state={state} setState={setState}/>
+            <GlobalTable state={state} setState={setState}/>
           </div>
         </div>
       </Layout>
@@ -32,20 +31,5 @@ export default function Home({data}) {
   )
 }
 
-Home.getInitialProps = async ctx => {
-  const covid = await covidService.getSummary();
-  const population = await covidService.getWorldPopulation();
-  const covidData = await covid.data;
-  const populationData = await population.data;
 
-  console.log(populationData)
-
-  return {
-    data: {
-      ...covidData.Global,
-      countries: covidData.Countries.map(coun => coun.Country),
-      population: populationData.reduce((acc, cur) => acc + cur.population, 0)
-    }
-  }
-}
 
