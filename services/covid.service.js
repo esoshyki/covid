@@ -1,8 +1,10 @@
+import axios from 'axios'
+
 const covidApi = process.env.covidApi;
 const populationApi = process.env.populationApi;
 const accessToken = '5cf9dfd5-3449-485e-b5ae-70a60e997864';
 const worldPopulation = "all?fields=name;population;flag"
-import axios from 'axios'
+
 
 export default {
   getSummary: async () => await axios(covidApi + "summary", {
@@ -12,6 +14,10 @@ export default {
     }
   }),
   getContries: async () => await axios.get(covidApi + "countries"),
-  getByCountry: async country => await axios.get(`${covidApi}country/${country}/status/confirmed`),
+  getByCountry: async ({type="dayone", country, status}) => await axios.get(`${covidApi}${type}/country/${country}/status/${status}`),
+  getConfirmedByCountry: async country => await axios.get(`${covidApi}total/country/${country}/status/confirmed`),
+  getDeathsByCountry: async country => await axios.get(`${covidApi}total/country/${country}/status/deaths`),
+  getRecoveredByCountry: async country => await axios.get(`${covidApi}total/country/${country}/status/recovered`),
   getWorldPopulation: async () => await axios.get(populationApi + worldPopulation),
+  getCountryPopulation: async (country) => await axios.get(populationApi + 'name/' + country)
 }

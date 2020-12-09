@@ -4,13 +4,10 @@ import styles from './GlobalTable.module.sass'
 import animation from '../../lib/animation'
 import toNiceNum from '../../lib/toniceNum'
 import { useTranslation } from 'react-i18next';
-import InputGroup from 'react-bootstrap/InputGroup'
-import Button from 'react-bootstrap/Button'
-import FormControl from 'react-bootstrap/FormControl'
-import Contries from './Countries'
 import Counties from './Countries'
-import axios from 'axios'
 import covidService from '../../services/covid.service'
+import getSumCases from '../../lib/getSumCases'
+
 
 
 const GlobalTable = ({data, state, setState}) => {
@@ -20,7 +17,6 @@ const GlobalTable = ({data, state, setState}) => {
 
   const [toFind, setToFind] = useState(false);
   const [contries, setCountries] = useState(null);
-  const [covidData, setCovidData] = useState(data);
 
   const setCountry = (country) => {
     setState({
@@ -38,6 +34,16 @@ const GlobalTable = ({data, state, setState}) => {
     TotalRecovered, 
     population } = data;
 
+  const [covidData, setCovidData] = useState({
+    confirmed: TotalConfirmed,
+    day_confirmed: NewConfirmed,
+    deaths: TotalDeaths,
+    day_deaths: NewDeaths,
+    recovered: TotalRecovered,
+    day_recovered: NewRecovered,
+    population: population
+  })
+
   const get100k = (value, x=0) => {
     return Math.round((+value * (10 ** 5)) / (+population)) / (10 ** x)}
 
@@ -50,11 +56,33 @@ const GlobalTable = ({data, state, setState}) => {
 
   useEffect(() => {
     animation(root.current, styles.fadeOut)
-  }, [data]);
+  }, [covidData]);
 
   useEffect(() => {
     animation(cityInput.current, styles.fadeOut)
   }, [toFind])
+
+  useEffect(async() => {
+    if (!state.country) return;
+    const obj = {};
+    const keys = ['confirmed', 'deaths', 'recovered']
+    const [ confirmed, deaths, recovered ] = keys;
+    const { country } = state;
+    await Promise.all([
+      covidService.getByCountry({country, status: confirmed}),
+      covidService.getByCountry({country, status: deaths}),
+      covidService.getByCountry({country, status: recovered}),       
+    ]).then(values => values.map(value => value.data))
+      .then(dataArrays => {
+        Object.assign(obj, getSumCases(dataArrays, ...keys))
+      })
+    .catch(err => console.log(err));
+    const population = await covidService.getCountryPopulation(country)
+    obj.population = population.data[0]?.population;
+    setCovidData({...obj})
+  }, [state])
+
+
 
   const globalLine = (key, value) => {
 
@@ -69,13 +97,13 @@ const GlobalTable = ({data, state, setState}) => {
   return <div ref={root} className={styles.root}>
   {covidData && <div className className={styles.global}>
     <ListGroup className={styles["list-group"]}>
-      {data && Object.keys(data).map(key => globalLine(key, data[key])) }
-      {globalLine("HundredKTotalConfirmed", get100k(TotalConfirmed))}
-      {globalLine("HundredKTotalDead", get100k(TotalDeaths))}
-      {globalLine("HundredKTotalRecovered", get100k(TotalRecovered))}
-      {globalLine("HundredKDailyConfirmed", get100k(NewConfirmed))}
-      {globalLine("HundredKDailyDead", get100k(NewDeaths, 4))}
-      {globalLine("HundredKDailyRecovered", get100k(NewRecovered, 2))}
+      {covidData && Object.keys(covidData).map(key => globalLine(key, covidData[key])) }
+      {globalLine("HundredKTotalConfirmed", get100k(covidData.confirmed))}
+      {globalLine("HundredKTotalDead", get100k(covidData.deaths))}
+      {globalLine("HundredKTotalRecovered", get100k(covidData.recovered))}
+      {globalLine("HundredKDailyConfirmed", get100k(covidData.day_confirmed))}
+      {globalLine("HundredKDailyDead", get100k(covidData.day_deaths, 4))}
+      {globalLine("HundredKDailyRecovered", get100k(covidData.day_recovered, 2))}
       <ListGroup.Item action variant="dark" onClick={findCountrie} className={styles['global-line']}>
         <span className={styles.dataKey}>{state.country || t("Allworld")}</span>
       </ListGroup.Item>

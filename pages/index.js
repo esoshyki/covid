@@ -37,7 +37,8 @@ Home.getInitialProps = async ctx => {
   const population = await covidService.getWorldPopulation();
   const covidData = await covid.data;
   const populationData = await population.data;
-  console.log(covidData)
+
+  console.log(populationData)
 
   return {
     data: {
