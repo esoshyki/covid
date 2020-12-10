@@ -1,10 +1,10 @@
 {
-  "day_Confirmed" : "Новые зараженные",
-  "Confirmed" : "Всего зараженные",
-  "day_Deaths" : "Новые умершие",
-  "Deaths" : "Всего умершие",
-  "day_Recovered" : "Новые выздоровевшие",
-  "Recovered" : "Всего выздоровевших",
+  "NewConfirmed" : "Новые зараженные",
+  "TotalConfirmed" : "Всего зараженные",
+  "NewDeaths" : "Новые умершие",
+  "TotalDeaths" : "Всего умершие",
+  "NewRecovered" : "Новые выздоровевшие",
+  "TotalRecovered" : "Всего выздоровевших",
   "HundredKTotalConfirmed" : "Всего заболевших на 100 тыс.",
   "HundredKTotalDead" : "Всего умерших на 100 тыс.",
   "HundredKTotalRecovered" : "Всего выздоровевших на 100 тыс.",
@@ -14,5 +14,6 @@
   "Allworld" : "Весь мир",
   "Find" : "Найти",
   "ChooseCountry" : "Выбрать страну",
-  "Country" : "Страна"
+  "Country" : "Страна",
+  "Loading" : "Загрузка..."
 }

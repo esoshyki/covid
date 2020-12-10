@@ -5,8 +5,7 @@ import animation from '../../lib/animation'
 import toNiceNum from '../../lib/toniceNum'
 import { useTranslation } from 'react-i18next';
 import Counties from './Countries'
-import covidService from '../../services/covid.service'
-import getCountryData from '../../lib/getCountryData'
+import DTO from './TableDTO';
 
 const GlobalTable = ({worldData, setCountry, country, countries}) => {
   const { t } = useTranslation();
@@ -15,23 +14,6 @@ const GlobalTable = ({worldData, setCountry, country, countries}) => {
 
   const [toFind, setToFind] = useState(false);
   const [activeData, setActiveData] = useState(worldData)
-  const [contries, setCountries] = useState(countries?.sort((a, b) => a.Country - b.Country))
-  const [population, setPopulation] = useState(0);
-
-  useEffect(() => {
-    if (!country) {
-      const newPopulation = countries?.reduce((acc, cur) => {
-        return acc + cur.Premium.CountryStats.Population
-      }, 0)
-      setPopulation(newPopulation)
-    } else {
-      console.log(country)
-    }
-  }, [country])
-
-  const get100k = (value, x=0) => {
-    return "" + (Math.round((+value * (10 ** 5) * (10 ** x)) / (+population))) / (10 ** x)
-  }
 
   const findCountrie = async () => {
     setToFind(!toFind)
@@ -47,46 +29,36 @@ const GlobalTable = ({worldData, setCountry, country, countries}) => {
 
   useEffect(async() => {
     if (!country) {
-      setActiveData({...worldData})
+      setActiveData(worldData)
     } else {
-      const {
-        Confirmed, Deaths, Recovered, NewConfirmed, NewDeaths, NewRecovered
-      } = country;
-      setActiveData({
-        Confirmed, Deaths, Recovered, NewConfirmed, NewDeaths, NewRecovered,
-        population: country.Premium.CountryStats.Population     
-      })
+      setActiveData({...country, population: country.Premium.CountryStats.Population})
     }
 
   }, [country])
 
 
 
-  const globalLine = (key, value) => {
-
-    return (key !== 'population' && key !== "Countries") ? (
+  const globalLine = (key, value) => (
       <ListGroup.Item variant ="dark" className={styles['global-line']} key={key}>
         <span className={styles.dataKey}>{t(key) + " : "}</span>
         <span className={styles.dataValue}>{toNiceNum("" + value)}</span>
       </ListGroup.Item>
-    ) : null
-  }
+    )
+
+  const renderData = DTO(activeData)
   
   return <div ref={root} className={styles.root}>
-  {activeData && <div className className={styles.global}>
+  {renderData && <div className className={styles.global}>
     <ListGroup className={styles["list-group"]}>
-      {activeData && Object.keys(activeData).map(key => globalLine(key, activeData[key])) }
-      {globalLine("HundredKTotalConfirmed", get100k(activeData.Confirmed))}
-      {globalLine("HundredKTotalDead", get100k(activeData.Deaths))}
-      {globalLine("HundredKTotalRecovered", get100k(activeData.Recovered))}
-      {globalLine("HundredKDailyConfirmed", get100k(activeData.day_Confirmed))}
-      {globalLine("HundredKDailyDead", get100k(activeData.day_Deaths, 2))}
-      {globalLine("HundredKDailyRecovered", get100k(activeData.day_Recovered))}
+      {Object.entries(renderData).map(([key, value]) => globalLine(key, value)) }
       <ListGroup.Item action variant="dark" onClick={findCountrie} className={styles['global-line']}>
         <span className={styles.dataKey}>{country?.title || t("Allworld")}</span>
       </ListGroup.Item>
         <div className={styles.countries} ref={cityInput}>
-          {toFind && <Counties contries={contries} setCountry={setCountry} setToFind={setToFind}/>}
+          {toFind && <Counties 
+                      countries={countries.sort((a, b) => a.Country > b.Country ? 1 : -1)} 
+                      setCountry={setCountry} 
+                      setToFind={setToFind}/>}
       </div>
     </ListGroup>
   </div>}

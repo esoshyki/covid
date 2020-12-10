@@ -1,10 +1,10 @@
 {
-  "day_Confirmed" : "Daily confirmed",
-  "Confirmed" : "Total confirmed",
-  "day_Deaths" : "Daily death",
-  "Deaths" : "Total deaths",
-  "day_Recovered" : "Daily recovered",
-  "Recovered" : "Total recovered",
+  "NewConfirmed" : "Daily confirmed",
+  "TotalConfirmed" : "Total confirmed",
+  "NewDeaths" : "Daily death",
+  "TotalDeaths" : "Total deaths",
+  "NewRecovered" : "Daily recovered",
+  "TotalRecovered" : "Total recovered",
   "HundredKTotalConfirmed" : "Total confirmed on 100k",
   "HundredKTotalDead" : "Total deaths on 100k",
   "HundredKTotalRecovered" : "Total recovered on 100k",
@@ -14,5 +14,6 @@
   "Allworld" : "All world",
   "Find" : "Find",
   "ChooseCountry" : "Choose country",
-  "Country" : "Country"
+  "Country" : "Country",
+  "Loading" : "Loading..."
 }

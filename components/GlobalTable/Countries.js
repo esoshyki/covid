@@ -5,9 +5,8 @@ import styles from './GlobalTable.module.sass'
 import InputGroup from 'react-bootstrap/InputGroup'
 import FormControl from 'react-bootstrap/FormControl'
 
-export default function Counties ({contries, setCountry, setToFind}) {
+export default function Counties ({countries, setCountry, setToFind}) {
   const { t } = useTranslation();
-  console.log(contries)
 
   const chooseCountry = async (country) => {
     setCountry(country);
@@ -20,7 +19,7 @@ export default function Counties ({contries, setCountry, setToFind}) {
 
   return (
     <div className={styles.countries}>
-      {contries && (
+      {countries && (
         <Dropdown className={styles.countries}>
           <Dropdown.Toggle variant="primary" className={styles.countries}>
             {t("ChooseCountry")}
@@ -33,7 +32,7 @@ export default function Counties ({contries, setCountry, setToFind}) {
           </Dropdown.Toggle>
             <Dropdown.Menu className={styles.dropdown}>
               <Dropdown.Item onClick={() => chooseCountry(null)} key={'null'}>{t("Allworld")}</Dropdown.Item>
-              {contries
+              {countries
                 .sort((a, b) => a.Country > b.Country ? 1 : -1)
                 .filter(con => con.Country.toLowerCase().startsWith(filtString.toLowerCase()))
                 .map(con => <Dropdown.Item 
@@ -44,7 +43,7 @@ export default function Counties ({contries, setCountry, setToFind}) {
             </Dropdown.Menu>
         </Dropdown>
         )}
-      {!contries && `Loading...`}
+      {!countries && t("Loading")}
     </div>
     )
 }

@@ -47,7 +47,12 @@ Home.getInitialProps = async ctx => {
   const data = await response.data;
 
   return ({
-    worldData: data.Global,
+    worldData: {
+      ...data.Global,
+      population: data.Countries.reduce((acc, cur) => {
+        return acc + cur.Premium.CountryStats.Population 
+      }, 0)
+    },
     countries: data.Countries
   })
 }
