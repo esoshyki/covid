@@ -7,8 +7,9 @@ import FormControl from 'react-bootstrap/FormControl'
 
 export default function Counties ({contries, setCountry, setToFind}) {
   const { t } = useTranslation();
+  console.log(contries)
 
-  const chooseCountry = (country) => {
+  const chooseCountry = async (country) => {
     setCountry(country);
     setToFind(false);
   }
@@ -37,10 +38,7 @@ export default function Counties ({contries, setCountry, setToFind}) {
                 .filter(con => con.Country.toLowerCase().startsWith(filtString.toLowerCase()))
                 .map(con => <Dropdown.Item 
                             key={con.Slug}  
-                            onClick={() => chooseCountry({
-                              Slug: con.Slug,
-                              title: con.Country
-                            })}>
+                            onClick={() => chooseCountry(con)}>
                             {con.Country}
                           </Dropdown.Item>)}
             </Dropdown.Menu>
