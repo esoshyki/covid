@@ -14,7 +14,13 @@ export default {
     }
   }),
   getContries: async () => await axios.get(covidApi + "countries"),
-  getByCountry: async ({type="dayone", country, status}) => await axios.get(`${covidApi}${type}/country/${country}/status/${status}`),
+  getByCountry: async ({type="dayone", country}) => await axios(`${covidApi}${type}/country/${country}`, {
+    method: "GET",
+    headers: {
+      'Access-Control-Allow-Origin' : '*',
+      'Access-Control-Allow-Methods' : 'GET',
+    }
+  }),
   getConfirmedByCountry: async country => await axios.get(`${covidApi}total/country/${country}/status/confirmed`),
   getDeathsByCountry: async country => await axios.get(`${covidApi}total/country/${country}/status/deaths`),
   getRecoveredByCountry: async country => await axios.get(`${covidApi}total/country/${country}/status/recovered`),

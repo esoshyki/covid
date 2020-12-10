@@ -5,10 +5,13 @@ import styles from './GlobalTable.module.sass'
 import InputGroup from 'react-bootstrap/InputGroup'
 import FormControl from 'react-bootstrap/FormControl'
 
-export default function Counties ({contries, setCountry}) {
+export default function Counties ({contries, setCountry, setToFind}) {
   const { t } = useTranslation();
 
-  const chooseCountry = (eventKey) => setCountry(eventKey)
+  const chooseCountry = (country) => {
+    setCountry(country);
+    setToFind(false);
+  }
 
   const [filtString, setFiltString] =useState("")
 
@@ -17,7 +20,7 @@ export default function Counties ({contries, setCountry}) {
   return (
     <div className={styles.countries}>
       {contries && (
-        <Dropdown onSelect={chooseCountry} className={styles.countries}>
+        <Dropdown className={styles.countries}>
           <Dropdown.Toggle variant="primary" className={styles.countries}>
             {t("ChooseCountry")}
             <InputGroup className="mb-3">
@@ -28,10 +31,18 @@ export default function Counties ({contries, setCountry}) {
           </InputGroup>
           </Dropdown.Toggle>
             <Dropdown.Menu className={styles.dropdown}>
-              <Dropdown.Item eventKey={null} key={'null'}>{t("Allworld")}</Dropdown.Item>
+              <Dropdown.Item onClick={() => chooseCountry(null)} key={'null'}>{t("Allworld")}</Dropdown.Item>
               {contries
-                .filter(con => con.toLowerCase().includes(filtString.toLowerCase()))
-                .map(con => <Dropdown.Item eventKey={con} key={con}>{con}</Dropdown.Item>)}
+                .sort((a, b) => a.Country > b.Country ? 1 : -1)
+                .filter(con => con.Country.toLowerCase().startsWith(filtString.toLowerCase()))
+                .map(con => <Dropdown.Item 
+                            key={con.Slug}  
+                            onClick={() => chooseCountry({
+                              Slug: con.Slug,
+                              title: con.Country
+                            })}>
+                            {con.Country}
+                          </Dropdown.Item>)}
             </Dropdown.Menu>
         </Dropdown>
         )}
