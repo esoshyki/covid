@@ -36,9 +36,13 @@ svg
 .rsm-marker
   circle
     transition-duration: 0.5s
+    &:hover
+      cursor: pointer
 
-.tootip
-  background: gray
-  color: #fff
-  padding: 12px
-  animation: fade-out 0.5s linear 0s
+.tooltip
+  position: absolute !important
+
+.transform
+  transition-timing-function: ease-in-out
+  transition-duration: 0.5s
+

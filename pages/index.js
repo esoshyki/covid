@@ -2,7 +2,7 @@ import Head from 'next/head'
 import styles from '../styles/Home.module.sass'
 import Layout from '../components/Layout/Layout'
 import GlobalTable from '../components/GlobalTable/GlobalTable'
-import { useEffect, useState } from 'react'
+import { useEffect, useState,  } from 'react'
 import Map from '../components/Map/Map'
 import covidService from '../services/covid.service'
 
@@ -10,8 +10,6 @@ export default function Home({worldData, countries}) {
 
   const [country, setCountry] = useState(null)
   const [data, setData] = useState(worldData);
-
-  console.log(data)
 
   useEffect(() => {
     setData(worldData)
@@ -33,6 +31,7 @@ export default function Home({worldData, countries}) {
             country={country}
             countries={data.countries}/>
           </div>
+
           <Map 
             countries={data.countries} 
             population={data.population} 
