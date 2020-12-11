@@ -1,5 +1,6 @@
 @import ./partials/displays
 @import ./partials/fonts
+@import ./partials/colors
   
 html,
 body 
@@ -25,3 +26,12 @@ svg
   display: inline-block
   width: 100%
 
+.rsm-geography
+  &:hover
+    color: red
+    cursor: pointer
+    fill: $dark-blue
+
+.rsm-marker
+  circle
+    transition-duration: 0.5s
