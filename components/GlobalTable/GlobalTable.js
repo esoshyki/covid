@@ -46,13 +46,13 @@ const GlobalTable = ({worldData, setCountry, country, countries}) => {
     )
 
   const renderData = DTO(activeData)
-  
+
   return <div ref={root} className={styles.root}>
   {renderData && <div className className={styles.global}>
     <ListGroup className={styles["list-group"]}>
       {Object.entries(renderData).map(([key, value]) => globalLine(key, value)) }
       <ListGroup.Item action variant="dark" onClick={findCountrie} className={styles['global-line']}>
-        <span className={styles.dataKey}>{country?.title || t("Allworld")}</span>
+        <span className={styles.dataKey}>{country?.Country || t("Allworld")}</span>
       </ListGroup.Item>
         <div className={styles.countries} ref={cityInput}>
           {toFind && <Counties 

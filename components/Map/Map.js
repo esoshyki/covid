@@ -1,18 +1,31 @@
 import styles from './Map.module.sass';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { ComposableMap, 
   Geographies, 
   Geography, 
   Marker, 
-  ZoomableGroup } from "react-simple-maps"
+  ZoomableGroup, 
+  Annotation } from "react-simple-maps"
 import Coords from './Coords'
 
 const geoUrl =
   "https://raw.githubusercontent.com/zcreativelabs/react-simple-maps/master/topojson-maps/world-110m.json"
 
-export default function Map ({countries, population}) {
+const ToolTip = ({NAME, coords}) => {
+  return (
+  <div className="tootip" style={{
+    top: coords[1],
+    left: coords[0],
+    position: "absolute"
+  }}>
+    {NAME}
+  </div>
+)}
+
+export default function Map ({countries, population, setCountry}) {
 
   const [position, setPosition] = useState({ coordinates: [0, 0], zoom: 1 });
+  const [tooltip, setTooltip] = useState(null)
 
   function handleZoomIn() {
     if (position.zoom >= 4) return;
@@ -28,14 +41,24 @@ export default function Map ({countries, population}) {
     setPosition(position);
   }
 
+  function createTooltip (e, ISO, NAME) {
+    setTooltip({
+      ISO, NAME, coords: [e.clientX, e.clientY]
+    })
+  }
+
+  function handleClick (ISO) {
+    const country = countries.find(el => el.CountryCode.toLowerCase() === ISO.toLowerCase())
+    country && setCountry(country)
+  }
+
   const _countries = countries && countries.map(el => ({
     ...el,
     coords: Coords[el.CountryCode.toLowerCase()]}))
 
-  console.log(countries)
-
   return (
     <div className={styles.root}>
+    {tooltip && <ToolTip NAME={tooltip.NAME} coords={tooltip.coords}/>}
     <ComposableMap>
       <ZoomableGroup
         zoom={position.zoom}
@@ -44,7 +67,14 @@ export default function Map ({countries, population}) {
         >
         <Geographies geography={geoUrl}>
           {({ geographies }) =>
-            geographies.map(geo => <Geography key={geo.rsmKey} geography={geo}/>)
+            geographies.map(geo => {
+              const { NAME, ISO_A2} = geo.properties;
+            return <Geography 
+                    onMouseOver={(e) => createTooltip(e, ISO_A2, NAME)} 
+                    onClick={() => handleClick(ISO_A2)}
+                    onMouseLeave={() => setTooltip(null)}
+                    key={geo.rsmKey} 
+                    geography={geo}/>})
           }
         </Geographies>
           {_countries && _countries.map((con, idx) => {
@@ -52,10 +82,10 @@ export default function Map ({countries, population}) {
           const long = con.coords?.long;
           const { TotalConfirmed } = con;
           const size = 9.5 ** 9 * (TotalConfirmed ** (1/3)) / population
-          console.log(size)
-          return <Marker key={idx} coordinates={[long, lat]}>
+          return (long && lat) ? <Marker key={idx} coordinates={[long, lat]}>
             <circle r={size / (position.zoom ** 0.5)} fill="#F53" />
-          </Marker>})}
+          </Marker> : null})}
+
         </ZoomableGroup>
       </ComposableMap>
       <div className={styles.controls}>

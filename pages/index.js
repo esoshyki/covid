@@ -33,7 +33,10 @@ export default function Home({worldData, countries}) {
             country={country}
             countries={data.countries}/>
           </div>
-          <Map countries={data.countries} population={data.population}/>
+          <Map 
+            countries={data.countries} 
+            population={data.population} 
+            setCountry={setCountry}/>
         </div>
       </Layout>
 
