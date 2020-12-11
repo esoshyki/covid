@@ -11,6 +11,8 @@ export default function Home({worldData, countries}) {
   const [country, setCountry] = useState(null)
   const [data, setData] = useState(worldData);
 
+  console.log(data)
+
   useEffect(() => {
     setData(worldData)
   }, [worldData])
@@ -27,11 +29,11 @@ export default function Home({worldData, countries}) {
           <div className={styles.leftPart}>
             <GlobalTable 
             worldData={data} 
-            setCountry={setCountry} 
+            setCountry={setCountry}  
             country={country}
-            countries={countries}/>
+            countries={data.countries}/>
           </div>
-          <Map />
+          <Map countries={data.countries} population={data.population}/>
         </div>
       </Layout>
 
@@ -51,9 +53,9 @@ Home.getInitialProps = async ctx => {
       ...data.Global,
       population: data.Countries.reduce((acc, cur) => {
         return acc + cur.Premium.CountryStats.Population 
-      }, 0)
+      }, 0),
+      countries: data.Countries
     },
-    countries: data.Countries
   })
 }
 
