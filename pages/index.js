@@ -16,6 +16,8 @@ export default function Home({worldData, error}) {
 
   console.log(data)
 
+  console.log(data)
+
   useEffect(() => {
     setData(worldData)
   }, [worldData])

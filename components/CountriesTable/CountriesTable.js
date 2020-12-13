@@ -3,7 +3,7 @@ import { useState } from 'react'
 import Card from 'react-bootstrap/Card'
 import { useTranslation } from 'react-i18next';
 
-const DTO = {
+const keys = {
   TotalConfirmed: "TotalConfirmed",
   TotalDeaths : "TotalDeaths",
   TotalRecovered : "TotalRecovered",
@@ -22,7 +22,7 @@ export default function CountriesTable ({countries}) {
 
   const { t } = useTranslation('countries')
 
-  const [data, setData] = useState()
+  const [key, setKey] = useState()
 
   return (
     <Card style={{ width: '100%'}}>
