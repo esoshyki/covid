@@ -6,6 +6,7 @@ import toNiceNum from '../../lib/toniceNum'
 import { useTranslation } from 'react-i18next';
 import Counties from './Countries'
 import DTO from './TableDTO';
+import Card from 'react-bootstrap/Card'
 
 const GlobalTable = ({worldData, setCountry, country, countries}) => {
   const { t } = useTranslation();
@@ -47,7 +48,7 @@ const GlobalTable = ({worldData, setCountry, country, countries}) => {
 
   const renderData = DTO(activeData)
 
-  return <div ref={root} className={styles.root}>
+  return <Card ref={root} >
   {renderData && <div className className={styles.global}>
     <ListGroup className={styles["list-group"]}>
       {Object.entries(renderData).map(([key, value]) => globalLine(key, value)) }
@@ -64,7 +65,7 @@ const GlobalTable = ({worldData, setCountry, country, countries}) => {
   </div>}
     
   {!activeData && <div className={styles.loading}>Loading...</div>}
-</div>
+</Card>
 } 
 
 

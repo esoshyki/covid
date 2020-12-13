@@ -1,11 +1,12 @@
 import style from './Layout.module.sass'
 import Header from '../Header/Header'
+import Container from 'react-bootstrap/Container'
 
 const Layout = ({children}) => {
-  return <div className={style.container}>
+  return <Container>
     <Header />
     {children}
-  </div>
+  </Container>
 }
 
 export default Layout

@@ -5,60 +5,85 @@ import GlobalTable from '../components/GlobalTable/GlobalTable'
 import { useEffect, useState,  } from 'react'
 import Map from '../components/Map/Map'
 import covidService from '../services/covid.service'
+import { Container, Row, Col } from 'react-bootstrap'
+import Graphic from '../components/Graphic/Graphic'
 
-export default function Home({worldData, countries}) {
+export default function Home({worldData, error}) {
 
   const [country, setCountry] = useState(null)
   const [data, setData] = useState(worldData);
+
+  console.log(data)
 
   useEffect(() => {
     setData(worldData)
   }, [worldData])
 
   return (
-    <div>
+    <Container>
       <Head>
         <title>Create Next App</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
       <Layout>
-        <div className={styles.container}>
-          <div className={styles.leftPart}>
-            <GlobalTable 
-            worldData={data} 
-            setCountry={setCountry}  
-            country={country}
-            countries={data.countries}/>
-          </div>
+        {error && <div>{error}</div>}
+        {!error && <Container fluid>
+          <Row>
+            <Col xs={4}>
+              <GlobalTable 
+              worldData={data} 
+              setCountry={setCountry}  
+              country={country}
+              countries={data.countries}/>
+            </Col>
+            <Col xs={8}>
+              <Map 
+                countries={data.countries} 
+                population={data.population} 
+                setCountry={setCountry}/>
+            </Col>
+          </Row>
+          <Row>
+            <Col xs={6}>
 
-          <Map 
-            countries={data.countries} 
-            population={data.population} 
-            setCountry={setCountry}/>
-        </div>
+            </Col>
+            <Col xs={6}>
+              <Graphic country={country} countries={data.countries}/>
+
+            </Col>
+          </Row>
+        </Container> }
+
+        
       </Layout>
 
       <footer className={styles.footer}>
 
       </footer>
-    </div>
+    </Container>
   )
 }
 
 Home.getInitialProps = async ctx => {
-  const response = await covidService.getSummary();
-  const data = await response.data;
-
-  return ({
-    worldData: {
-      ...data.Global,
-      population: data.Countries.reduce((acc, cur) => {
-        return acc + cur.Premium.CountryStats.Population 
-      }, 0),
-      countries: data.Countries
-    },
-  })
+  try {
+    const response = await covidService.getSummary();
+    const data = await response.data;
+  
+    return ({
+      worldData: {
+        ...data.Global,
+        population: data.Countries.reduce((acc, cur) => {
+          return acc + cur.Premium.CountryStats.Population 
+        }, 0),
+        countries: data.Countries
+      },
+    })
+  } catch (err) {
+    return ({
+      error: "Api is not availible"
+    })
+  }
 }
 
 
