@@ -7,6 +7,7 @@ import Map from '../components/Map/Map'
 import covidService from '../services/covid.service'
 import { Container, Row, Col } from 'react-bootstrap'
 import Graphic from '../components/Graphic/Graphic'
+import CountriesTable from '../components/CountriesTable/CountriesTable'
 
 export default function Home({worldData, error}) {
 
@@ -44,13 +45,12 @@ export default function Home({worldData, error}) {
                 setCountry={setCountry}/>
             </Col>
           </Row>
-          <Row>
+          <Row style={{marginTop: 20}}>
             <Col xs={6}>
-
+              <CountriesTable countries={data.countries} />
             </Col>
             <Col xs={6}>
               <Graphic country={country} countries={data.countries}/>
-
             </Col>
           </Row>
         </Container> }
