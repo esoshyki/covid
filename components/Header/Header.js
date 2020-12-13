@@ -23,8 +23,12 @@ const Header = () => {
     <DropdownButton 
 			id="dropdown-basic-button"
 			size="sm"
-			className={style.language}
-      title={language} >
+      title={language} 
+      variant="info"
+      style={{
+        position: "absolute",
+        right: 20
+      }}>
 			<DropdownItem eventKey='en' onSelect={handleChange}><div className={style.en}></div></DropdownItem>
 			<DropdownItem eventKey='ru' onSelect={handleChange}><div className={style.ru}></div></DropdownItem>
     </DropdownButton>

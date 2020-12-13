@@ -7,6 +7,7 @@ import { useTranslation } from 'react-i18next';
 import Counties from './Countries'
 import DTO from './TableDTO';
 import Card from 'react-bootstrap/Card'
+import Button from 'react-bootstrap/Button'
 
 const GlobalTable = ({worldData, setCountry, country, countries}) => {
   const { t } = useTranslation("global");
@@ -80,7 +81,7 @@ const GlobalTable = ({worldData, setCountry, country, countries}) => {
         action 
         onClick={findCountrie} 
       >
-        <Card.Text as="span" vairant="success">{country?.Country || t("Allworld")}</Card.Text>
+        <Button vairant="primary" style={{width: "100%", color: "#fff"}}>{country?.Country || t("Allworld")}</Button>
       </ListGroup.Item>
         <div className={styles.countries} ref={cityInput}>
           {toFind && <Counties 
