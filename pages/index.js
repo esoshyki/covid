@@ -5,6 +5,7 @@ import GlobalTable from '../components/GlobalTable/GlobalTable'
 import { useEffect, useState,  } from 'react'
 import Map from '../components/Map/Map'
 import covidService from '../services/covid.service'
+import Graphic from '../components/Graphic/Graphic'
 
 export default function Home({worldData, countries}) {
 
@@ -36,6 +37,7 @@ export default function Home({worldData, countries}) {
             countries={data.countries} 
             population={data.population} 
             setCountry={setCountry}/>
+          <Graphic />
         </div>
       </Layout>
 
