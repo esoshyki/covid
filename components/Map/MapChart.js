@@ -16,7 +16,6 @@ const geoUrl =
 const MapChart = ({countries, population, setCountry, setTooltipContent}) => {
 
   const [position, setPosition] = useState({ coordinates: [0, 0], zoom: 1 });
-  const [tooltip, setTooltip] = useState(null)
   const [circleMode, setCircleMode] = useState(true)
 
   function handleZoomIn() {
@@ -40,6 +39,19 @@ const MapChart = ({countries, population, setCountry, setTooltipContent}) => {
 
   function changeMode (bool) {
     setCircleMode(bool)
+  }
+
+  function createTooltipData ({ISO_A2, NAME}) {
+    const con = countries.find(el => el.CountryCode === ISO_A2);
+
+    if (con) {
+      const { TotalConfirmed, NewConfirmed, TotalDeaths, NewDeaths, TotalRecovered, NewRecovered } = con;
+      return ({
+        TotalConfirmed, NewConfirmed, TotalDeaths, NewDeaths, TotalRecovered, NewRecovered, population: con.Premium?.CountryStats?.Population, NAME
+      })
+    } else {
+      return NAME
+    }
   }
 
   function getColor ({ISO_A2, key}) {
@@ -74,24 +86,25 @@ const MapChart = ({countries, population, setCountry, setTooltipContent}) => {
               const { NAME, ISO_A2} = geo.properties;
               const rgb = ISO_A2 !== -99 ? `rgba(${getColor({ISO_A2})}, 40, 20)` : null
             return <Geography 
-                    onMouseEnter={(e) => setTooltipContent(NAME)}
+                    onMouseEnter={(e) => setTooltipContent(createTooltipData({ISO_A2, NAME}))}
                     onMouseLeave={(e) => setTooltipContent("")}
-                    onClick={() => handleClick(ISO_A2)}
+                    onClick={(e) => handleClick(ISO_A2)}
                     onMouseLeave={() => setTooltipContent(null)}
                     key={geo.rsmKey} 
                     geography={geo}
                     style={{
                       default: {
                         fill: circleMode ? "#000" : rgb || "none",
-                        outline: "none"
+                        outline: "none",
+                        stroke: "#fff",
+                        strokeWidth: 0.3,
+                        vectorEffect: 'rotation',
                       },
                       hover: {
-                        fill: "#fff",
-                        outline: "none"
+                        outline: "none",
                       },
                       pressed: {
-                        fill: "red",
-                        outline: "none"
+                        outline: "none",
                       }
                     }}/>
                   })
