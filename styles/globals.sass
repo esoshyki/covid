@@ -48,3 +48,18 @@ svg
   transition-timing-function: ease-in-out
   transition-duration: 0.5s
 
+.dropdown-toggle
+  background-color: rgba(0, 0, 0, 0) !important
+  width: 32px
+  height: 32px
+  +flex()
+  opacity: 0
+
+.dropdown
+  +flex()
+  width: 40px
+  height: 40px
+  &::after
+    content: "" !important
+
+

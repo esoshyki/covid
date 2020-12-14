@@ -54,7 +54,7 @@ export default function Map ({countries, population, setCountry}) {
   }
 
   return (
-    <div data-type="success" style={{width: '100%', height: "100%"}}>
+    <Card data-type="success" style={{width: '100%', height: "100%"}}>
       {(!countries || !population) && <Spinner animation="border"/>} 
       {countries && <MapChart 
         setTooltipContent={setContent} 
@@ -62,6 +62,6 @@ export default function Map ({countries, population, setCountry}) {
         population={population}
         setCountry={setCountry}/>}
       {(countries && content) && <ReactTooltip dangerouslySetInnerHTML={{__html: '<p>test</p>'}} type="dark" effect="float">{createContent()}</ReactTooltip>}
-    </div>
+    </Card>
   )
 }

@@ -72,7 +72,9 @@ const MapChart = ({countries, population, setCountry, setTooltipContent}) => {
         <button className={styles.color} onClick={() => changeMode(false)}/>
       </div>
       <div className={styles.root}>
-      <ComposableMap data-tip="" projectionConfig={{ scale: 200 }} fill={circleMode ? "yellow" : "black"}>
+      <ComposableMap data-tip="" projectionConfig={{ scale: 200 }} fill={circleMode ? "yellow" : "black"} style={{
+        backgroundColor: "#fff"
+      }}>
         <ZoomableGroup
           zoom={position.zoom}
           center={position.coordinates}
