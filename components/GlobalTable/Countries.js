@@ -30,7 +30,7 @@ export default function Counties ({countries, setCountry, setToFind}) {
             />
           </InputGroup>
           </Dropdown.Toggle>
-            <Dropdown.Menu className={styles.dropdown}>
+            <Dropdown.Menu className={styles.dropdown} show={'true'}>
               <Dropdown.Item onClick={() => chooseCountry(null)} key={'null'}>{t("Allworld")}</Dropdown.Item>
               {countries
                 .sort((a, b) => a.Country > b.Country ? 1 : -1)
