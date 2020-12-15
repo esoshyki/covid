@@ -15,6 +15,7 @@ export default function Map ({countries, population, setCountry}) {
     if (typeof content === 'string') {
       return content
     } else {
+      console.log(content)
       return (<Card style={{padding: 0, backgroundColor: "none"}}>
         <Card.Title style={{
           color: "brown",
@@ -22,6 +23,10 @@ export default function Map ({countries, population, setCountry}) {
           margin: 0,
           lineHeight: 1
           }}>
+          <Card.Img 
+            variant="top" 
+            src={`https://www.countryflags.io/${content.ISO_A2}/flat/64.png`} 
+            style={{width: 64, height: 64}}></Card.Img>
           {content.NAME}
         </Card.Title>
         <Card.Body style={{padding: 4}}>

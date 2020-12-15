@@ -1,5 +1,5 @@
 import styles from './Map.module.sass';
-import {  useState, memo } from 'react';
+import {  useState, memo, useRef } from 'react';
 import { ComposableMap, 
   Geographies, 
   Geography, 
@@ -17,6 +17,8 @@ const MapChart = ({countries, population, setCountry, setTooltipContent}) => {
 
   const [position, setPosition] = useState({ coordinates: [0, 0], zoom: 1 });
   const [circleMode, setCircleMode] = useState(true)
+
+  const map = useRef()
 
   function handleZoomIn() {
     if (position.zoom >= 4) return;
@@ -47,7 +49,15 @@ const MapChart = ({countries, population, setCountry, setTooltipContent}) => {
     if (con) {
       const { TotalConfirmed, NewConfirmed, TotalDeaths, NewDeaths, TotalRecovered, NewRecovered } = con;
       return ({
-        TotalConfirmed, NewConfirmed, TotalDeaths, NewDeaths, TotalRecovered, NewRecovered, population: con.Premium?.CountryStats?.Population, NAME
+        TotalConfirmed, 
+        NewConfirmed, 
+        TotalDeaths, 
+        NewDeaths, 
+        TotalRecovered, 
+        NewRecovered, 
+        population: con.Premium?.CountryStats?.Population,
+        NAME,
+        ISO_A2
       })
     } else {
       return NAME
@@ -63,23 +73,42 @@ const MapChart = ({countries, population, setCountry, setTooltipContent}) => {
 
   const _countries = countries && countries.map(el => ({
     ...el,
-    coords: Coords[el.CountryCode.toLowerCase()]}))
+    coords: Coords[el.CountryCode.toLowerCase()],
+    ISO_A2: el.CountryCode.toLowerCase()}
+    ))
+
+  const zoomEnd = (e) => {
+
+    document.querySelector(".dasda").style.transitionDuration = 0;
+    console.log(document.querySelector(".dasda"))
+  }
+
+  const zoomStart = (e) => {
+    console.log(e)
+    document.querySelector(".dasda").style.transitionDuration = "0.4s";
+    console.log(document.querySelector(".dasda"))
+  }
 
   return (
-    <div style={{position: "relative", width: "100%", height: "100%"}}> 
+    <div style={{position: "relative", width: "100%", height: "100%"}} onWheel={zoomStart}> 
       <div className={styles.mode}>
         <button className={styles.circle} onClick={() => changeMode(true)}/>
         <button className={styles.color} onClick={() => changeMode(false)}/>
       </div>
       <div className={styles.root}>
       <ComposableMap data-tip="" projectionConfig={{ scale: 200 }} fill={circleMode ? "yellow" : "black"} style={{
-        backgroundColor: "#fff"
-      }}>
+        backgroundColor: "#fff",
+      }}
+        onMouseDown={() => console.log(map.current)}
+
+      >
         <ZoomableGroup
+          className="dasda"
           zoom={position.zoom}
           center={position.coordinates}
           onMoveEnd={handleMoveEnd}
-          onMouseDown={(e) => e.target.style="transition-duration: 0"}
+          onWheel={zoomStart}
+          onZoomEnd={zoomEnd}
           onMouseMove={(e) => e.target.style="transition-duration: 0"}
           >
         <Geographies geography={geoUrl} fill="rgb(20, 20, 20)">
@@ -113,13 +142,14 @@ const MapChart = ({countries, population, setCountry, setTooltipContent}) => {
           }
         </Geographies>
           {_countries && _countries.map((con, idx) => {
+          console.log(con)
           const lat = con.coords?.lat;
           const long = con.coords?.long;
           const { TotalConfirmed } = con;
           const size = 9.5 ** 9 * (TotalConfirmed ** (1/3)) / population
           return ((long && lat) && circleMode) ? <Marker key={idx} coordinates={[long, lat]}>
             <circle 
-            onMouseEnter={() => setTooltipContent(con.Country)}
+            onMouseEnter={() => setTooltipContent({...con.Country, ISO_A2: con.ISO_A2})}
             onMouseLeave={() => setTooltipContent("")}
             r={size / (position.zoom ** 0.5)} fill="#F53" />
           </Marker> : null})}
