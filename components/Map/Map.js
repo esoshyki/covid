@@ -7,8 +7,8 @@ import { useTranslation } from 'react-i18next';
 
 export default function Map ({countries, population, setCountry}) {
 
-  const { t } = useTranslation("global")
-  const conDict = useTranslation("countries").t;
+  const { t } = useTranslation("global");
+  const conT = useTranslation("countries").t
 
   const [content, setContent] = useState("")
 
@@ -27,10 +27,10 @@ export default function Map ({countries, population, setCountry}) {
             variant="top" 
             src={content.ISO_A2 === 'BY' ? '/icons/bchb.png' : `https://www.countryflags.io/${content.ISO_A2}/flat/64.png`} 
             style={{width: 64, height: 64}}></Card.Img>
-          {conDict(content.NAME)}
+          {conT(content.NAME)}
         </Card.Title>
         <Card.Body style={{padding: 4}}>
-          {Object.entries(content).map(([key, value], idx) => key !== "NAME" && (
+          {Object.entries(content).map(([key, value], idx) => (key !== "NAME" && key !== "ISO_A2") && (
             <div key={idx}>
               <Card.Subtitle 
                 as="span" 

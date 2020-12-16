@@ -31,7 +31,7 @@ i18n
     fallbackLng: 'en',
     preload: true,
     debug: true,
-    ns: ["global"],
+    ns: ["global", "countries", "graphics", "home"],
     defaultNS: "global",
 
     keySeparator: false,

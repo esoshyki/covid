@@ -105,7 +105,7 @@ const MapChart = ({countries, population, setCountry, setTooltipContent}) => {
           onZoomEnd={zoomEnd}
           onMouseMove={(e) => e.target.style="transition-duration: 0"}
           >
-        <Geographies geography={geoUrl} fill="rgb(20, 20, 20)">
+        <Geographies geography={geoUrl} >
           {({ geographies }) =>
             geographies.map(geo => {
               const { NAME, ISO_A2} = geo.properties;
@@ -121,21 +121,14 @@ const MapChart = ({countries, population, setCountry, setTooltipContent}) => {
                       default: {
                         fill: circleMode ? "#000" : rgb || "none",
                         outline: "none",
-                        stroke: "#fff",
-                        strokeWidth: 0.3,
-                        vectorEffect: 'rotation',
                       },
                       hover: {
-                        fill: "yellow",
+                        fill: "rgb(153, 142, 213)",
                         outline: "none",
-                        stroke: "#fff",
-                        strokeWidth: 0.3,
                       },
                       pressed: {
                         fille: "red",
                         outline: "none",
-                        stroke: "#fff",
-                        strokeWidth: 0.3,
                       }
                     }}/>
                   })

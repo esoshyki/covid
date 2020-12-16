@@ -16,5 +16,6 @@
   "Find" : "Find",
   "ChooseCountry" : "Choose country",
   "Country" : "Country",
-  "Loading" : "Loading..."
+  "Loading" : "Loading...",
+  "population" : "Population"
 }
