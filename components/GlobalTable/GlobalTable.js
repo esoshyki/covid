@@ -6,9 +6,11 @@ import toNiceNum from '../../lib/toniceNum'
 import { useTranslation } from 'react-i18next';
 import Counties from './Countries'
 import DTO from './TableDTO';
+import Card from 'react-bootstrap/Card'
+import Button from 'react-bootstrap/Button'
 
 const GlobalTable = ({worldData, setCountry, country, countries}) => {
-  const { t } = useTranslation();
+  const { t } = useTranslation("global");
   const root = useRef();
   const cityInput = useRef();
 
@@ -39,20 +41,47 @@ const GlobalTable = ({worldData, setCountry, country, countries}) => {
 
 
   const globalLine = (key, value) => (
-      <ListGroup.Item variant ="dark" className={styles['global-line']} key={key}>
-        <span className={styles.dataKey}>{t(key) + " : "}</span>
-        <span className={styles.dataValue}>{toNiceNum("" + value)}</span>
+      <ListGroup.Item style={{
+        width: "100%",
+        padding: 2,
+      }}>
+        <Card.Text 
+          as="span" 
+          style={{
+            color: "#000",
+            fontSize: 18
+            }}>
+          {t(key) + " : "}
+        </Card.Text>
+        <Card.Text 
+          as="span" 
+          style={{
+            color: "rgb(255, 85, 51)",
+            fontSize: 18
+            }}>
+          {toNiceNum("" + value)}
+        </Card.Text>
+
       </ListGroup.Item>
     )
 
   const renderData = DTO(activeData)
 
-  return <div ref={root} className={styles.root}>
+  return <Card ref={root} >
+    <Card.Title style={{color: "#000", margin: "auto"}}>{t("Summary")}</Card.Title>
   {renderData && <div className className={styles.global}>
     <ListGroup className={styles["list-group"]}>
       {Object.entries(renderData).map(([key, value]) => globalLine(key, value)) }
-      <ListGroup.Item action variant="dark" onClick={findCountrie} className={styles['global-line']}>
-        <span className={styles.dataKey}>{country?.Country || t("Allworld")}</span>
+      <ListGroup.Item
+        style={{
+          width: "100%",
+          padding: '5px',
+          fontSize: 18
+        }}
+        action 
+        onClick={findCountrie} 
+      >
+        <Button vairant="primary" style={{width: "100%", color: "#fff"}}>{country?.Country || t("Allworld")}</Button>
       </ListGroup.Item>
         <div className={styles.countries} ref={cityInput}>
           {toFind && <Counties 
@@ -64,7 +93,7 @@ const GlobalTable = ({worldData, setCountry, country, countries}) => {
   </div>}
     
   {!activeData && <div className={styles.loading}>Loading...</div>}
-</div>
+</Card>
 } 
 
 

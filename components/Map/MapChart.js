@@ -7,6 +7,7 @@ import { ComposableMap,
   ZoomableGroup, 
   } from "react-simple-maps"
 import Coords from './Coords'
+import Pagination from 'react-bootstrap/Pagination'
 
 const geoUrl =
   "https://raw.githubusercontent.com/zcreativelabs/react-simple-maps/master/topojson-maps/world-110m.json"
@@ -15,7 +16,7 @@ const geoUrl =
 const MapChart = ({countries, population, setCountry, setTooltipContent}) => {
 
   const [position, setPosition] = useState({ coordinates: [0, 0], zoom: 1 });
-  const [tooltip, setTooltip] = useState(null)
+  const [circleMode, setCircleMode] = useState(true)
 
   function handleZoomIn() {
     if (position.zoom >= 4) return;
@@ -36,41 +37,76 @@ const MapChart = ({countries, population, setCountry, setTooltipContent}) => {
     country && setCountry(country)
   }
 
+  function changeMode (bool) {
+    setCircleMode(bool)
+  }
+
+  function createTooltipData ({ISO_A2, NAME}) {
+    const con = countries.find(el => el.CountryCode === ISO_A2);
+
+    if (con) {
+      const { TotalConfirmed, NewConfirmed, TotalDeaths, NewDeaths, TotalRecovered, NewRecovered } = con;
+      return ({
+        TotalConfirmed, NewConfirmed, TotalDeaths, NewDeaths, TotalRecovered, NewRecovered, population: con.Premium?.CountryStats?.Population, NAME
+      })
+    } else {
+      return NAME
+    }
+  }
+
+  function getColor ({ISO_A2, key}) {
+    const con = countries.find(el => el.CountryCode === ISO_A2)
+    const target = con && con[key || "TotalConfirmed"];
+    const size = target ? (11 * ((9.5 ** 9 * (target ** (1/3)) / population))) : 10
+    return size
+  }
+
   const _countries = countries && countries.map(el => ({
     ...el,
     coords: Coords[el.CountryCode.toLowerCase()]}))
 
   return (
-    <div style={{position: "relative", width: "100%"}}>
+    <div style={{position: "relative", width: "100%", height: "100%"}}> 
+      <div className={styles.mode}>
+        <button className={styles.circle} onClick={() => changeMode(true)}/>
+        <button className={styles.color} onClick={() => changeMode(false)}/>
+      </div>
       <div className={styles.root}>
-      <ComposableMap data-tip="" projectionConfig={{ scale: 200 }}>
+      <ComposableMap data-tip="" projectionConfig={{ scale: 200 }} fill={circleMode ? "yellow" : "black"} style={{
+        backgroundColor: "#fff"
+      }}>
         <ZoomableGroup
           zoom={position.zoom}
           center={position.coordinates}
           onMoveEnd={handleMoveEnd}
+          onMouseDown={(e) => e.target.style="transition-duration: 0"}
+          onMouseMove={(e) => e.target.style="transition-duration: 0"}
           >
-        <Geographies geography={geoUrl}>
+        <Geographies geography={geoUrl} fill="rgb(20, 20, 20)">
           {({ geographies }) =>
             geographies.map(geo => {
               const { NAME, ISO_A2} = geo.properties;
+              const rgb = ISO_A2 !== -99 ? `rgba(${getColor({ISO_A2})}, 40, 20)` : null
             return <Geography 
-                    onMouseEnter={(e) => setTooltipContent(NAME)}
+                    onMouseEnter={(e) => setTooltipContent(createTooltipData({ISO_A2, NAME}))}
                     onMouseLeave={(e) => setTooltipContent("")}
-                    onClick={() => handleClick(ISO_A2)}
+                    onClick={(e) => handleClick(ISO_A2)}
                     onMouseLeave={() => setTooltipContent(null)}
                     key={geo.rsmKey} 
                     geography={geo}
                     style={{
                       default: {
-                        outline: "none"
+                        fill: circleMode ? "#000" : rgb || "none",
+                        outline: "none",
+                        stroke: "#fff",
+                        strokeWidth: 0.3,
+                        vectorEffect: 'rotation',
                       },
                       hover: {
-                        fill: "#256",
-                        outline: "none"
+                        outline: "none",
                       },
                       pressed: {
-                        fill: "#E42",
-                        outline: "none"
+                        outline: "none",
                       }
                     }}/>
                   })
@@ -81,7 +117,7 @@ const MapChart = ({countries, population, setCountry, setTooltipContent}) => {
           const long = con.coords?.long;
           const { TotalConfirmed } = con;
           const size = 9.5 ** 9 * (TotalConfirmed ** (1/3)) / population
-          return (long && lat) ? <Marker key={idx} coordinates={[long, lat]}>
+          return ((long && lat) && circleMode) ? <Marker key={idx} coordinates={[long, lat]}>
             <circle 
             onMouseEnter={() => setTooltipContent(con.Country)}
             onMouseLeave={() => setTooltipContent("")}
@@ -90,8 +126,11 @@ const MapChart = ({countries, population, setCountry, setTooltipContent}) => {
 
         </ZoomableGroup>
       </ComposableMap>
-      <div className={styles.controls}>
-      <button onClick={handleZoomIn}>
+
+    </div>
+
+    <div className={styles.controls}>
+        <button onClick={handleZoomIn}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="24"
@@ -117,7 +156,6 @@ const MapChart = ({countries, population, setCountry, setTooltipContent}) => {
           </svg>
         </button>
       </div>
-    </div>
   </div>
   )
 }

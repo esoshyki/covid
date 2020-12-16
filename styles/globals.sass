@@ -14,6 +14,9 @@ body
   width: 100vw
   overflow: hidden
 
+#__next
+  width: 100%
+
 a 
   color: inherit
   text-decoration: none
@@ -29,9 +32,7 @@ svg
 
 .rsm-geography
   &:hover
-    color: red
     cursor: pointer
-    fill: $dark-blue
 
 .rsm-marker
   circle
@@ -45,4 +46,19 @@ svg
 .transform
   transition-timing-function: ease-in-out
   transition-duration: 0.5s
+
+.dropdown-toggle
+  background-color: rgba(0, 0, 0, 0) !important
+  width: 32px
+  height: 32px
+  +flex()
+  opacity: 0
+
+.dropdown
+  +flex()
+  width: 40px
+  height: 40px
+  &::after
+    content: "" !important
+
 

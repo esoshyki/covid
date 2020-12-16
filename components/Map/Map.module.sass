@@ -1,16 +1,18 @@
 @import ../../styles/partials/displays
+@import ../../styles/partials/colors
  
 .root
   +flex()
-  position: absolute
+  position: relative
   width: 100%
-  background-color: #168
+  background-color: $dark-blue
+  border: 5px solid #fff
 
 .controls
   display: flex
-  position: fixed
-  top: 4%
-  left: 31%
+  position: absolute
+  bottom: 0px
+  left: 50px
   margin: 1.25rem 0
   text-align: center
   transform: translateX(-50%)
@@ -28,4 +30,27 @@
     border: 0
     &:first-child
       margin-right: 0.25rem
+
+.mode
+  position: absolute
+  right: 5px
+  top: 5px
+  +flex(row)
+  width: 60px
+  height: 30px
+  z-index: 2
+
+.circle, .color
+  width: 50%
+  height: 100%
+  background-color: rgba(0, 0, 0, 0)
+  border: none
+  background-size: cover
+
+.circle
+  background-image: url('/icons/circle.svg')
+
+
+.color
+  background-image: url('/icons/color.svg')
 

@@ -21,6 +21,12 @@ export default {
       'Access-Control-Allow-Methods' : 'GET',
     }
   }),
+  getAllWorldData: async () => {
+    const data = axios(covidApi, {
+      method: "GET",
+
+    })
+  },
   getConfirmedByCountry: async country => await axios.get(`${covidApi}total/country/${country}/status/confirmed`),
   getDeathsByCountry: async country => await axios.get(`${covidApi}total/country/${country}/status/deaths`),
   getRecoveredByCountry: async country => await axios.get(`${covidApi}total/country/${country}/status/recovered`),
