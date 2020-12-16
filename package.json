@@ -10,8 +10,10 @@
   "dependencies": {
     "axios": "^0.21.0",
     "bootstrap": "^4.5.3",
+    "chart.js": "^2.9.4",
     "date.js": "^0.3.3",
     "i18next": "^19.8.4",
+    "moment": "^2.29.1",
     "next": "10.0.3",
     "next-i18next": "^7.0.1",
     "react": "17.0.1",
