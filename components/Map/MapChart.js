@@ -43,8 +43,8 @@ const MapChart = ({countries, population, setCountry, setTooltipContent}) => {
     setCircleMode(bool)
   }
 
-  function createTooltipData ({ISO_A2, NAME}) {
-    const con = countries.find(el => el.CountryCode === ISO_A2);
+  function createTooltipData ({country, ISO_A2, NAME}) {
+    const con = country || countries.find(el => el.CountryCode === ISO_A2);
 
     if (con) {
       const { TotalConfirmed, NewConfirmed, TotalDeaths, NewDeaths, TotalRecovered, NewRecovered } = con;
@@ -56,8 +56,8 @@ const MapChart = ({countries, population, setCountry, setTooltipContent}) => {
         TotalRecovered, 
         NewRecovered, 
         population: con.Premium?.CountryStats?.Population,
-        NAME,
-        ISO_A2
+        NAME: NAME || con.Country,
+        ISO_A2: ISO_A2 || con.ISO_A2
       })
     } else {
       return NAME
@@ -78,15 +78,11 @@ const MapChart = ({countries, population, setCountry, setTooltipContent}) => {
     ))
 
   const zoomEnd = (e) => {
-
     document.querySelector(".dasda").style.transitionDuration = 0;
-    console.log(document.querySelector(".dasda"))
   }
 
   const zoomStart = (e) => {
-    console.log(e)
     document.querySelector(".dasda").style.transitionDuration = "0.4s";
-    console.log(document.querySelector(".dasda"))
   }
 
   return (
@@ -99,8 +95,6 @@ const MapChart = ({countries, population, setCountry, setTooltipContent}) => {
       <ComposableMap data-tip="" projectionConfig={{ scale: 200 }} fill={circleMode ? "yellow" : "black"} style={{
         backgroundColor: "#fff",
       }}
-        onMouseDown={() => console.log(map.current)}
-
       >
         <ZoomableGroup
           className="dasda"
@@ -132,24 +126,29 @@ const MapChart = ({countries, population, setCountry, setTooltipContent}) => {
                         vectorEffect: 'rotation',
                       },
                       hover: {
+                        fill: "yellow",
                         outline: "none",
+                        stroke: "#fff",
+                        strokeWidth: 0.3,
                       },
                       pressed: {
+                        fille: "red",
                         outline: "none",
+                        stroke: "#fff",
+                        strokeWidth: 0.3,
                       }
                     }}/>
                   })
           }
         </Geographies>
           {_countries && _countries.map((con, idx) => {
-          console.log(con)
           const lat = con.coords?.lat;
           const long = con.coords?.long;
           const { TotalConfirmed } = con;
           const size = 9.5 ** 9 * (TotalConfirmed ** (1/3)) / population
           return ((long && lat) && circleMode) ? <Marker key={idx} coordinates={[long, lat]}>
             <circle 
-            onMouseEnter={() => setTooltipContent({...con.Country, ISO_A2: con.ISO_A2})}
+            onMouseEnter={() => setTooltipContent(createTooltipData({country: con}))}
             onMouseLeave={() => setTooltipContent("")}
             r={size / (position.zoom ** 0.5)} fill="#F53" />
           </Marker> : null})}

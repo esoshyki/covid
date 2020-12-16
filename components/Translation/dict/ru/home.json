@@ -1,0 +1,5 @@
+{
+  "APIerrorType" : "Ошибка API",
+  "APIerrorMessage" : "Api не доступно",
+  "CallbackMessage" : "Попробовать снова"
+}

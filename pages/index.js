@@ -8,15 +8,16 @@ import covidService from '../services/covid.service'
 import { Container, Row, Col } from 'react-bootstrap'
 import Graphic from '../components/Graphic/Graphic'
 import CountriesTable from '../components/CountriesTable/CountriesTable'
+import { useRouter } from 'next/router'
+import Error from '../components/Error/Error'
+import { useTranslation } from 'react-i18next';
 
 export default function Home({worldData, error}) {
 
   const [country, setCountry] = useState(null)
   const [data, setData] = useState(worldData);
-
-  console.log(data)
-
-  console.log(data)
+  const router = useRouter()
+  const { t } = useTranslation("home")
 
   useEffect(() => {
     setData(worldData)
@@ -30,7 +31,12 @@ export default function Home({worldData, error}) {
       </Head>
 
       <Layout>
-        {error && <div>{error}</div>}
+        {error && <Error 
+          type={t("ServerErrorType")}
+          message={t("ServerErrorMessage")}
+          callback={() => router.push('/')}
+          callbackDescription={t("CallbackText")}
+          />}
         {!error && <Container fluid>
           <Row>
             <Col xs={4}>
