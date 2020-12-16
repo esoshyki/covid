@@ -25,7 +25,7 @@ export default function Map ({countries, population, setCountry}) {
           }}>
           <Card.Img 
             variant="top" 
-            src={`https://www.countryflags.io/${content.ISO_A2}/flat/64.png`} 
+            src={content.ISO_A2 === 'BY' ? '/icons/bchb.png' : `https://www.countryflags.io/${content.ISO_A2}/flat/64.png`} 
             style={{width: 64, height: 64}}></Card.Img>
           {content.NAME}
         </Card.Title>
