@@ -5,7 +5,7 @@ import Spinner from 'react-bootstrap/Spinner'
 import Card from 'react-bootstrap/Card'
 import { useTranslation } from 'react-i18next';
 
-export default function Map ({countries, population, setCountry}) {
+export default function Map ({countries, population, setCountry, country}) {
 
   const { t } = useTranslation("global");
   const conT = useTranslation("countries").t
@@ -65,7 +65,8 @@ export default function Map ({countries, population, setCountry}) {
         setTooltipContent={setContent} 
         countries={countries}
         population={population}
-        setCountry={setCountry}/>}
+        setCountry={setCountry}
+        country={country}/>}
       {(countries && content) && <ReactTooltip 
         dangerouslySetInnerHTML={{__html: '<p>test</p>'}} 
         effect="float"

@@ -9,6 +9,7 @@ export default function Counties ({countries, setCountry, setToFind}) {
   const { t } = useTranslation();
 
   const chooseCountry = async (country) => {
+    console.log(country)
     setCountry(country);
     setToFind(false);
   }

@@ -50,7 +50,8 @@ export default function Home({worldData, error}) {
               <Map 
                 countries={data.countries} 
                 population={data.population} 
-                setCountry={setCountry}/>
+                setCountry={setCountry}
+                country={country}/>
             </Col>
           </Row>
           <Row style={{marginTop: 20}}>

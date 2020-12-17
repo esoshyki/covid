@@ -1,5 +1,5 @@
 {
   "APIerrorType" : "Api Error",
   "APIerrorMessage" : "Api is not available",
-  "CallbackMessage" : "Try again"
+  "callbackDescription" : "Try again"
 }

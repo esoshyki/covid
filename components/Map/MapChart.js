@@ -1,5 +1,5 @@
 import styles from './Map.module.sass';
-import {  useState, memo, useRef } from 'react';
+import {  useState, memo, useRef, useEffect } from 'react';
 import { ComposableMap, 
   Geographies, 
   Geography, 
@@ -7,21 +7,31 @@ import { ComposableMap,
   ZoomableGroup, 
   } from "react-simple-maps"
 import Coords from './Coords'
-import Pagination from 'react-bootstrap/Pagination'
 
 const geoUrl =
   "https://raw.githubusercontent.com/zcreativelabs/react-simple-maps/master/topojson-maps/world-110m.json"
 
 
-const MapChart = ({countries, population, setCountry, setTooltipContent}) => {
+const MapChart = ({countries, population, setCountry, country, setTooltipContent}) => {
 
   const [position, setPosition] = useState({ coordinates: [0, 0], zoom: 1 });
   const [circleMode, setCircleMode] = useState(true)
+  const [chosenNode, setChosenNode] = useState(null)
 
   const map = useRef()
 
+  useEffect(() => {
+    const newCoords = country ? Coords[country.CountryCode.toLowerCase()] : { lat: 0, long: 0} 
+    const { lat, long} = newCoords;
+    setPosition({coordinates: [long, lat], zoom: country ? 8 : 1})
+    const conNode = country?.CountryCode ? document.querySelector("." + country?.CountryCode) : null
+    chosenNode && chosenNode.classList.remove("chosen");
+    conNode && conNode.classList.add('chosen');
+    setChosenNode(conNode)
+  }, [country])
+
   function handleZoomIn() {
-    if (position.zoom >= 4) return;
+    if (position.zoom >= 8) return;
     setPosition(pos => ({ ...pos, zoom: pos.zoom * 2 }));
   }
 
@@ -31,7 +41,12 @@ const MapChart = ({countries, population, setCountry, setTooltipContent}) => {
   }
 
   function handleMoveEnd(position) {
+    document.querySelector('.rsm-zoomable-group').classList.add('transition')
     setPosition(position);
+  }
+
+  function handleMoveStart () {
+    document.querySelector('.rsm-zoomable-group').classList.remove('transition')
   }
 
   function handleClick (ISO) {
@@ -78,15 +93,18 @@ const MapChart = ({countries, population, setCountry, setTooltipContent}) => {
     ))
 
   const zoomEnd = (e) => {
-    document.querySelector(".dasda").style.transitionDuration = 0;
+    document.querySelector(".zoom").style.transitionDuration = 0;
   }
 
   const zoomStart = (e) => {
-    document.querySelector(".dasda").style.transitionDuration = "0.4s";
+    document.querySelector(".zoom").style.transitionDuration = "0.5s";
   }
 
   return (
-    <div style={{position: "relative", width: "100%", height: "100%"}} onWheel={zoomStart}> 
+    <div 
+      style={{position: "relative", width: "100%", height: "100%"}} 
+      onWheel={zoomStart}  
+      > 
       <div className={styles.mode}>
         <button className={styles.circle} onClick={() => changeMode(true)}/>
         <button className={styles.color} onClick={() => changeMode(false)}/>
@@ -97,15 +115,20 @@ const MapChart = ({countries, population, setCountry, setTooltipContent}) => {
       }}
       >
         <ZoomableGroup
-          className="dasda"
+          className="transition"
           zoom={position.zoom}
           center={position.coordinates}
           onMoveEnd={handleMoveEnd}
+          onMoveStart={handleMoveStart}
           onWheel={zoomStart}
           onZoomEnd={zoomEnd}
           onMouseMove={(e) => e.target.style="transition-duration: 0"}
           >
-        <Geographies geography={geoUrl} >
+        <Geographies 
+          geography={geoUrl} 
+          ref={map}
+          >
+          
           {({ geographies }) =>
             geographies.map(geo => {
               const { NAME, ISO_A2} = geo.properties;
@@ -117,6 +140,7 @@ const MapChart = ({countries, population, setCountry, setTooltipContent}) => {
                     onMouseLeave={() => setTooltipContent(null)}
                     key={geo.rsmKey} 
                     geography={geo}
+                    className={ISO_A2}
                     style={{
                       default: {
                         fill: circleMode ? "#000" : rgb || "none",

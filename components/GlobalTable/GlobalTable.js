@@ -18,8 +18,7 @@ const GlobalTable = ({worldData, setCountry, country, countries}) => {
   const [toFind, setToFind] = useState(false);
   const [activeData, setActiveData] = useState(worldData)
   const [isTotalRender, setisTotalRender] = useState(false)
-  
-  
+
   const findCountrie = async () => {
     setToFind(!toFind)
   }
