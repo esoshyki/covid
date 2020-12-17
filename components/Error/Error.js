@@ -3,10 +3,10 @@ import Button from 'react-bootstrap/Button'
 
 export default function Error ({type, message, callback, callbackDescription}) {
 
-  return (
+   return (
     <Modal.Dialog>
       <Modal.Header>
-        <Modal.Title style={{color: "000"}}>{type}</Modal.Title>
+        <Modal.Title style={{color: "#000"}}>{type}</Modal.Title>
       </Modal.Header>
 
       <Modal.Body>

@@ -17,5 +17,9 @@
   "ChooseCountry" : "Choose country",
   "Country" : "Country",
   "Loading" : "Loading...",
-  "population" : "Population"
+  "population" : "Population",
+  "zoomOut" : "Zoom out",
+  "zoomIn" : "Zoom In",
+  "colorMode" : "Color Mode",
+  "circleMode" : "Circle Mode"
 }

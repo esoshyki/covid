@@ -1,5 +1,5 @@
 {
   "APIerrorType" : "Ошибка API",
   "APIerrorMessage" : "Api не доступно",
-  "callbackDescription" : "Попробовать снова"
+  "tryAgarin" : "Попробовать снова"
 }

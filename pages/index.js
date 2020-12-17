@@ -32,10 +32,10 @@ export default function Home({worldData, error}) {
 
       <Layout>
         {error && <Error 
-          type={t("ServerErrorType")}
-          message={t("ServerErrorMessage")}
+          type={t("APIerrorType")}
+          message={t("APIerrorMessage")}
           callback={() => router.push('/')}
-          callbackDescription={t("CallbackText")}
+          callbackDescription={t("tryAgarin")}
           />}
         {!error && <Container fluid>
           <Row>

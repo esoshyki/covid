@@ -7,12 +7,17 @@ import { ComposableMap,
   ZoomableGroup, 
   } from "react-simple-maps"
 import Coords from './Coords'
+import OverlayTrigger from 'react-bootstrap/OverlayTrigger'
+import Tooltip from 'react-bootstrap/Tooltip'
+import { useTranslation } from 'react-i18next'
 
 const geoUrl =
   "https://raw.githubusercontent.com/zcreativelabs/react-simple-maps/master/topojson-maps/world-110m.json"
 
 
 const MapChart = ({countries, population, setCountry, country, setTooltipContent}) => {
+
+  const { t } = useTranslation("global")
 
   const [position, setPosition] = useState({ coordinates: [0, 0], zoom: 1 });
   const [circleMode, setCircleMode] = useState(true)
@@ -93,11 +98,11 @@ const MapChart = ({countries, population, setCountry, country, setTooltipContent
     ))
 
   const zoomEnd = (e) => {
-    document.querySelector(".zoom").style.transitionDuration = 0;
+    document.querySelector(".transition").style.transitionDuration = 0;
   }
 
   const zoomStart = (e) => {
-    document.querySelector(".zoom").style.transitionDuration = "0.5s";
+    document.querySelector(".transition").style.transitionDuration = "0.5s";
   }
 
   return (
@@ -105,11 +110,38 @@ const MapChart = ({countries, population, setCountry, country, setTooltipContent
       style={{position: "relative", width: "100%", height: "100%"}} 
       onWheel={zoomStart}  
       > 
+
+      <OverlayTrigger 
+        placement="bottom"
+        overlay={<Tooltip id="allWorld"><strong>{t('Allworld')}</strong></Tooltip>}
+        >         
+        <button 
+          className={styles.allWorld} 
+          onClick={() => setCountry(null)}/>
+      </OverlayTrigger>
+
       <div className={styles.mode}>
-        <button className={styles.circle} onClick={() => changeMode(true)}/>
-        <button className={styles.color} onClick={() => changeMode(false)}/>
+
+        <OverlayTrigger 
+          placement="bottom"
+          overlay={<Tooltip id="circleMode"><strong>{t('circleMode')}</strong></Tooltip>}
+          > 
+          <button 
+            className={styles.circle} 
+            onClick={() => changeMode(true)}/>
+        </OverlayTrigger>
+
+        <OverlayTrigger 
+          placement="bottom"
+          overlay={<Tooltip id="colorMode"><strong>{t('colorMode')}</strong></Tooltip>}
+          >         
+          <button 
+            className={styles.color} 
+            onClick={() => changeMode(false)}/>
+        </OverlayTrigger>
+         
       </div>
-      <div className={styles.root}>
+    <div className={styles.root}>
       <ComposableMap data-tip="" projectionConfig={{ scale: 200 }} fill={circleMode ? "yellow" : "black"} style={{
         backgroundColor: "#fff",
       }}
@@ -176,6 +208,10 @@ const MapChart = ({countries, population, setCountry, country, setTooltipContent
     </div>
 
     <div className={styles.controls}>
+      <OverlayTrigger 
+        placement="top"
+        overlay={<Tooltip id="zoom-in"><strong>{t('zoomIn')}</strong></Tooltip>}
+        >   
         <button onClick={handleZoomIn}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -189,6 +225,12 @@ const MapChart = ({countries, population, setCountry, country, setTooltipContent
             <line x1="5" y1="12" x2="19" y2="12" />
           </svg>
         </button>
+      </OverlayTrigger>
+
+      <OverlayTrigger 
+        placement="top"
+        overlay={<Tooltip id="zoom-out"><strong>{t('zoomOut')}</strong></Tooltip>}
+        >
         <button onClick={handleZoomOut}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -197,11 +239,12 @@ const MapChart = ({countries, population, setCountry, country, setTooltipContent
             viewBox="0 0 24 24"
             stroke="currentColor"
             strokeWidth="3"
-          >
+            >
             <line x1="5" y1="12" x2="19" y2="12" />
           </svg>
         </button>
-      </div>
+      </OverlayTrigger>
+    </div>
   </div>
   )
 }

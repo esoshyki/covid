@@ -17,5 +17,9 @@
   "ChooseCountry" : "Выбрать страну",
   "Country" : "Страна",
   "Loading" : "Загрузка...",
-  "population" : "Популяция"
+  "population" : "Популяция",
+  "zoomOut" : "Отдалить",
+  "zoomIn" : "Приблизить",
+  "colorMode" : "Цветовой режим",
+  "circleMode" : "Режим кружков"
 }
