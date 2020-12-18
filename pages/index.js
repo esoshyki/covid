@@ -11,17 +11,19 @@ import CountriesTable from '../components/CountriesTable/CountriesTable'
 import { useRouter } from 'next/router'
 import Error from '../components/Error/Error'
 import { useTranslation } from 'react-i18next';
+import { connect } from 'react-redux';
+import getSummary from '../state/actions/summary';
+import chooseCountry from '../state/actions/chooseCountry'
 
-export default function Home({worldData, error}) {
-
-  const [country, setCountry] = useState(null)
-  const [data, setData] = useState(worldData);
-  const router = useRouter()
-  const { t } = useTranslation("home")
+function Home({summary, countries, chosenCountry, error, dispatch}) {
 
   useEffect(() => {
-    setData(worldData)
-  }, [worldData])
+    if (Object.keys(summary).length === 0) {
+      dispatch(getSummary())
+    } else {
+      console.log(summary)
+    }
+  }, [summary])
 
   return (
     <Container>
@@ -41,25 +43,24 @@ export default function Home({worldData, error}) {
           <Row>
             <Col xs={4}>
               <GlobalTable 
-              worldData={data} 
-              setCountry={setCountry}  
-              country={country}
-              countries={data.countries}/>
+              worldData={summary} 
+              setCountry={chooseCountry}  
+              country={chosenCountry}
+              countries={countries}/>
             </Col>
             <Col xs={8}>
               <Map 
-                countries={data.countries} 
-                population={data.population} 
-                setCountry={setCountry}
-                country={country}/>
+                population={summary.population} 
+                chooseCountry={chooseCountry}
+                />
             </Col>
           </Row>
           <Row style={{marginTop: 20}}>
             <Col xs={6}>
-              <CountriesTable countries={data.countries} />
+              <CountriesTable countries={countries} />
             </Col>
             <Col xs={6}>
-              <Graphic country={country} countries={data.countries}/>
+              <Graphic country={chosenCountry} countries={countries}/>
             </Col>
           </Row>
         </Container> }
@@ -74,26 +75,16 @@ export default function Home({worldData, error}) {
   )
 }
 
-Home.getInitialProps = async ctx => {
-  try {
-    const response = await covidService.getSummary();
-    const data = await response.data;
-  
-    return ({
-      worldData: {
-        ...data.Global,
-        population: data.Countries.reduce((acc, cur) => {
-          return acc + cur.Premium.CountryStats.Population 
-        }, 0),
-        countries: data.Countries
-      },
-    })
-  } catch (err) {
-    return ({
-      error: "Api is not availible"
-    })
+const mapStateToProps = state => { 
+
+  return {
+    summary: state.summary,
+    countries: state.countries,
+    chosenCountry: state.choseCountry
   }
 }
+
+export default connect(mapStateToProps)(Home)
 
 
 

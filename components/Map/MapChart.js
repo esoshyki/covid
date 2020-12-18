@@ -1,5 +1,5 @@
 import styles from './Map.module.sass';
-import {  useState, memo, useRef, useEffect } from 'react';
+import {  useState, useRef, useEffect } from 'react';
 import { ComposableMap, 
   Geographies, 
   Geography, 
@@ -10,12 +10,14 @@ import Coords from './Coords'
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger'
 import Tooltip from 'react-bootstrap/Tooltip'
 import { useTranslation } from 'react-i18next'
+import chooseCountry from '../../state/actions/chooseCountry'
+import { connect } from 'react-redux';
 
 const geoUrl =
   "https://raw.githubusercontent.com/zcreativelabs/react-simple-maps/master/topojson-maps/world-110m.json"
 
 
-const MapChart = ({countries, population, setCountry, country, setTooltipContent}) => {
+const MapChart = ({countries, population, chosenCountry, setTooltipContent, dispatch}) => {
 
   const { t } = useTranslation("global")
 
@@ -26,14 +28,15 @@ const MapChart = ({countries, population, setCountry, country, setTooltipContent
   const map = useRef()
 
   useEffect(() => {
-    const newCoords = country ? Coords[country.CountryCode.toLowerCase()] : { lat: 0, long: 0} 
+    const { country } = chosenCountry;
+    const newCoords = country ? Coords[country.CountryCode.toLowerCase()] : { lat: 0, long: 0}
     const { lat, long} = newCoords;
     setPosition({coordinates: [long, lat], zoom: country ? 8 : 1})
     const conNode = country?.CountryCode ? document.querySelector("." + country?.CountryCode) : null
     chosenNode && chosenNode.classList.remove("chosen");
     conNode && conNode.classList.add('chosen');
     setChosenNode(conNode)
-  }, [country])
+  }, [chosenCountry])
 
   function handleZoomIn() {
     if (position.zoom >= 8) return;
@@ -56,7 +59,7 @@ const MapChart = ({countries, population, setCountry, country, setTooltipContent
 
   function handleClick (ISO) {
     const country = countries.find(el => el.CountryCode.toLowerCase() === ISO.toLowerCase())
-    country && setCountry(country)
+    country && dispatch(chooseCountry(country))
   }
 
   function changeMode (bool) {
@@ -117,7 +120,7 @@ const MapChart = ({countries, population, setCountry, country, setTooltipContent
         >         
         <button 
           className={styles.allWorld} 
-          onClick={() => setCountry(null)}/>
+          onClick={() => dispatch(chooseCountry(null))}/>
       </OverlayTrigger>
 
       <div className={styles.mode}>
@@ -249,4 +252,12 @@ const MapChart = ({countries, population, setCountry, country, setTooltipContent
   )
 }
 
-export default memo(MapChart)
+const mapStateToProps = state => {
+  return {
+    population: state.summary.population,
+    countries: state.countries,
+    chosenCountry: state.chosenCountry
+  }
+}
+
+export default connect(mapStateToProps)(MapChart)

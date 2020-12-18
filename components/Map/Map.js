@@ -4,8 +4,11 @@ import ReactTooltip from "react-tooltip"
 import Spinner from 'react-bootstrap/Spinner'
 import Card from 'react-bootstrap/Card'
 import { useTranslation } from 'react-i18next';
+import { connect } from 'react-redux';
 
-export default function Map ({countries, population, setCountry, country}) {
+const Map = ({countries, population, chosenCountry}) => {
+
+  console.log(chosenCountry)
 
   const { t } = useTranslation("global");
   const conT = useTranslation("countries").t
@@ -63,10 +66,7 @@ export default function Map ({countries, population, setCountry, country}) {
       {(!countries || !population) && <Spinner animation="border"/>} 
       {countries && <MapChart 
         setTooltipContent={setContent} 
-        countries={countries}
-        population={population}
-        setCountry={setCountry}
-        country={country}/>}
+        />}
       {(countries && content) && <ReactTooltip 
         dangerouslySetInnerHTML={{__html: '<p>test</p>'}} 
         effect="float"
@@ -74,3 +74,15 @@ export default function Map ({countries, population, setCountry, country}) {
     </Card>
   )
 }
+
+const mapStateToProps = state => {
+
+  return {
+    population: state.summary.population,
+    countries: state.countries,
+    chosenCountry: state.chosenCountry
+  }
+}
+
+export default connect(mapStateToProps)(Map)
+

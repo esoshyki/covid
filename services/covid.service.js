@@ -13,6 +13,7 @@ export default {
       "X-Access-Token" : accessToken
     }
   }),
+  getDayOne: async (Slug) => await axios.get(covidApi + "total/country/" + Slug),
   getContries: async () => await axios.get(covidApi + "countries"),
   getByCountry: async ({type="dayone", country}) => await axios(`${covidApi}${type}/country/${country}`, {
     method: "GET",
