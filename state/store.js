@@ -4,9 +4,10 @@ import thunkMiddleware from 'redux-thunk'
 import countries from './reducers/countries'
 import summary from './reducers/summary';
 import chosenCountry from './reducers/chosenCountry'
+import appState from './reducers/appState'
 
 const reducers = combineReducers({
-  summary, countries, chosenCountry
+  summary, countries, chosenCountry, appState
 })
 
 const _createStore = () => {

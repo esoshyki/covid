@@ -2,8 +2,6 @@ import styles from './CountriesTables.module.sass'
 import { useState } from 'react'
 import Card from 'react-bootstrap/Card'
 import { useTranslation } from 'react-i18next';
-import { connect } from 'react-redux';
-import setKey from '../../state/actions/setKey'
 
 const keys = {
   TotalConfirmed: "TotalConfirmed",
@@ -20,22 +18,18 @@ const keys = {
   HundredKDailyRecovered : "HundredKDailyDead"
 }
 
-const CountriesTable = ({countries, appState, dispatch}) => {
+export default function CountriesTable ({countries}) {
 
   const { t } = useTranslation('countries');
+  const [key, setKey] = useState(countries);
 
-  console.log(appState)
-
-  const handleChangeKey = key => {
-    dispatch(setKey(key))
-  }
-
-  // const selectField = document.getElementById('field');
-  // let choosenField = 'TotalConfirmed';
-  // selectField.addEventListener('change', () => { 
-  //   console.log(selectField.value);
-  //   choosenField = selectField.value;
-  // });
+//при первой загрузке выдает ошибку
+  const selectField = document.getElementById('field');
+  let choosenField = 'TotalConfirmed';
+  selectField.addEventListener('change', () => { 
+    console.log(selectField.value);
+    choosenField = selectField.value;
+  });
   // ошибка на этом моменте, не выводит переменную choosenField после span, даже если я только ее вывожу 
   const countriesElement = countries.map((item, index) =>
       <li style={{color: "#000"}}><img src={`https://www.countryflags.io/${item.CountryCode}/flat/64.png`}></img><span>{item.Country}</span>{item.choosenField}</li>
@@ -132,13 +126,3 @@ const CountriesTable = ({countries, appState, dispatch}) => {
     </Card>
   )
 }
-
-const mapStateToProps = state => {
-
-  return {
-    countries: state.countries,
-    appState: state.appState
-  }
-}
-
-export default connect(mapStateToProps)(CountriesTable)
