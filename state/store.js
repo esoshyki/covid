@@ -5,9 +5,10 @@ import countries from './reducers/countries'
 import summary from './reducers/summary';
 import chosenCountry from './reducers/chosenCountry'
 import appState from './reducers/appState'
+import statistics from './reducers/statistics'
 
 const reducers = combineReducers({
-  summary, countries, chosenCountry, appState
+  summary, countries, chosenCountry, appState, statistics
 })
 
 const _createStore = () => {

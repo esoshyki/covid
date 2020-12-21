@@ -14,8 +14,9 @@ import { useTranslation } from 'react-i18next';
 import { connect } from 'react-redux';
 import getSummary from '../state/actions/summary';
 import chooseCountry from '../state/actions/chooseCountry'
+import getStatistic from '../state/actions/getStatistic'
 
-function Home({summary, countries, chosenCountry, error, dispatch}) {
+function Home({summary, statistics, countries, chosenCountry, error, dispatch}) {
 
   useEffect(() => {
     if (Object.keys(summary).length === 0) {
@@ -24,6 +25,15 @@ function Home({summary, countries, chosenCountry, error, dispatch}) {
       console.log(summary)
     }
   }, [summary])
+
+  useEffect(() => {
+    if (Object.keys(summary).length === 0) {
+      dispatch(getStatistic())
+    } else {
+      console.log(statistics)
+    }
+  }, [statistics])
+
 
   return (
     <Container>
@@ -80,7 +90,8 @@ const mapStateToProps = state => {
   return {
     summary: state.summary,
     countries: state.countries,
-    chosenCountry: state.choseCountry
+    chosenCountry: state.choseCountry,
+    statistics: state.statistics
   }
 }
 

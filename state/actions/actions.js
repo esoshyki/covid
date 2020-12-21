@@ -5,3 +5,4 @@ export const COUNTRIES_ERROR = "COUNTRIES_ERROR";
 export const CHOOSE_COUNTRY = "CHOOSE_COUNTRY";
 export const CLEAR_COUNTRY = "CLEAR_COUNTRY";
 export const CHANGE_KEY = "CHANGE_KEY";
+export const GET_STATISTICS = "GET_STATISTICS";

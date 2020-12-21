@@ -8,8 +8,6 @@ import { connect } from 'react-redux';
 
 const Map = ({countries, population, chosenCountry}) => {
 
-  console.log(chosenCountry)
-
   const { t } = useTranslation("global");
   const conT = useTranslation("countries").t
 

@@ -9,9 +9,9 @@ const summary = (state=initial, action) => {
         ...action.payload
       }
     case SUMMARY_ERROR:
-      return {...initial}
+      return initial
     default:
-      return {...state}
+      return state
   }
 }
 

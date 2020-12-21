@@ -8,6 +8,7 @@ const initial = {
 const chooseCountry = (state=initial, action) => {
   switch (action.type) {
     case CHOOSE_COUNTRY:
+      console.log(action.payload)
       const {country, data} = action.payload;
        return {
         country,
