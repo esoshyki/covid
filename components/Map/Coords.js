@@ -1,29 +1,36 @@
 export default {
-  "ad": {
+  "Andorra": {
+      ISO: "AD",
       "lat": "42.5000",
       "long": "1.5000"
   },
-  "ae": {
+  "UAE": {
+      ISO: "AE",
       "lat": "24.0000",
       "long": "54.0000"
   },
-  "af": {
+  "Afghanistan": {
+      ISO: "AF",
       "lat": "33.0000",
       "long": "65.0000"
   },
-  "ag": {
+  "Antigua-and-Barbuda": {
+      ISO: "AG",
       "lat": "17.0500",
       "long": "-61.8000"
   },
-  "ai": {
+  "Anguilla": {
+      ISO: "AI",
       "lat": "18.2500",
       "long": "-63.1667"
   },
-  "al": {
+  "Albania": {
+      ISO: "AL",
       "lat": "41.0000",
       "long": "20.0000"
   },
-  "am": {
+  "Armenia": {
+      ISO: "AM",
       "lat": "40.0000",
       "long": "45.0000"
   },
@@ -31,7 +38,8 @@ export default {
       "lat": "12.2500",
       "long": "-68.7500"
   },
-  "ao": {
+  "Angola": {
+      ISO: "AO",
       "lat": "-12.5000",
       "long": "18.5000"
   },
@@ -39,11 +47,13 @@ export default {
       "lat": "35.0000",
       "long": "105.0000"
   },
-  "aq": {
+  "Antarctica": {
+      ISO : "AQ",
       "lat": "-90.0000",
       "long": "0.0000"
   },
-  "ar": {
+  "Argentina": {
+      ISO: "AR",
       "lat": "-34.0000",
       "long": "-64.0000"
   },
@@ -55,215 +65,266 @@ export default {
       "lat": "47.3333",
       "long": "13.3333"
   },
-  "au": {
+  "Australia": {
+      ISO: "AU",
       "lat": "-27.0000",
       "long": "133.0000"
   },
-  "aw": {
+  "Aruba": {
+      ISO: "AW",
       "lat": "12.5000",
       "long": "-69.9667"
   },
-  "az": {
+  "Azerbaijan": {
+      ISO: "AZ",
       "lat": "40.5000",
       "long": "47.5000"
   },
-  "ba": {
+  "Bosnia-and-Herzegovina": {
+      ISO: "BA",
       "lat": "44.0000",
       "long": "18.0000"
   },
-  "bb": {
+  "Barbados": {
+      ISO: "BB",
       "lat": "13.1667",
       "long": "-59.5333"
   },
-  "bd": {
+  "Bangladesh": {
+      ISO: "BD",
       "lat": "24.0000",
       "long": "90.0000"
   },
-  "be": {
+  "Belgium": {
+      ISO: "BE",
       "lat": "50.8333",
       "long": "4.0000"
   },
-  "bf": {
+  "Burkina-Faso": {
+      ISO: "BF",
       "lat": "13.0000",
       "long": "-2.0000"
   },
-  "bg": {
+  "Bulgaria": {
+      ISO: "BG",
       "lat": "43.0000",
       "long": "25.0000"
   },
-  "bh": {
+  "Bahrain": {
+      ISO: "BH",
       "lat": "26.0000",
       "long": "50.5500"
   },
-  "bi": {
+  "Burundi": {
+      ISO: "BI",
       "lat": "-3.5000",
       "long": "30.0000"
   },
-  "bj": {
+  "Benin": {
+      ISO: "BJ",
       "lat": "9.5000",
       "long": "2.2500"
   },
-  "bm": {
+  "Bermuda": {
+      ISO: "BM",
       "lat": "32.3333",
       "long": "-64.7500"
   },
-  "bn": {
+  "Brunei": {
+      ISO: "BN",
       "lat": "4.5000",
       "long": "114.6667"
   },
-  "bo": {
+  "Bolivia": {
+      ISO: "BO",
       "lat": "-17.0000",
       "long": "-65.0000"
   },
-  "br": {
+  "Brazil": {
+      ISO: "BR",
       "lat": "-10.0000",
       "long": "-55.0000"
   },
-  "bs": {
+  "Bahamas": {
+      ISO: "BS",
       "lat": "24.2500",
       "long": "-76.0000"
   },
-  "bt": {
+  "Bhutan": {
+      ISO: "BT",
       "lat": "27.5000",
       "long": "90.5000"
   },
-  "bv": {
+  "Bouvet-Island": {
       "lat": "-54.4333",
       "long": "3.4000"
   },
-  "bw": {
+  "Botswana": {
+      ISO: "BW",
       "lat": "-22.0000",
       "long": "24.0000"
   },
-  "by": {
+  "Belarus": {
+      ISO: "BY",
       "lat": "53.0000",
       "long": "28.0000"
   },
-  "bz": {
+  "Belize": {
+      ISO: "BZ",
       "lat": "17.2500",
       "long": "-88.7500"
   },
-  "ca": {
+  "Canada": {
+      ISO: "CA",
       "lat": "60.0000",
       "long": "-95.0000"
   },
-  "cc": {
+  "Cocos-islands": {
+      ISO : "CC",
       "lat": "-12.5000",
       "long": "96.8333"
   },
-  "cd": {
+  "DRC": {
+      ISO: "CD",
       "lat": "0.0000",
       "long": "25.0000"
   },
-  "cf": {
+  "CAR": {
+      ISO: "CF",
       "lat": "7.0000",
       "long": "21.0000"
   },
-  "cg": {
+  "Congo": {
+      ISO: "CG",
       "lat": "-1.0000",
       "long": "15.0000"
   },
-  "ch": {
+  "Switzerland": {
+      ISO: "CH",
       "lat": "47.0000",
       "long": "8.0000"
   },
-  "ci": {
+  "Ivory-Coast": {
+      ISO: "CI",
       "lat": "8.0000",
       "long": "-5.0000"
   },
-  "ck": {
+  "Cook-islands": {
+      ISO: "CK",
       "lat": "-21.2333",
       "long": "-159.7667"
   },
-  "cl": {
+  "Chile": {
+      ISO: "CL",
       "lat": "-30.0000",
       "long": "-71.0000"
   },
-  "cm": {
+  "Cameroon": {
+      ISO: "CM",
       "lat": "6.0000",
       "long": "12.0000"
   },
-  "cn": {
+  "China": {
+      ISO: "CN",
       "lat": "35.0000",
       "long": "105.0000"
   },
-  "co": {
+  "Colombia": {
+      ISO: "CO",
       "lat": "4.0000",
       "long": "-72.0000"
   },
-  "cr": {
+  "Costa-Rica": {
+      ISO: "CR",
       "lat": "10.0000",
       "long": "-84.0000"
   },
-  "cu": {
+  "Cuba": {
+      ISO: "CU",
       "lat": "21.5000",
       "long": "-80.0000"
   },
-  "cv": {
+  "Cabo-Verde": {
+      ISO: "CV",
       "lat": "16.0000",
       "long": "-24.0000"
   },
-  "cx": {
+  "Christmas-island": {
+      ISO: "CM",
       "lat": "-10.5000",
       "long": "105.6667"
   },
-  "cy": {
+  "Cyprus": {
+      ISO: "CY",
       "lat": "35.0000",
       "long": "33.0000"
   },
-  "cz": {
+  "Czechia": {
+      ISO: "CZ",
       "lat": "49.7500",
       "long": "15.5000"
   },
-  "de": {
+  "Germany": {
+      ISO: "DE",
       "lat": "51.0000",
       "long": "9.0000"
   },
-  "dj": {
+  "Djibouti": {
+      ISO: "DJ",
       "lat": "11.5000",
       "long": "43.0000"
   },
-  "dk": {
+  "Denmark": {
+      ISO: "DK",
       "lat": "56.0000",
       "long": "10.0000"
   },
-  "dm": {
+  "Dominica": {
+      ISO: "DM",
       "lat": "15.4167",
       "long": "-61.3333"
   },
-  "do": {
+  "Dominican-Republic": {
       "lat": "19.0000",
       "long": "-70.6667"
   },
-  "dz": {
+  "Algeria": {
+      ISO: "DZ",
       "lat": "28.0000",
       "long": "3.0000"
   },
-  "ec": {
+  "Ecuador": {
+      ISO: "EC",
       "lat": "-2.0000",
       "long": "-77.5000"
   },
-  "ee": {
+  "Estonia": {
+      ISO: "EE",
       "lat": "59.0000",
       "long": "26.0000"
   },
-  "eg": {
+  "Egypt": {
+      ISO: "EG",
       "lat": "27.0000",
       "long": "30.0000"
   },
-  "eh": {
+  "Western-Sahara": {
+      ISO: "EH",
       "lat": "24.5000",
       "long": "-13.0000"
   },
-  "er": {
+  "Eritrea": {
+      ISO: "ER",
       "lat": "15.0000",
       "long": "39.0000"
   },
-  "es": {
+  "Spain": {
+      ISO: "ES",
       "lat": "40.0000",
       "long": "-4.0000"
   },
-  "et": {
+  "Ethiopia": {
+      ISO: "ET",
       "lat": "8.0000",
       "long": "38.0000"
   },
@@ -271,691 +332,863 @@ export default {
       "lat": "47.0000",
       "long": "8.0000"
   },
-  "fi": {
+  "Finland": {
+      ISO: "FI",
       "lat": "64.0000",
       "long": "26.0000"
   },
-  "fj": {
+  "Fiji": {
+      ISO: "FJ",
       "lat": "-18.0000",
       "long": "175.0000"
   },
-  "fk": {
+  "Falkland-Islands": {
+      ISO: "FK",
       "lat": "-51.7500",
       "long": "-59.0000"
   },
-  "fm": {
+  "Micronesia": {
+      ISO: "FM",
       "lat": "6.9167",
       "long": "158.2500"
   },
-  "fo": {
+  "Faeroe-Islands": {
+      ISO: "FO",
       "lat": "62.0000",
       "long": "-7.0000"
   },
-  "fr": {
+  "France": {
+      ISO: "FR",
       "lat": "46.0000",
       "long": "2.0000"
   },
-  "ga": {
+  "Gabon": {
+      ISO: "GA",
       "lat": "-1.0000",
       "long": "11.7500"
   },
-  "gb": {
+  "UK": {
+      ISO: "GB",
       "lat": "54.0000",
       "long": "-2.0000"
   },
-  "gd": {
+  "Grenada": {
+      ISO: "GD",
       "lat": "12.1167",
       "long": "-61.6667"
   },
-  "ge": {
+  "Georgia": {
+      ISO: "GE",
       "lat": "42.0000",
       "long": "43.5000"
   },
-  "gf": {
+  "French-Guiana": {
+      ISO: "GF",
       "lat": "4.0000",
       "long": "-53.0000"
   },
-  "gh": {
+  "Ghana": {
+      ISO: "GH",
       "lat": "8.0000",
       "long": "-2.0000"
   },
-  "gi": {
+  "Gibraltar": {
+      ISO: "GI",
       "lat": "36.1833",
       "long": "-5.3667"
   },
-  "gl": {
+  "Greenland": {
+      ISO: "GL",
       "lat": "72.0000",
       "long": "-40.0000"
   },
-  "gm": {
+  "Gambia": {
+      ISO: "GM",
       "lat": "13.4667",
       "long": "-16.5667"
   },
-  "gn": {
+  "Guinea": {
+      ISO: "GN",
       "lat": "11.0000",
       "long": "-10.0000"
   },
-  "gp": {
+  "Guadeloupe": {
+      ISO: "GP",
       "lat": "16.2500",
       "long": "-61.5833"
   },
-  "gq": {
+  "Equatorial-Guinea": {
+      ISO: "GQ",
       "lat": "2.0000",
       "long": "10.0000"
   },
-  "gr": {
+  "Greece": {
+      ISO: "GR",
       "lat": "39.0000",
       "long": "22.0000"
   },
-  "gs": {
+  "South-Georgia": {
+      ISO: "GS",
       "lat": "-54.5000",
       "long": "-37.0000"
   },
-  "gt": {
+  "Guatemala": {
+      ISO: "GT",
       "lat": "15.5000",
       "long": "-90.2500"
   },
-  "gu": {
+  "Guam": {
+      ISO: "GU",
       "lat": "13.4667",
       "long": "144.7833"
   },
-  "gw": {
+  "Guinea-Bissau": {
+      ISO: "GW",
       "lat": "12.0000",
       "long": "-15.0000"
   },
-  "gy": {
+  "Guyana": {
+      ISO: "GY",
       "lat": "5.0000",
       "long": "-59.0000"
   },
-  "hk": {
+  "Hong-Kong": {
+      ISO: "HK",
       "lat": "22.2500",
       "long": "114.1667"
   },
-  "hm": {
+  "Heard-Island": {
+      ISO: "HM",
       "lat": "-53.1000",
       "long": "72.5167"
   },
-  "hn": {
+  "Honduras": {
+      ISO: "HN",
       "lat": "15.0000",
       "long": "-86.5000"
   },
-  "hr": {
+  "Croatia": {
+      ISO: "HR",
       "lat": "45.1667",
       "long": "15.5000"
   },
-  "ht": {
+  "Haiti": {
+      ISO: "HT",
       "lat": "19.0000",
       "long": "-72.4167"
   },
-  "hu": {
+  "Hungary": {
+      ISO: "HU",
       "lat": "47.0000",
       "long": "20.0000"
   },
-  "id": {
+  "Indonesia": {
+      ISO: "ID",
       "lat": "-5.0000",
       "long": "120.0000"
   },
-  "ie": {
+  "Ireland": {
+      ISO: "IE",
       "lat": "53.0000",
       "long": "-8.0000"
   },
-  "il": {
+  "Israel": {
+      ISO: "IL",
       "lat": "31.5000",
       "long": "34.7500"
   },
-  "in": {
+  "India": {
+      ISO: "IN",
       "lat": "20.0000",
       "long": "77.0000"
   },
-  "io": {
+  "British-Indian-Ocean-Territory": {
+      ISO: "IO",
       "lat": "-6.0000",
       "long": "71.5000"
   },
-  "iq": {
+  "Iraq": {
+      ISO: "IQ",
       "lat": "33.0000",
       "long": "44.0000"
   },
-  "ir": {
+  "Iran": {
+      ISO: "IR",
       "lat": "32.0000",
       "long": "53.0000"
   },
-  "is": {
+  "Iceland": {
+      ISO: "IS",
       "lat": "65.0000",
       "long": "-18.0000"
   },
-  "it": {
+  "Italy": {
+      ISO: "IT",
       "lat": "42.8333",
       "long": "12.8333"
   },
-  "jm": {
+  "Jamaica": {
+      ISO: "JM",
       "lat": "18.2500",
       "long": "-77.5000"
   },
-  "jo": {
+  "Jordan": {
+      ISO: "JO",
       "lat": "31.0000",
       "long": "36.0000"
   },
-  "jp": {
+  "Japan": {
+      ISO: "JP",
       "lat": "36.0000",
       "long": "138.0000"
   },
-  "ke": {
+  "Kenya": {
+      ISO: "KE",
       "lat": "1.0000",
       "long": "38.0000"
   },
-  "kg": {
+  "Kyrgyzstan": {
+      ISO: "KG",
       "lat": "41.0000",
       "long": "75.0000"
   },
-  "kh": {
+  "Cambodia": {
+      ISO: "KH",
       "lat": "13.0000",
       "long": "105.0000"
   },
-  "ki": {
+  "Kiribati": {
+      ISO: "KI",
       "lat": "1.4167",
       "long": "173.0000"
   },
-  "km": {
+  "Comoros": {
+      ISO: "KM",
       "lat": "-12.1667",
       "long": "44.2500"
   },
-  "kn": {
+  "Saint-Kitts-and-Nevis": {
+      ISO: "KN",
       "lat": "17.3333",
       "long": "-62.7500"
   },
-  "kp": {
+  "Korea": {
+      ISO: "KP",
       "lat": "40.0000",
       "long": "127.0000"
   },
-  "kr": {
+  "S-Korea": {
+      ISO: "KR",
       "lat": "37.0000",
       "long": "127.5000"
   },
-  "kw": {
+  "Kuwait": {
+      ISO: "KW",
       "lat": "29.3375",
       "long": "47.6581"
   },
-  "ky": {
+  "Cayman-Islands": {
+      ISO: "KY",
       "lat": "19.5000",
       "long": "-80.5000"
   },
-  "kz": {
+  "Kazakhstan": {
+      ISO: "KZ",
       "lat": "48.0000",
       "long": "68.0000"
   },
-  "la": {
+  "Laos": {
+      ISO: "LA",
       "lat": "18.0000",
       "long": "105.0000"
   },
-  "lb": {
+  "Lebanon": {
+      ISO: "LB",
       "lat": "33.8333",
       "long": "35.8333"
   },
-  "lc": {
+  "Saint-Lucia": {
+      ISO: "LC",
       "lat": "13.8833",
       "long": "-61.1333"
   },
-  "li": {
+  "Liechtenstein": {
+      ISO: "LI",
       "lat": "47.1667",
       "long": "9.5333"
   },
-  "lk": {
+  "Sri-Lanka": {
+      ISO: "LK",
       "lat": "7.0000",
       "long": "81.0000"
   },
-  "lr": {
+  "Liberia": {
+      ISO: "LR",
       "lat": "6.5000",
       "long": "-9.5000"
   },
-  "ls": {
+  "Lesotho": {
+      ISO: "LS",
       "lat": "-29.5000",
       "long": "28.5000"
   },
-  "lt": {
+  "Lithuania": {
+      ISO: "LT",
       "lat": "56.0000",
       "long": "24.0000"
   },
-  "lu": {
+  "Luxembourg": {
+      ISO: "LU",
       "lat": "49.7500",
       "long": "6.1667"
   },
-  "lv": {
+  "Latvia": {
+      ISO: "LV",
       "lat": "57.0000",
       "long": "25.0000"
   },
-  "ly": {
+  "Libya": {
+      ISO: "LY",
       "lat": "25.0000",
       "long": "17.0000"
   },
-  "ma": {
+  "Morocco": {
+      ISO: "MA",
       "lat": "32.0000",
       "long": "-5.0000"
   },
-  "mc": {
+  "Monaco": {
+      ISO: "MC",
       "lat": "43.7333",
       "long": "7.4000"
   },
-  "md": {
+  "Moldova": {
+      ISO: "MD",
       "lat": "47.0000",
       "long": "29.0000"
   },
-  "me": {
+  "Montenegro": {
+      ISO: "ME",
       "lat": "42.0000",
       "long": "19.0000"
   },
-  "mg": {
+  "Madagascar": {
+      ISO: "MG",
       "lat": "-20.0000",
       "long": "47.0000"
   },
-  "mh": {
+  "Marshall-Islands": {
+      ISO: "MH",
       "lat": "9.0000",
       "long": "168.0000"
   },
-  "mk": {
+  "North-Macedonia": {
+      ISO: "MK",
       "lat": "41.8333",
       "long": "22.0000"
   },
-  "ml": {
+  "Mali": {
+      ISO: "ML",
       "lat": "17.0000",
       "long": "-4.0000"
   },
-  "mm": {
+  "Myanmar": {
+      ISO: "MM",
       "lat": "22.0000",
       "long": "98.0000"
   },
-  "mn": {
+  "Mongolia": {
+      ISO: "MN",
       "lat": "46.0000",
       "long": "105.0000"
   },
-  "mo": {
+  "Macao": {
+      ISO: "MO",
       "lat": "22.1667",
       "long": "113.5500"
   },
-  "mp": {
+  "Northern-Mariana-Islands": {
+      ISO: "MP",
       "lat": "15.2000",
       "long": "145.7500"
   },
-  "mq": {
+  "Martinique": {
+      ISO: "MQ",
       "lat": "14.6667",
       "long": "-61.0000"
   },
-  "mr": {
+  "Mauritania": {
+      ISO: "MR",
       "lat": "20.0000",
       "long": "-12.0000"
   },
-  "ms": {
+  "Montserrat": {
+      ISO: "MS",
       "lat": "16.7500",
       "long": "-62.2000"
   },
-  "mt": {
+  "Malta": {
+      ISO: "MT",
       "lat": "35.8333",
       "long": "14.5833"
   },
-  "mu": {
+  "Mauritius": {
+      ISO: "MU",
       "lat": "-20.2833",
       "long": "57.5500"
   },
-  "mv": {
+  "Maldives": {
+      ISO: "MV",
       "lat": "3.2500",
       "long": "73.0000"
   },
-  "mw": {
+  "Malawi": {
+      ISO: "MW",
       "lat": "-13.5000",
       "long": "34.0000"
   },
-  "mx": {
+  "Mexico": {
+      ISO: "MX",
       "lat": "23.0000",
       "long": "-102.0000"
   },
-  "my": {
+  "Malaysia": {
+      ISO: "MY",
       "lat": "2.5000",
       "long": "112.5000"
   },
-  "mz": {
+  "Mozambique": {
+      ISO: "MZ",
       "lat": "-18.2500",
       "long": "35.0000"
   },
-  "na": {
+  "Namibia": {
+      ISO: "NA",
       "lat": "-22.0000",
       "long": "17.0000"
   },
-  "nc": {
+  "New-Caledonia": {
+      ISO: "NC",
       "lat": "-21.5000",
       "long": "165.5000"
   },
-  "ne": {
+  "Niger": {
+      ISO: "NE",
       "lat": "16.0000",
       "long": "8.0000"
   },
-  "nf": {
+  "Norfolk-Island": {
+      ISO: "NF",
       "lat": "-29.0333",
       "long": "167.9500"
   },
-  "ng": {
+  "Nigeria": {
+      ISO: "NG",
       "lat": "10.0000",
       "long": "8.0000"
   },
-  "ni": {
+  "Nicaragua": {
+      ISO: "NI",
       "lat": "13.0000",
       "long": "-85.0000"
   },
-  "nl": {
+  "Netherlands": {
+      ISO: "NL",
       "lat": "52.5000",
       "long": "5.7500"
   },
-  "no": {
+  "Norway": {
+      ISO: "NO",
       "lat": "62.0000",
       "long": "10.0000"
   },
-  "np": {
+  "Nepal": {
+      ISO: "NP",
       "lat": "28.0000",
       "long": "84.0000"
   },
-  "nr": {
+  "Nauru": {
+      ISO: "NR",
       "lat": "-0.5333",
       "long": "166.9167"
   },
-  "nu": {
+  "Niue": {
+      ISO: "NU",
       "lat": "-19.0333",
       "long": "-169.8667"
   },
-  "nz": {
+  "New-Zealand": {
+      ISO: "NZ",
       "lat": "-41.0000",
       "long": "174.0000"
   },
-  "om": {
+  "Oman": {
+      ISO: "OM",
       "lat": "21.0000",
       "long": "57.0000"
   },
-  "pa": {
+  "Panama": {
+      ISO: "PA",
       "lat": "9.0000",
       "long": "-80.0000"
   },
-  "pe": {
+  "Peru": {
+      ISO: "PE",
       "lat": "-10.0000",
       "long": "-76.0000"
   },
-  "pf": {
+  "French-Polynesia": {
+      ISO: "PF",
       "lat": "-15.0000",
       "long": "-140.0000"
   },
-  "pg": {
+  "Papua-New-Guinea": {
+      ISO: "PG",
       "lat": "-6.0000",
       "long": "147.0000"
   },
-  "ph": {
+  "Philippines": {
+      ISO: "PH",
       "lat": "13.0000",
       "long": "122.0000"
   },
-  "pk": {
+  "Pakistan": {
+      ISO: "PK",
       "lat": "30.0000",
       "long": "70.0000"
   },
-  "pl": {
+  "Poland": {
+      ISO: "PL",
       "lat": "52.0000",
       "long": "20.0000"
   },
-  "pm": {
+  "Saint-Pierre-Miquelon": {
+      ISO: "PM",
       "lat": "46.8333",
       "long": "-56.3333"
   },
-  "pr": {
+  "Puerto-Rico": {
+      ISO: "PR",
       "lat": "18.2500",
       "long": "-66.5000"
   },
-  "ps": {
+  "Palestine": {
+      ISO: "PS",
       "lat": "32.0000",
       "long": "35.2500"
   },
-  "pt": {
+  "Portugal": {
+      ISO : "PT",
       "lat": "39.5000",
       "long": "-8.0000"
   },
-  "pw": {
+  "Palau": {
+      ISO: "PW",
       "lat": "7.5000",
       "long": "134.5000"
   },
-  "py": {
+  "Paraguay": {
+      ISO: "PY",
       "lat": "-23.0000",
       "long": "-58.0000"
   },
-  "qa": {
+  "Qatar": {
+      ISO: "QA",
       "lat": "25.5000",
       "long": "51.2500"
   },
-  "re": {
+  "Réunion": {
+      ISO: "RE",
       "lat": "-21.1000",
       "long": "55.6000"
   },
-  "ro": {
+  "Romania": {
+      ISO: "RO",
       "lat": "46.0000",
       "long": "25.0000"
   },
-  "rs": {
+  "Serbia": {
+      ISO: "RS",
       "lat": "44.0000",
       "long": "21.0000"
   },
-  "ru": {
+  "Russia": {
+      ISO: "RU",
       "lat": "60.0000",
       "long": "100.0000"
   },
-  "rw": {
+  "Rwanda": {
+      ISO: "RW",
       "lat": "-2.0000",
       "long": "30.0000"
   },
-  "sa": {
+  "Saudi-Arabia": {
+      ISO: "SA",
       "lat": "25.0000",
       "long": "45.0000"
   },
-  "sb": {
+  "Solomon-Islands": {
+      ISO: "SB",
       "lat": "-8.0000",
       "long": "159.0000"
   },
-  "sc": {
+  "Seychelles": {
+      ISO: "SC",
       "lat": "-4.5833",
       "long": "55.6667"
   },
-  "sd": {
+  "Sudan": {
+      ISO: "SD",
       "lat": "15.0000",
       "long": "30.0000"
   },
-  "se": {
+  "Sweden": {
+      ISO: "SE",
       "lat": "62.0000",
       "long": "15.0000"
   },
-  "sg": {
+  "Singapore": {
+      ISO: "SG",
       "lat": "1.3667",
       "long": "103.8000"
   },
-  "sh": {
+  "Saint-Helena": {
+      ISO: "SH",
       "lat": "-15.9333",
       "long": "-5.7000"
   },
-  "si": {
+  "Slovenia": {
+      ISO: "SI",
       "lat": "46.0000",
       "long": "15.0000"
   },
-  "sj": {
+  "Svalbard-and-Jan-Mayen": {
+      ISO: "SJ",
       "lat": "78.0000",
       "long": "20.0000"
   },
-  "sk": {
+  "Slovakia": {
+      ISO: "SK",
       "lat": "48.6667",
       "long": "19.5000"
   },
-  "sl": {
+  "Sierra-Leone": {
+      ISO:"SL",
       "lat": "8.5000",
       "long": "-11.5000"
   },
-  "sm": {
+  "San-Marino": {
+      ISO: "SM",
       "lat": "43.7667",
       "long": "12.4167"
   },
-  "sn": {
+  "Senegal": {
+      ISO: "SN",
       "lat": "14.0000",
       "long": "-14.0000"
   },
-  "so": {
+  "Somalia": {
+      ISO: "SO",
       "lat": "10.0000",
       "long": "49.0000"
   },
-  "sr": {
+  "Suriname": {
+      ISO: "SR",
       "lat": "4.0000",
       "long": "-56.0000"
   },
-  "st": {
+  "Sao-Tome-and-Principe": {
+      ISO: "ST",
       "lat": "1.0000",
       "long": "7.0000"
   },
-  "sv": {
+  "El-Salvador": {
+      ISO: "SV",
       "lat": "13.8333",
       "long": "-88.9167"
   },
-  "sy": {
+  "Syria": {
+      ISO: "SY",
       "lat": "35.0000",
       "long": "38.0000"
   },
-  "sz": {
+  "Eswatini": {
+      ISO: "SZ",
       "lat": "-26.5000",
       "long": "31.5000"
   },
-  "tc": {
+  "Turks-and-Caicos": {
+      ISO: "TC",
       "lat": "21.7500",
       "long": "-71.5833"
   },
-  "td": {
+  "Chad": {
+      ISO: "TD",
       "lat": "15.0000",
       "long": "19.0000"
   },
-  "tf": {
+  "French-Southern-Territories": {
+      ISO: "TF",
       "lat": "-43.0000",
       "long": "67.0000"
   },
-  "tg": {
+  "Togo": {
+      ISO: "TG",
       "lat": "8.0000",
       "long": "1.1667"
   },
-  "th": {
+  "Thailand": {
+      ISO: "TH",
       "lat": "15.0000",
       "long": "100.0000"
   },
-  "tj": {
+  "Tajikistan": {
+      ISO: "TJ",
       "lat": "39.0000",
       "long": "71.0000"
   },
-  "tk": {
+  "Tokelau": {
+      ISO: "TK",
       "lat": "-9.0000",
       "long": "-172.0000"
   },
-  "tm": {
+  "Turkmenistan": {
+      ISO: "TM",
       "lat": "40.0000",
       "long": "60.0000"
   },
-  "tn": {
+  "Tunisia": {
+      ISO: "TN",
       "lat": "34.0000",
       "long": "9.0000"
   },
-  "to": {
+  "Tonga": {
+      ISO: "TO",
       "lat": "-20.0000",
       "long": "-175.0000"
   },
-  "tr": {
+  "Turkey": {
+      ISO: "TR",
       "lat": "39.0000",
       "long": "35.0000"
   },
-  "tt": {
+  "Trinidad-and-Tobago": {
+      ISO: "TT",
       "lat": "11.0000",
       "long": "-61.0000"
   },
-  "tv": {
+  "Tuvalu": {
+      ISO: "TV",
       "lat": "-8.0000",
       "long": "178.0000"
   },
-  "tw": {
+  "Taiwan": {
+      ISO: "TW",
       "lat": "23.5000",
       "long": "121.0000"
   },
-  "tz": {
+  "Tanzania": {
+      ISO: "TZ",
       "lat": "-6.0000",
       "long": "35.0000"
   },
-  "ua": {
+  "Ukraine": {
+      ISO: "UA",
       "lat": "49.0000",
       "long": "32.0000"
   },
-  "ug": {
+  "Uganda": {
+      ISO: "UG",
       "lat": "1.0000",
       "long": "32.0000"
   },
-  "um": {
+  "United-States-Minor-Outlying-Islands": {
+      ISO: "UM",
       "lat": "19.2833",
       "long": "166.6000"
   },
-  "us": {
+  "USA": {
+      ISO: "US",
       "lat": "38.0000",
       "long": "-97.0000"
   },
-  "uy": {
+  "Uruguay": {
+      ISO: "UY",
       "lat": "-33.0000",
       "long": "-56.0000"
   },
-  "uz": {
+  "Uzbekistan": {
+      ISO: "UZ",
       "lat": "41.0000",
       "long": "64.0000"
   },
-  "va": {
+  "Vatican-City": {
+      ISO: "VA",
       "lat": "41.9000",
       "long": "12.4500"
   },
-  "vc": {
+  "St-Vincent-Grenadines": {
+      ISO: "VC",
       "lat": "13.2500",
       "long": "-61.2000"
   },
-  "ve": {
+  "Venezuela": {
+      ISO: "VE",
       "lat": "8.0000",
       "long": "-66.0000"
   },
-  "vg": {
+  "British-Virgin-Islands": {
+      ISO: "VG",
       "lat": "18.5000",
       "long": "-64.5000"
   },
-  "vi": {
+  "Virgin-Islands": {
+      ISO: "VI",
       "lat": "18.3333",
       "long": "-64.8333"
   },
-  "vn": {
+  "Vietnam": {
+      ISO: "VN",
       "lat": "16.0000",
       "long": "106.0000"
   },
-  "vu": {
+  "Vanuatu": {
+      ISO: "VU",
       "lat": "-16.0000",
       "long": "167.0000"
   },
-  "wf": {
+  "Wallis-and-Futuna": {
+      ISO: "WF",
       "lat": "-13.3000",
       "long": "-176.2000"
   },
-  "ws": {
+  "Samoa": {
+      ISO: "WS",
       "lat": "-13.5833",
       "long": "-172.3333"
   },
-  "ye": {
+  "Yemen": {
+      ISO: "YE",
       "lat": "15.0000",
       "long": "48.0000"
   },
-  "yt": {
+  "Mayotte": {
+      ISO: "YT",
       "lat": "-12.8333",
       "long": "45.1667"
   },
-  "za": {
+  "South-Africa": {
+      ISO: "ZA",
       "lat": "-29.0000",
       "long": "24.0000"
   },
-  "zm": {
+  "Zambia": {
+      ISO: "ZM",
       "lat": "-15.0000",
       "long": "30.0000"
   },
-  "zw": {
+  "Zimbabwe": {
+      ISO: "ZW",
       "lat": "-20.0000",
       "long": "30.0000"
   }

@@ -1,23 +1,18 @@
-import { CHANGE_KEY } from '../actions/actions'
+import { CHANGE_KEY, API_LOADING, API_DONE } from '../actions/actions'
 
-const keys = {
-  TotalConfirmed: "TotalConfirmed",
-  TotalDeaths : "TotalDeaths",
-  TotalRecovered : "TotalRecovered",
-  NewConfirmed: "NewConfirmed",
-  NewDeaths : "NewDeaths",
-  NewRecovered : "NewRecovered",
-  HundredKTotalConfirmed : "HundredKTotalConfirmed",
-  HundredKTotalDead : "HundredKTotalDead",
-  HundredKTotalRecovered : "HundredKTotalRecovered",
-  HundredKDailyConfirmed : "HundredKDailyConfirmed",
-  HundredKDailyDead : "HundredKDailyDead",
-  HundredKDailyRecovered : "HundredKDailyDead"
+export const keys = {
+  totalCases: "totalCases",
+  totalDeaths : "totalDeaths",
+  totalRecoverd : "totalRecoverd",
+  newCases: "newCases",
+  newDeaths : "newDeaths",
+  casesOnMillion : "casesOnMillion",
+  deathOnMillion : "deathOnMillion",
 }
 
 const inital = {
-  key: keys.TotalConfirmed,
-  virtualKeyboard: false
+  key: keys.totalCases,
+  loading: false
 }
 
 const appState = (state=inital, action) => {
@@ -26,6 +21,16 @@ const appState = (state=inital, action) => {
       return {
         ...state,
         key: action.payload
+      }
+    case API_LOADING:
+      return {
+        ...state,
+        loading: true
+      }
+    case API_DONE:
+      return {
+        ...state,
+        loading: false
       }
       default:
         return state
