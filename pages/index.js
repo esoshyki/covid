@@ -2,7 +2,7 @@ import Head from 'next/head'
 import styles from '../styles/Home.module.sass'
 import Layout from '../components/Layout/Layout'
 import GlobalTable from '../components/GlobalTable/GlobalTable'
-import { useEffect, useState,  } from 'react'
+import { useEffect, useState, } from 'react'
 import Map from '../components/Map/Map'
 import covidService from '../services/covid.service'
 import { Container, Row, Col } from 'react-bootstrap'
@@ -15,7 +15,7 @@ import { connect } from 'react-redux';
 import getSummary from '../state/actions/summary';
 import chooseCountry from '../state/actions/chooseCountry'
 
-function Home({summary, countries, chosenCountry, error, dispatch}) {
+function Home({ summary, countries, chosenCountry, error, dispatch }) {
 
   useEffect(() => {
     if (Object.keys(summary).length === 0) {
@@ -33,39 +33,39 @@ function Home({summary, countries, chosenCountry, error, dispatch}) {
       </Head>
 
       <Layout>
-        {error && <Error 
+        {error && <Error
           type={t("APIerrorType")}
           message={t("APIerrorMessage")}
           callback={() => router.push('/')}
           callbackDescription={t("tryAgarin")}
-          />}
+        />}
         {!error && <Container fluid>
           <Row>
             <Col xs={4}>
-              <GlobalTable 
-              worldData={summary} 
-              setCountry={chooseCountry}  
-              country={chosenCountry}
-              countries={countries}/>
+              <GlobalTable
+                worldData={summary}
+                setCountry={chooseCountry}
+                country={chosenCountry}
+                countries={countries} />
             </Col>
             <Col xs={8}>
-              <Map 
-                population={summary.population} 
+              <Map
+                population={summary.population}
                 chooseCountry={chooseCountry}
-                />
+              />
             </Col>
           </Row>
-          <Row style={{marginTop: 20}}>
+          <Row style={{ marginTop: 20 }}>
             <Col xs={6}>
               <CountriesTable countries={countries} />
             </Col>
             <Col xs={6}>
-              <Graphic country={chosenCountry} countries={countries}/>
+              <Graphic summary={summary} country={chosenCountry} countries={countries} />
             </Col>
           </Row>
-        </Container> }
+        </Container>}
 
-        
+
       </Layout>
 
       <footer className={styles.footer}>
@@ -75,7 +75,7 @@ function Home({summary, countries, chosenCountry, error, dispatch}) {
   )
 }
 
-const mapStateToProps = state => { 
+const mapStateToProps = state => {
 
   return {
     summary: state.summary,

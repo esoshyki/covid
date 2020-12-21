@@ -32,5 +32,7 @@ export default {
   getDeathsByCountry: async country => await axios.get(`${covidApi}total/country/${country}/status/deaths`),
   getRecoveredByCountry: async country => await axios.get(`${covidApi}total/country/${country}/status/recovered`),
   getWorldPopulation: async () => await axios.get(populationApi + worldPopulation),
-  getCountryPopulation: async (country) => await axios.get(populationApi + 'name/' + country)
+  getCountryPopulation: async (country) => await axios.get(populationApi + 'name/' + country),
+  getCountryPeriod: async () => await axios.get(covidApi + 'world?from=2020-03-01T00:00:00Z&to=2020-04-01T00:00:00Z'),
+
 }
