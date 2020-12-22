@@ -1,5 +1,5 @@
 import MapChart from "./MapChart"
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import ReactTooltip from "react-tooltip"
 import Spinner from 'react-bootstrap/Spinner'
 import Card from 'react-bootstrap/Card'

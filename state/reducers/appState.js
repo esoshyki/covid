@@ -16,8 +16,19 @@ export const keys = {
   deathOnMillion : "deathOnMillion",
 }
 
+export const mappers = {
+	[keys.totalCases] : day => day.cases.total,
+	[keys.totalDeaths] : day => day.deaths.total,
+	[keys.totalRecoverd] : day => day.cases.recovered,
+	[keys.newCases] : day => parseInt(day.cases.new),
+	[keys.newDeaths] : day => parseInt(day.deaths.new),
+	[keys.casesOnMillion] : day => parseInt(day.cases["1M_pop"]),
+	[keys.deathOnMillion] : day => parseInt(day.deaths["1M_pop"])
+}
+
 const inital = {
   key: keys.totalCases,
+  mapper: mappers[keys.totalCases],
   historyLoading: false,
   countriesLoading: false,
   chosenCountry: null,
@@ -28,7 +39,8 @@ const appState = (state=inital, action) => {
     case CHANGE_KEY:
       return {
         ...state,
-        key: action.payload
+        key: action.payload,
+        mapper: mappers[action.payload]
       }
     case HISTORY_LOADING:
       return {

@@ -15,27 +15,10 @@ import { connect } from 'react-redux';
 import getCountries from '../state/actions/getCountries'
 import getHistory from '../state/actions/getHistory';
 
-function Home({countries, history, dispatch}) {
+function Home({dispatch}) {
 
   useEffect(() => dispatch(getCountries()), [])
   useEffect(() => dispatch(getHistory()), [])
-
-  // useEffect(() => {
-  //   if (countries.length === 0) {
-  //     dispatch(getCountries())
-  //   } else {
-
-  //   }
-  // }, [countries])
-
-  // useEffect(() => {
-  //   if (history.days && history?.days.length === 0) {
-  //     dispatch(getHistory(history.chosenCountry))
-  //   } else {
-  //     console.log(history)
-  //   }
-  // }, [history])
-
 
   return (
     <Container>
@@ -57,10 +40,10 @@ function Home({countries, history, dispatch}) {
           </Row>
           <Row style={{marginTop: 5}}>
             <Col xs={6}>
-              {/* <CountriesTable /> */}
+              <CountriesTable />
             </Col>
             <Col xs={6}>
-              <Graphic />
+              {/* <Graphic /> */}
             </Col>
           </Row>
         </Container>

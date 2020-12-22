@@ -26,8 +26,8 @@ const MapChart = ({countries, setTooltipContent, chosenCountry, countriesLoading
   const [chosenNode, setChosenNode] = useState(null)
 
   useEffect(() => {
-
-  }, [countries])
+    console.log(chosenCountry)
+  })
 
   const map = useRef()
 
