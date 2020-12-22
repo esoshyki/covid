@@ -53,19 +53,19 @@ const mappers = {
 //   )
 // }
 
-// Data generation
-const getRandomArray = (numItems) => {
-   // Create random array of objects
-   let names = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-   let data = [];
-   for (var i = 0; i < numItems; i++) {
-      data.push({
-         label: names[i],
-         value: Math.round(20 + 80 * Math.random())
-      });
-   }
-   return data;
-}
+// // Data generation
+// const getRandomArray = (numItems) => {
+//    // Create random array of objects
+//    let names = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+//    let data = [];
+//    for (var i = 0; i < numItems; i++) {
+//       data.push({
+//          label: names[i],
+//          value: Math.round(20 + 80 * Math.random())
+//       });
+//    }
+//    return data;
+// }
 
 
 
@@ -115,7 +115,7 @@ class LineChart extends React.Component {
                data: this.props.data.map(d => d.value),
                fill: 'none',
                backgroundColor: this.props.color,
-               pointRadius: 2,
+               pointRadius: 1,
                borderColor: this.props.color,
                borderWidth: 1,
                lineTension: 0
@@ -138,7 +138,7 @@ function Graphic({history, dispatch, appState}) {
    const getRandomDateArray = (numItems) => {
       // Create random array of objects (with date)
       let data = [];
-      for (var i = 0; i < history.days.length; i++) {
+      for (let i = 0; i < history.days.length; i++) {
          data.push({
             time: new Date(history.days[i].time),
             value: history.days[i].cases.active
@@ -167,20 +167,20 @@ function Graphic({history, dispatch, appState}) {
          data: getRandomDateArray()
       });
    
-      data.push({
-         title: 'Categories',
-         data: getRandomArray(20)
-      });
+      // data.push({
+      //    title: 'Categories',
+      //    data: getRandomArray(20)
+      // });
    
-      data.push({
-         title: 'Categories',
-         data: getRandomArray(10)
-      });
+      // data.push({
+      //    title: 'Categories',
+      //    data: getRandomArray(10)
+      // });
    
-      data.push({
-         title: 'Data 4',
-         data: getRandomArray(6)
-      });
+      // data.push({
+      //    title: 'Data 4',
+      //    data: getRandomArray(6)
+      // });
    
       return data;
    }
