@@ -1191,5 +1191,10 @@ export default {
       ISO: "ZW",
       "lat": "-20.0000",
       "long": "30.0000"
+  },
+  "Sint-Maarten": {
+      ISO: "SX",
+      "lat": "18.0700",
+      "long" : "-63.0500"
   }
 }

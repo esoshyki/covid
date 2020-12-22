@@ -31,18 +31,18 @@ function Home({dispatch}) {
 
         <Container fluid>
           <Row>
-            <Col xs={4}>
+            <Col lg={4} sm={false}>
               {/* <GlobalTable /> */}
             </Col>
-            <Col xs={8}>
+            <Col lg={8} sm={12} >
               <Map />
             </Col>
           </Row>
           <Row style={{marginTop: 5}}>
-            <Col xs={6}>
+            <Col lg={6} sm={12}>
               <CountriesTable />
             </Col>
-            <Col xs={6}>
+            <Col lg={6} sm={12}>
               <Graphic />
             </Col>
           </Row>

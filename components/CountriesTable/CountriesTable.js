@@ -73,9 +73,13 @@ const CountriesTable = ({countries, appState, dispatch}) => {
   }
 
   return (
-    <Card style={{ width: '100%', maxHeight: 500, overflow: "scroll"}}>
+    <Card style={{ width: '100%', height: 300, overflowY: "scroll"}}>
       {(appState.countriesLoading || loading) && <Loading />}
-      <Card.Header style={{color: "#000"}}>
+      <Card.Header 
+        style={{
+          color: "#000",
+          padding: 5
+          }}>
           {t("сountryTable")}
       </Card.Header>
       <Card.Body 
@@ -90,11 +94,20 @@ const CountriesTable = ({countries, appState, dispatch}) => {
             position: "absolute",
             right: 5,
             zIndex: 5,
-            top: 5
+            top: 3
           }}
           >
-          <Button variant="success">{t(appState.key)}</Button>
-          <Dropdown.Toggle split variant="success" id="dropdown-split-basic" />
+          <Button 
+            variant="success" 
+            size="sm"
+            style={{
+              padding: 2,
+              height: 35
+            }}
+            >
+            {t(appState.key)}
+          </Button>
+          <Dropdown.Toggle split variant="success" style={{height: 35}} />
 
           <Dropdown.Menu>
             {Object.keys(keys).map((el, idx) => (
