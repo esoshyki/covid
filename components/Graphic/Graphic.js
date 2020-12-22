@@ -9,9 +9,9 @@ import {
   XYPlot,
   XAxis,
   YAxis,
-  VerticalGridLines,
-  HorizontalGridLines,
-  LineMarkSeries
+  VerticalBarSeries ,
+  Crosshair,
+  
 } from 'react-vis';
 
 import { keys } from '../../state/reducers/appState';
@@ -28,53 +28,61 @@ const mappers = {
 
 function Graphic({history, dispatch, appState}) {
 
+	const [crosshairValues, setCrosshairVelues] = useState([])
+
   const { t } = useTranslation("countries")
   const { key } = appState;
 	const { chosenCountry } = history;
 	
-	const data = history.days ? history.days.reverse().map(day => {
+	const data = history.days ? [...history.days].reverse().map((day, idx) => {
 		return ({
-			x: new Date(day.day),
-			y: mappers[key](day)
+			x: idx,
+			y: (mappers[key](day)),
+			date: new Date(day.day)
 		})
 	}) : null;
 
-	console.log(history)
-	console.log(data)
+	const _onNearestX = (value) => {
+		console.log(value)
+		// const { date, y } = value;
+		// setCrosshairVelues([
+		// 	date,
+		// 	y
+		// ])
+	}
+
+	const _onMouseLeave = () => {
+		setCrosshairVelues([])
+	}
 
   return (
 
     <Card>
       {appState.loading && <Loading />}
 
-      <Card.Title style={{padding: 15}}>
+      <Card.Header style={{padding: 15}}>
         <h5 style={{color: "#000"}}>
 					{t(chosenCountry ? chosenCountry.country : "All")} <Badge variant="primary">{t(key)}</Badge>
 				</h5>
-      </Card.Title>
+      </Card.Header>
 
-      <Card.Body style={{padding: 0}}>
+			<Card.Body 
+				style={{
+					padding: 0,
+					display: "flex",
+					flexDirection: "column",
+					alignItems: "center"}}>
 
-				<XYPlot width={300} height={300}>
-      		<VerticalGridLines />
-      		<HorizontalGridLines />
-      		<XAxis />
-      		<YAxis />
-      		<LineMarkSeries
-        		className="linemark-series-example"
-        		style={{
-         		  strokeWidth: '3px'
-        		}}
-        		lineStyle={{stroke: 'red'}}
-        		markStyle={{stroke: 'blue'}}
-        		data={data}
-      />
-      <LineMarkSeries
-        className="linemark-series-example-2"
-        curve={'curveMonotoneX'}
-        data={[{x: 1, y: 11}, {x: 1.5, y: 29}, {x: 3, y: 7}]}
-      />
-    </XYPlot>
+			<XYPlot width={300} height={300} onMouseLeave={_onMouseLeave}>
+				<VerticalBarSeries 
+					data={data}
+					onNearestX={_onNearestX}
+				/>
+				<Crosshair 
+					values={crosshairValues}
+					className="test-class-name"
+				/>
+	    </XYPlot>
     	</Card.Body> 
     </Card>
    );
