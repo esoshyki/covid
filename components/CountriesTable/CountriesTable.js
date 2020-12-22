@@ -8,37 +8,105 @@ import { keys } from '../../state/reducers/appState';
 import Dropdown from 'react-bootstrap/Dropdown';
 import ButtonGroup from 'react-bootstrap/ButtonGroup'
 import ListGroup from 'react-bootstrap/ListGroup'
+import ListGroupItem from 'react-bootstrap/ListGroupItem'
 import Button from 'react-bootstrap/Button'
+import Image from 'react-bootstrap/Image'
+import Loading from '../Loading/Loading'
 
 const CountriesTable = ({countries, appState, dispatch}) => {
 
   const { t } = useTranslation('global');
   const conT = useTranslation("countries").t;
+  const [loading, setLoading] = useState(false);
 
   const _onSelect = (eventKey) => {
     dispatch(setKey(eventKey))
   }
 
+  const enclude = [
+    "Asia", "Europe", "North-America", "All", "South-America", "Africa"
+  ]
+
+  
+  const Group = () => {
+
+    const mapper = appState.mapper;
+    const filtred = countries ? countries.filter(con => !enclude.includes(con.country)).map(con => {
+      return ({
+        country: con.country,
+        cases: mapper(con),
+        ISO: con.ISO
+      })
+    }).sort((a, b) => b.cases - a.cases) :null
+
+    return (
+      <ListGroup className="list-group-flush">
+        {filtred && filtred.map(con => (
+          <ListGroupItem 
+            style={{
+              color: "#000",
+              padding: 0,
+              "&::hover" : {
+                cursor: "pointer"
+              }
+              }}>
+            <Image 
+              style={{width: 32, height: 32, marginRight: 20}}
+              rounded 
+              src={con.ISO === 'BY' ? '/icons/bchb.png' : `https://www.countryflags.io/${con.ISO}/flat/64.png`}
+            />
+            <h5 style={{
+              display: "inline-block",
+              color: "black",
+              fontSize: 12 }}>{conT(con.country)}</h5>
+            <h6 style={{
+              display: "inline-block", 
+              color: "red",
+              marginLeft: 20,
+              fontSize: 12 
+              }}>{con.cases}</h6>
+
+          </ListGroupItem>
+        ))}
+      </ListGroup>
+    )
+  }
+
   return (
-    <Card style={{ width: '100%'}}>
+    <Card style={{ width: '100%', maxHeight: 500, overflow: "scroll"}}>
+      {(appState.countriesLoading || loading) && <Loading />}
       <Card.Header style={{color: "#000"}}>
           {t("сountryTable")}
       </Card.Header>
-      <Card.Body style={{width: "100%"}}>
-      <Dropdown as={ButtonGroup} onSelect={_onSelect}>
-      <Button variant="success">{t(appState.key)}</Button>
-      <Dropdown.Toggle split variant="success" id="dropdown-split-basic" />
+      <Card.Body 
+        style={{
+          width: "100%",
+          padding: 5
+          }}>
+        <Dropdown 
+          as={ButtonGroup} 
+          onSelect={_onSelect} 
+          style={{
+            position: "absolute",
+            right: 5,
+            zIndex: 5,
+            top: 5
+          }}
+          >
+          <Button variant="success">{t(appState.key)}</Button>
+          <Dropdown.Toggle split variant="success" id="dropdown-split-basic" />
 
-      <Dropdown.Menu>
-        {Object.keys(keys).map((el, idx) => (
-          <Dropdown.Item 
-            eventKey={el}
-            key={idx}>
+          <Dropdown.Menu>
+            {Object.keys(keys).map((el, idx) => (
+            <Dropdown.Item 
+              eventKey={el}
+              key={idx}>
               {t(el)}
             </Dropdown.Item>
-        ))}
-      </Dropdown.Menu>
-</Dropdown>
+            ))}
+          </Dropdown.Menu>
+        </Dropdown>
+        <Group />
       </Card.Body>
     </Card>
   )
