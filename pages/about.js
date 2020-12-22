@@ -24,7 +24,8 @@ export default function About () {
 
         <h2>{t("ourTeam")}</h2>
         <Row>
-          <Col xs={4}>
+
+          <Col lg={4} md={12}>
             <a href="https://github.com/esoshyki" target="_blank" style={{
               textDecoration: 'none'
             }}>
@@ -44,8 +45,49 @@ export default function About () {
               </Card>
             </a>
           </Col>
-          <Col xs={4}></Col>
-          <Col xs={4}></Col>
+
+          <Col lg={4} md={12}>
+            <a href="https://github.com/esoshyki" target="_blank" style={{
+              textDecoration: 'none'
+            }}>
+              <Card >
+                <Card.Header style={{textAlign: "center"}}>
+                  Shyki
+                </Card.Header>
+
+                <Card.Body style={{ padding: 0}}>
+                  <Card.Img src="https://avatars.mds.yandex.net/get-kinopoisk-post-img/1374145/4e559bf19bc46b2879cfbffa8792253b/960x540" />
+                </Card.Body>
+
+                <Card.Text style={{margin: 15}}>
+                  {t("shykiCardText")}
+                </Card.Text>
+
+              </Card>
+            </a>
+          </Col>
+
+          <Col lg={4} md={12}>
+            <a href="https://github.com/esoshyki" target="_blank" style={{
+              textDecoration: 'none'
+            }}>
+              <Card >
+                <Card.Header style={{textAlign: "center"}}>
+                  Shyki
+                </Card.Header>
+
+                <Card.Body style={{ padding: 0}}>
+                  <Card.Img src="https://giknutye.ru/wp-content/uploads/2016/08/giknutye-Doctor-Strange.jpg" />
+                </Card.Body>
+
+                <Card.Text style={{margin: 15}}>
+                  {t("shykiCardText")}
+                </Card.Text>
+
+              </Card>
+            </a>
+          </Col>
+
         </Row>
       </Container>
     </Layout>
