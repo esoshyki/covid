@@ -17,7 +17,7 @@ const geoUrl =
   "https://raw.githubusercontent.com/zcreativelabs/react-simple-maps/master/topojson-maps/world-110m.json"
 
 
-const MapChart = ({countries, setTooltipContent, chosenCountry, appState, dispatch}) => {
+const MapChart = ({countries, setTooltipContent, chosenCountry, countriesLoading, dispatch}) => {
 
   const { t } = useTranslation("global")
 
@@ -26,8 +26,8 @@ const MapChart = ({countries, setTooltipContent, chosenCountry, appState, dispat
   const [chosenNode, setChosenNode] = useState(null)
 
   useEffect(() => {
-
-  }, [countries])
+    console.log(chosenCountry)
+  })
 
   const map = useRef()
 
@@ -135,7 +135,7 @@ const MapChart = ({countries, setTooltipContent, chosenCountry, appState, dispat
          
       </div>
     <div className={styles.root}>
-      {appState.loading && <Loading />}
+      {countriesLoading && <Loading />}
       <ComposableMap data-tip="" projectionConfig={{ scale: 200 }} fill={circleMode ? "yellow" : "black"} style={{
         backgroundColor: "#fff",
       }}
@@ -251,8 +251,8 @@ const MapChart = ({countries, setTooltipContent, chosenCountry, appState, dispat
 const mapStateToProps = state => {
   return {
     countries: state.countries,
-    chosenCountry: state.history.chosenCountry,
-    appState: state.appState
+    chosenCountry: state.appState.chosenCountry,
+    countriesLoading: state.appState.countriesLoading
   }
 }
 

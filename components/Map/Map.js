@@ -1,12 +1,12 @@
 import MapChart from "./MapChart"
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import ReactTooltip from "react-tooltip"
 import Spinner from 'react-bootstrap/Spinner'
 import Card from 'react-bootstrap/Card'
 import { useTranslation } from 'react-i18next';
 import { connect } from 'react-redux';
 
-const Map = ({countries, history}) => {
+const Map = ({countries}) => {
 
   const { t } = useTranslation("global");
   const conT = useTranslation("countries").t
@@ -77,7 +77,6 @@ const mapStateToProps = state => {
 
   return {
     countries: state.countries,
-    history: state.history
   }
 }
 

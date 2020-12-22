@@ -5,18 +5,11 @@ import { useTranslation } from 'react-i18next';
 import React from 'react';
 import { connect } from 'react-redux'
 import Chart from 'chart.js';
+import Loading from '../Loading/Loading'
 
 import { keys } from '../../state/reducers/appState';
 
-const mappers = {
-	[keys.totalCases] : day => day.cases.total,
-	[keys.totalDeaths] : day => day.deaths.total,
-	[keys.totalRecoverd] : day => day.cases.recovered,
-	[keys.newCases] : day => parseInt(day.cases.new),
-	[keys.newDeaths] : day => parseInt(day.deaths.new),
-	[keys.casesOnMillion] : day => parseInt(day.cases["1M_pop"]),
-	[keys.deathOnMillion] : day => parseInt(day.deaths["1M_pop"])
-}
+
 
 
 
@@ -129,20 +122,35 @@ class LineChart extends React.Component {
    }
 }
 
-function Graphic({history, dispatch, appState}) {
+function Graphic({history, appState, dispatch}) {
   const { t } = useTranslation("countries")
   const { key } = appState;
 	const { chosenCountry } = history;
 
-   console.log(history.days)
+
+  const mapper = appState.mapper;
+   // const mappers = {
+   //    [keys.totalCases] : day => day.cases.total,
+   //    [keys.totalDeaths] : day => day.deaths.total,
+   //    [keys.totalRecoverd] : day => day.cases.recovered,
+   //    [keys.newCases] : day => parseInt(day.cases.new),
+   //    [keys.newDeaths] : day => parseInt(day.deaths.new),
+   //    [keys.casesOnMillion] : day => parseInt(day.cases["1M_pop"]),
+   //    [keys.deathOnMillion] : day => parseInt(day.deaths["1M_pop"])
+   // }
+
+
+   
    const getRandomDateArray = (numItems) => {
       // Create random array of objects (with date)
       let data = [];
-      for (let i = 0; i < history.days.length; i++) {
+      for (var i = 0; i < history.length; i++) {
          data.push({
-            time: new Date(history.days[i].time),
-            value: history.days[i].cases.active
+            
+            time: new Date(history[i].time),
+            value: mapper(history[i])
          });
+         
       }
       return data;
    }
@@ -163,7 +171,7 @@ function Graphic({history, dispatch, appState}) {
       let data = [];
    
       data.push({
-         title: 'Confirmed',
+         title: key,
          data: getRandomDateArray()
       });
    
@@ -199,6 +207,7 @@ function Graphic({history, dispatch, appState}) {
 
    return (
       <div  className="Graphic">
+         {appState.historyLoading && <Loading />}
          <div className="main chart-wrapper">
            
             {<LineChart

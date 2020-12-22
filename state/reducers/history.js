@@ -1,9 +1,6 @@
 import { GET_HISTORY } from '../actions/actions'
 
-const initial = {
-  chosenCountry: null,
-  days: []
-};
+const initial = []
 
 const countries = (state=initial, action) => {
   switch (action.type) {
