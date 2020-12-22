@@ -1,6 +1,5 @@
-export default function DTOLastDay(obj, callback) {
-  
-    console.log(obj)
+export default function DTOLastDay(obj, callback) {  
+    
     const DTO = {
       "totalCases" : obj.cases.new === null ? "-": obj.cases.new,
       "totalDeaths" : obj.deaths.new === null ? "-": obj.deaths.new,

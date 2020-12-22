@@ -11,9 +11,7 @@ import Loading from '../Loading/Loading'
 
 const GlobalTable = ({countries, chosenCountrys, dispatch}) => { 
  
-  let chosenCountry;
-
- 
+  let chosenCountry; 
   
   if(chosenCountrys === undefined || chosenCountrys === null){    
     if(countries.length<1){      
@@ -23,17 +21,12 @@ const GlobalTable = ({countries, chosenCountrys, dispatch}) => {
     }    
   }else{
     chosenCountry = chosenCountrys
-  } 
-   
-  console.log(chosenCountry) 
-  const { t } = useTranslation("countries", 'global');
-
-  const root = useRef();
-
-  const [toFind, setToFind] = useState(false);
+  }    
   
-  const [isTotalRender, setisTotalRender] = useState(true)
- 
+  const { t } = useTranslation("countries", 'global');
+  const root = useRef();
+  const [toFind, setToFind] = useState(false);  
+  const [isTotalRender, setisTotalRender] = useState(true) 
   const findCountrie = async () => {
     setToFind(!toFind)
   }
@@ -47,7 +40,7 @@ const GlobalTable = ({countries, chosenCountrys, dispatch}) => {
   }  
   const renderData = DTO(chosenCountry);
   const renderDataDaily = DTOLastDay(chosenCountry);
-  let data; 
+  let displayedCovidData; 
   let headDropdownText;
   
   function handleClick (country) {
@@ -77,22 +70,19 @@ const GlobalTable = ({countries, chosenCountrys, dispatch}) => {
         </Card.Text>
 
       </ListGroup.Item>
-    )  
-
-    
+    )   
     
     if (isTotalRender) {
-      data = renderData;
+      displayedCovidData = renderData;
       headDropdownText = t('global:All Time');
     }else{
-      data = renderDataDaily;
+      displayedCovidData = renderDataDaily;
       headDropdownText = t('global:Last Day');
     }
-
     
     const list = 
      <ListGroup className={styles["list-group"]}>
-      {Object.entries(data).map(([key, value]) => globalLine(key, value)) }
+      {Object.entries(displayedCovidData).map(([key, value]) => globalLine(key, value)) }
       <ListGroup.Item
         style={{
           width: "100%",
