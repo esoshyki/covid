@@ -41,8 +41,9 @@ const CountriesTable = ({countries, appState, dispatch}) => {
 
     return (
       <ListGroup className="list-group-flush">
-        {filtred && filtred.map(con => (
+        {filtred && filtred.map((con, idx) => (
           <ListGroupItem 
+            key={idx}
             style={{
               color: "#000",
               padding: 0,

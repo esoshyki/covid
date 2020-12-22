@@ -1,5 +1,5 @@
 import styles from './Map.module.sass';
-import {  useState, useRef, useEffect } from 'react';
+import {  useState, useEffect } from 'react';
 import { ComposableMap, 
   Geographies, 
   Geography, 
@@ -12,24 +12,19 @@ import { useTranslation } from 'react-i18next'
 import getHistory from '../../state/actions/getHistory'
 import { connect } from 'react-redux';
 import Loading from '../Loading/Loading'
+import { mappers } from '../../state/reducers/appState';
 
 const geoUrl =
   "https://raw.githubusercontent.com/zcreativelabs/react-simple-maps/master/topojson-maps/world-110m.json"
 
 
-const MapChart = ({countries, setTooltipContent, chosenCountry, countriesLoading, dispatch}) => {
+const MapChart = ({countries, setTooltipContent, chosenCountry, countriesLoading, dispatch, mapKey, mapper}) => {
 
   const { t } = useTranslation("global")
 
   const [position, setPosition] = useState({ coordinates: [0, 0], zoom: 1 });
   const [circleMode, setCircleMode] = useState(true)
   const [chosenNode, setChosenNode] = useState(null)
-
-  useEffect(() => {
-    console.log(chosenCountry)
-  })
-
-  const map = useRef()
 
   useEffect(() => {
     const newCoords = chosenCountry ? {lat: chosenCountry.lat, long: chosenCountry.long }: { lat: 0, long: 0}
@@ -85,9 +80,8 @@ const MapChart = ({countries, setTooltipContent, chosenCountry, countriesLoading
     }  
 
   function getColor (country) {
-    const total = country?.cases.total;
-    console.log(total * 0.0000055)
-    return total ? `rgb(${total * 0.0000500}, 20, 30)` : "#000"
+    const cases = mapper(country)
+    return cases ? `rgb(${cases * 0.0000500}, 20, 30)` : "#000"
   }
 
   const zoomEnd = (e) => {
@@ -147,12 +141,10 @@ const MapChart = ({countries, setTooltipContent, chosenCountry, countriesLoading
           onMoveEnd={handleMoveEnd}
           onMoveStart={handleMoveStart}
           onWheel={zoomStart}
-          onZoomEnd={zoomEnd}
           onMouseMove={(e) => e.target.style="transition-duration: 0"}
           >
         <Geographies 
           geography={geoUrl} 
-          ref={map}
           >
           
           {({ geographies }) =>
@@ -160,7 +152,6 @@ const MapChart = ({countries, setTooltipContent, chosenCountry, countriesLoading
               const { NAME, ISO_A2} = geo.properties;
               const country = countries.find(con => con.ISO === ISO_A2)
               if (!country) {
-                console.log(NAME, ISO_A2)
               }
             return <Geography 
                     onMouseEnter={(e) => setTooltipContent(createTooltipData(country))}
@@ -191,8 +182,8 @@ const MapChart = ({countries, setTooltipContent, chosenCountry, countriesLoading
           {countries && countries.map((con, idx) => {
           const lat = con?.lat;
           const long = con?.long;
-          const totalConfirmed = con.cases.total;
-          const size = totalConfirmed ** (0.5) / 100
+          const cases = mapper ? mapper(con) : con.cases.total;
+          const size = cases ** (0.5) / 100
           return ((long && lat) && circleMode) ? <Marker key={idx} coordinates={[long, lat]}>
             <circle 
             onMouseEnter={() => setTooltipContent(createTooltipData(con))}
@@ -252,7 +243,9 @@ const mapStateToProps = state => {
   return {
     countries: state.countries,
     chosenCountry: state.appState.chosenCountry,
-    countriesLoading: state.appState.countriesLoading
+    countriesLoading: state.appState.countriesLoading,
+    mapKey: state.appState.key,
+    mapper: mappers[state.appState.key || "totalConfirmed"]
   }
 }
 

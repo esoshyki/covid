@@ -17,13 +17,13 @@ export const keys = {
 }
 
 export const mappers = {
-	[keys.totalCases] : day => day.cases.total,
-	[keys.totalDeaths] : day => day.deaths.total,
-	[keys.totalRecoverd] : day => day.cases.recovered,
-	[keys.newCases] : day => parseInt(day.cases.new),
-	[keys.newDeaths] : day => parseInt(day.deaths.new),
-	[keys.casesOnMillion] : day => parseInt(day.cases["1M_pop"]),
-	[keys.deathOnMillion] : day => parseInt(day.deaths["1M_pop"])
+	[keys.totalCases] : day => day?.cases?.total || 0,
+	[keys.totalDeaths] : day => day?.deaths?.total || 0,
+	[keys.totalRecoverd] : day => day?.cases?.recovered || 0,
+	[keys.newCases] : day => parseInt(day?.cases?.new || 0),
+	[keys.newDeaths] : day => parseInt(day?.deaths?.new || 0),
+	[keys.casesOnMillion] : day => parseInt(day?.cases["1M_pop"] || 0),
+	[keys.deathOnMillion] : day => parseInt(day?.deaths["1M_pop"] || 0)
 }
 
 const inital = {

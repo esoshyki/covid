@@ -1,12 +1,9 @@
-import styles from '../styles/Home.module.sass'
 import Layout from '../components/Layout/Layout'
-import GlobalTable from '../components/GlobalTable/GlobalTable'
 import { useEffect } from 'react'
 import Map from '../components/Map/Map'
 import { Container, Row, Col } from 'react-bootstrap'
 import Graphic from '../components/Graphic/Graphic'
 import CountriesTable from '../components/CountriesTable/CountriesTable'
-import { useTranslation } from 'react-i18next';
 import { connect } from 'react-redux';
 import getCountries from '../state/actions/getCountries'
 import getHistory from '../state/actions/getHistory';
