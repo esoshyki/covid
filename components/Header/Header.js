@@ -12,9 +12,22 @@ const Header = () => {
   useTranslation();
   const [language, setLanguage] = useState(i18n.language || 'en');
 
+  const [langIcon, setLongIcon] = useState(`english.png`)
+
   const handleChange = eventKey => {
     setLanguage(eventKey)
     i18n.changeLanguage(eventKey)
+    switch (eventKey) {
+      case "en":
+        setLongIcon(`english.png`)
+        break
+      case "ru":
+        setLongIcon(`russia.png`)
+        break
+      case "be":
+        setLongIcon(`belarus.png`)
+        break        
+    }
   }
 
   const { t } = useTranslation("global")
@@ -46,7 +59,7 @@ const Header = () => {
       right: 15
     }}>
       <Dropdown.Toggle style={{
-        backgroundImage: `url(/icons/${language === 'en' ? "english.png" : "russia.png"})`,
+        backgroundImage: `url(/icons/${langIcon})`,
         width: 32,
         height: 32,
         backgroundSize: "cover"
@@ -63,6 +76,11 @@ const Header = () => {
         <Dropdown.Item 
           onSelect={() => handleChange('ru')}>
           <div className={style.ru} />          
+        </Dropdown.Item>
+
+        <Dropdown.Item 
+          onSelect={() => handleChange('be')}>
+          <div className={style.be} />          
         </Dropdown.Item>
 
       </Dropdown.Menu>

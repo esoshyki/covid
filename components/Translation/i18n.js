@@ -13,6 +13,12 @@ import graphicsRu from './dict/ru/graphics.json';
 import homeRu from './dict/ru/home.json';
 import aboutRu from './dict/ru/about.json'
 
+import globalBe from './dict/be/global.json';
+import countriesBe from './dict/be/countries.json'
+import graphicsBe from './dict/be/graphics.json';
+import homeBe from './dict/be/home.json';
+import aboutBe from './dict/be/about.json'
+
 i18n
   .use(initReactI18next)
   .init({
@@ -30,12 +36,19 @@ i18n
         graphics: graphicsRu,
         home: homeRu,
         about: aboutRu
-      }
+      },
+      be: {
+        global: globalBe,
+        countries: countriesBe,
+        graphics: graphicsBe,
+        home: homeBe,
+        about: aboutBe
+      },     
     },
     fallbackLng: 'en',
     preload: true,
     debug: true,
-    ns: ["global", "countries", "graphics", "home"],
+    ns: ["global", "countries", "graphics", "home", "about"],
     defaultNS: "global",
 
     keySeparator: false,
