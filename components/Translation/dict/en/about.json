@@ -1,0 +1,6 @@
+{
+  "summaryArticleTitle" : "Our project",
+  "summaryArticle" : "Our project is written in Next / JS framework. This is a react with built-in features, such as easy routing, simple server side, simple file serving, and much more. Also, the project used the redux library together with thunk to create a single application state and the fashionable i18 library for easy translation of the application into various languages.",
+  "ourTeam" : "Our team",
+  "shykiCardText" : "Main structure. Map. Store. Countries table. Adaptive"
+}

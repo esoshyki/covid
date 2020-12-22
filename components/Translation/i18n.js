@@ -5,11 +5,13 @@ import globalEn from './dict/en/global.json';
 import countriesEn from './dict/en/countries.json';
 import graphicsEn from './dict/en/graphics.json';
 import homeEn from './dict/en/home.json';
+import aboutEn from './dict/en/about.json';
 
 import globalRu from './dict/ru/global.json';
 import countriesRu from './dict/ru/countries.json'
 import graphicsRu from './dict/ru/graphics.json';
 import homeRu from './dict/ru/home.json';
+import aboutRu from './dict/ru/about.json'
 
 i18n
   .use(initReactI18next)
@@ -19,13 +21,15 @@ i18n
         global: globalEn,
         countries: countriesEn,
         graphics: graphicsEn,
-        home: homeEn
+        home: homeEn,
+        about: aboutEn
       },
       ru: {
         global: globalRu,
         countries: countriesRu,
         graphics: graphicsRu,
-        home: homeRu
+        home: homeRu,
+        about: aboutRu
       }
     },
     fallbackLng: 'en',

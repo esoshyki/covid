@@ -1,11 +1,11 @@
 import style from './Header.module.sass'
-import DropdownItem from 'react-bootstrap/DropdownItem'
-import DropdownButton from 'react-bootstrap/DropdownButton'
 import Dropdown from 'react-bootstrap/Dropdown'
 import i18n from '../Translation/i18n'
 import { useTranslation } from 'react-i18next'
 import { useState } from 'react'
 import Navbar from 'react-bootstrap/Navbar'
+import Image from 'react-bootstrap/Image'
+import Nav from 'react-bootstrap/Nav'
 
 const Header = () => {
 
@@ -17,34 +17,58 @@ const Header = () => {
     i18n.changeLanguage(eventKey)
   }
 
-  return <header className={style.root}>
-    <Navbar bg="primary" style={{
-      height: "100%", width: "100%"
-    }}>
-      <Navbar.Brand href="/">
-        <img alt="logo" src="/virus.gif" className={style.logo} />
+  const { t } = useTranslation("global")
+
+  return (
+    <Navbar sticky="top" bg="dark" style={{maxHeight: 90}}>
+      <Navbar.Brand href="/" >
+        <Image alt="logo" src="/virus.gif" className={style.logo} />
       </Navbar.Brand>
 
-    <div className={style.title}>
+    <div style={{display: "none"}}>
     	<h1>Covid Center</h1>
     </div>
-    <DropdownButton
-			id="dropdown-basic-button"
-			size="sm"
-      variant="primary"
+
+    <Nav className="justify-content-center" activeKey="/" style={{color: "#fff"}}>
+      <Nav.Item >
+        <Nav.Link href="/">{t("home")}</Nav.Link>
+      </Nav.Item>
+      <Nav.Item>
+        <Nav.Link href="/about">{t("about")}</Nav.Link>
+      </Nav.Item>
+    </Nav>
+
+    <Dropdown 
+      drop="left"
       style={{
-        position: "absolute",
-        right: 20,
+      position: "absolute",
+      bottom: 25,
+      right: 15
+    }}>
+      <Dropdown.Toggle style={{
         backgroundImage: `url(/icons/${language === 'en' ? "english.png" : "russia.png"})`,
         width: 32,
         height: 32,
         backgroundSize: "cover"
       }}>
-			<DropdownItem onSelect={() => handleChange('en')}><div className={style.en}></div></DropdownItem>
-			<DropdownItem onSelect={() => handleChange('ru')}><div className={style.ru}></div></DropdownItem>
-    </DropdownButton>
+      </Dropdown.Toggle>
+
+      <Dropdown.Menu  drop="top">
+
+        <Dropdown.Item 
+          onSelect={() => handleChange('en')}>
+          <div className={style.en} />          
+        </Dropdown.Item>
+
+        <Dropdown.Item 
+          onSelect={() => handleChange('ru')}>
+          <div className={style.ru} />          
+        </Dropdown.Item>
+
+      </Dropdown.Menu>
+    </Dropdown>
     </Navbar>
-  </header>
+  )
 }
 
 export default Header

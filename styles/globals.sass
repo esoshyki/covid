@@ -9,7 +9,6 @@ body
   margin: 0
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif
   +flex()
-  color: #000 !important
 
 body
   width: 100vw
@@ -52,19 +51,18 @@ svg
   transition-timing-function: ease-in-out
   transition-duration: 0.5s
 
-// .dropdown-toggle
-//   background-color: rgba(0, 0, 0, 0) !important
-//   width: 32px
-//   height: 32px
-//   +flex()
-//   opacity: 0
+.nav-item
+  a
+    position: relative
+    color: #fff !important
+    font-weight: 700
+    top: 0
+    &:hover
+      cursor: pointer
+      top: 2px
+      transition-duration: 0.2s
+      color: #c2adad !important
 
-// .dropdown
-//   +flex()
-//   width: 40px
-//   height: 40px
-//   &::after
-//     content: "" !important
 
 .__react_component_tooltip
   background: none !important

@@ -20,5 +20,7 @@
   "circleMode": "Circle Mode",
   "All Time": "All Time",
   "Last Day": "Last Day",
-  "сountryTable" : "Country Table"
+  "сountryTable" : "Country Table",
+  "home" : "Home",
+  "about" : "About"
 }

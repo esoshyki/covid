@@ -1,15 +1,11 @@
-import Head from 'next/head'
 import styles from '../styles/Home.module.sass'
 import Layout from '../components/Layout/Layout'
 import GlobalTable from '../components/GlobalTable/GlobalTable'
-import { useEffect, useState, } from 'react'
+import { useEffect } from 'react'
 import Map from '../components/Map/Map'
-import covidService from '../services/covid.service'
 import { Container, Row, Col } from 'react-bootstrap'
 import Graphic from '../components/Graphic/Graphic'
 import CountriesTable from '../components/CountriesTable/CountriesTable'
-import { useRouter } from 'next/router'
-import Error from '../components/Error/Error'
 import { useTranslation } from 'react-i18next';
 import { connect } from 'react-redux';
 import getCountries from '../state/actions/getCountries'
@@ -21,15 +17,8 @@ function Home({dispatch}) {
   useEffect(() => dispatch(getHistory()), [])
 
   return (
-    <Container>
-      <Head>
-        <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
       <Layout>
-
-        <Container fluid>
+        <Container fluid style={{padding: 0, paddingTop: 10}}>
           <Row>
             <Col lg={4} sm={false}>
               {/* <GlobalTable /> */}
@@ -47,13 +36,7 @@ function Home({dispatch}) {
             </Col>
           </Row>
         </Container>
-
       </Layout>
-
-      <footer className={styles.footer}>
-
-      </footer>
-    </Container>
   )
 }
 
