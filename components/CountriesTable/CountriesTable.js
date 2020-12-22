@@ -54,7 +54,7 @@ const CountriesTable = ({countries, appState, dispatch}) => {
             <Image 
               style={{width: 32, height: 32, marginRight: 20}}
               rounded 
-              src={con.ISO === 'BY' ? '/icons/bchb.png' : `https://www.countryflags.io/${con.ISO}/flat/64.png`}
+              src={con.ISO === 'BY' ? '/icons/bchb.png' : con.ISO ? `https://www.countryflags.io/${con.ISO}/flat/64.png` : "/default.jpg"}
             />
             <h5 style={{
               display: "inline-block",
