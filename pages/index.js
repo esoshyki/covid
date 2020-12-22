@@ -52,12 +52,12 @@ function Home({countries, history, dispatch}) {
               <Map />
             </Col>
           </Row>
-          <Row style={{marginTop: 20}}>
+          <Row style={{marginTop: 5}}>
             <Col xs={6}>
               {/* <CountriesTable /> */}
             </Col>
             <Col xs={6}>
-              {/* <Graphic /> */}
+              <Graphic />
             </Col>
           </Row>
         </Container>
