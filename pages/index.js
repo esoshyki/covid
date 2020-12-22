@@ -21,7 +21,7 @@ function Home({dispatch}) {
         <Container fluid style={{padding: 0, paddingTop: 10}}>
           <Row>
             <Col lg={4} sm={false}>
-              {/* <GlobalTable /> */}
+              <GlobalTable />
             </Col>
             <Col lg={8} sm={12} >
               <Map />

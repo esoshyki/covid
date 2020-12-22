@@ -6,17 +6,32 @@ import DTO from './TableDTO';
 import DTOLastDay from './TabloDTOLastDay';
 import {Card, Button, Dropdown, InputGroup, ListGroup} from 'react-bootstrap'
 import { connect } from 'react-redux';
+import getHistory from '../../state/actions/getHistory'
 
-const GlobalTable = ({worldData, setCountry, country, countries, chosenCountry, dispatch}) => {  
+const GlobalTable = ({countries, chosenCountry, dispatch}) => { 
+  console.log(chosenCountry===null)
+  console.log(chosenCountry)
+  console.log(countries)
+
+  if(chosenCountry === null){
+  return <div></div>}
+  
+  if(chosenCountry === undefined){
+    return <div></div>}
+
+  if(chosenCountry === null){
+    return <div></div>
+  }  
+  console.log(countries)
+    
   const { t } = useTranslation("countries", 'global');
+
   const root = useRef();
 
   const [toFind, setToFind] = useState(false);
   
   const [isTotalRender, setisTotalRender] = useState(false)
-
-  const currentCountry = chosenCountry.country !== null ? {...chosenCountry.country, population: chosenCountry.country.Premium.CountryStats.Population} : worldData;
-     
+ 
   const findCountrie = async () => {
     setToFind(!toFind)
   }
@@ -28,12 +43,15 @@ const GlobalTable = ({worldData, setCountry, country, countries, chosenCountry, 
   const renderTotal = async () => {
     setisTotalRender(true)
   }  
-  const renderData = DTO(currentCountry);
-  const renderDataDaily = DTOLastDay(currentCountry);
- 
-    
+  const renderData = DTO(chosenCountry);
+  const renderDataDaily = DTOLastDay(chosenCountry);  
+  
+  function handleClick (country) {
+    dispatch(getHistory(country))
+  }
+
   const globalLine = (key, value) => (
-      <ListGroup.Item style={{
+      <ListGroup.Item style={{        
         width: "100%",
         padding: 2,
       }}>
@@ -97,25 +115,26 @@ const GlobalTable = ({worldData, setCountry, country, countries, chosenCountry, 
         action 
         onClick={findCountrie} 
       >
-      <Button vairant="primary" style={{width: "100%", color: "#fff"}}>{ t(currentCountry.Country) || t('global:Allworld')}</Button>
+      <Button vairant="primary" style={{width: "100%", color: "#fff"}}>{ t(chosenCountry.country) || t('global:Allworld')}</Button>
       </ListGroup.Item>        
           {toFind && <div className={styles.countries}>      
         <Dropdown className={styles.countries}>
           <Dropdown.Toggle variant="primary" className={styles.countries}>
-            {t("ChooseCountry")}
+            
             <InputGroup className="mb-3">
           
           </InputGroup>
           </Dropdown.Toggle>
             <Dropdown.Menu className={styles.dropdown} show={'true'}>
-              <Dropdown.Item onClick={() => {dispatch(chooseCountry(null)); findCountrie()}} key={'null'}>{t('global:Allworld') }</Dropdown.Item>
+              <Dropdown.Item onClick={() => { findCountrie()}} key={'null'}>{t('global:Allworld') }</Dropdown.Item>
               {countries 
+                .sort((a, b) => a.country > b.country ? 1 : -1)
                 .map(con => <Dropdown.Item 
-                            key={con.Slug}  
+                            key={con.country}  
                             onClick={() => {
-                            dispatch(chooseCountry(con));
+                            handleClick(con),
                             findCountrie()} }>
-                          {t(con.Country)}
+                          {t(con.country)}
                           </Dropdown.Item>)}
             </Dropdown.Menu>
         </Dropdown>             
@@ -126,7 +145,7 @@ const GlobalTable = ({worldData, setCountry, country, countries, chosenCountry, 
 
       list =   
     <ListGroup className={styles["list-group"]}>
-      {Object.entries(renderDataDaily).map(([key, value]) => globalLine(key, value)) }
+      {Object.entries(renderDataDaily).map(([key, value]) => globalLine(key, value)) }      
       <ListGroup.Item
         style={{
           width: "100%",
@@ -136,25 +155,24 @@ const GlobalTable = ({worldData, setCountry, country, countries, chosenCountry, 
         action 
         onClick={findCountrie} 
       >
-        <Button vairant="primary" style={{width: "100%", color: "#fff"}}>{t(currentCountry.Country) || t('global:Allworld')}</Button>
+       <Button vairant="primary" style={{width: "100%", color: "#fff"}}>{ t(chosenCountry.country) || t('global:Allworld')}</Button>
       </ListGroup.Item>        
-        {toFind && <div className={styles.countries}>      
+          {toFind && <div className={styles.countries}>      
         <Dropdown className={styles.countries}>
-          <Dropdown.Toggle variant="primary" className={styles.countries}>
-            {t("ChooseCountry")}
-            <InputGroup className="mb-3">
-          
+          <Dropdown.Toggle variant="primary" className={styles.countries}>            
+            <InputGroup className="mb-3">          
           </InputGroup>
           </Dropdown.Toggle>
             <Dropdown.Menu className={styles.dropdown} show={'true'}>
-              <Dropdown.Item key={'null'}>{t('global:Allworld')}</Dropdown.Item>
+              <Dropdown.Item onClick={() => { findCountrie()}} key={'null'}>{t('global:Allworld') }</Dropdown.Item>
               {countries 
+                .sort((a, b) => a.country > b.country ? 1 : -1)
                 .map(con => <Dropdown.Item 
-                            key={con.Slug}  
+                            key={con.country}  
                             onClick={() => {
-                            dispatch(chooseCountry(con));
+                            handleClick(con),
                             findCountrie()} }>
-                            {t(con.Country)}
+                          {t(con.country)}
                           </Dropdown.Item>)}
             </Dropdown.Menu>
         </Dropdown>             
@@ -176,16 +194,13 @@ const GlobalTable = ({worldData, setCountry, country, countries, chosenCountry, 
 
 } 
 
+
 const GlobalTableStateToProps = state => {
 
-  return {   
-    population: state.summary.population,
+  return {
     countries: state.countries,
-    chosenCountry: state.chosenCountry    
+    chosenCountry: state.appState.chosenCountry,      
   }
 }
 
-
-
 export default connect(GlobalTableStateToProps)(GlobalTable)
-
