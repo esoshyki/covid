@@ -197,6 +197,7 @@ const MapChart = ({countries, setTooltipContent, chosenCountry, appState, dispat
             <circle 
             onMouseEnter={() => setTooltipContent(createTooltipData(con))}
             onMouseLeave={() => setTooltipContent("")}
+            onClick={() => handleClick(con) }
             r={size / (position.zoom ** 0.5)} fill="#F53" />
           </Marker> : null})}
 
