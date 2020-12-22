@@ -44,7 +44,27 @@ export default function About () {
               </Card>
             </a>
           </Col>
-          <Col xs={4}></Col>
+          <Col xs={4}>
+          <a href="https://github.com/Valeryaleshka" target="_blank" style={{
+              textDecoration: 'none'
+            }}>
+              <Card >
+                <Card.Header style={{textAlign: "center"}}>
+                  Valeron
+                </Card.Header>
+
+                <Card.Body style={{ padding: 0}}>
+                  <Card.Img src="https://images.wallpaperscraft.ru/image/avtomobil_neon_chelovek_137624_300x168.jpg" />
+                </Card.Body>
+
+                <Card.Text style={{margin: 15}}>
+                  {t("valeronCardText")}
+                </Card.Text>
+
+              </Card>
+            </a>
+          </Col>
+          
           <Col xs={4}></Col>
         </Row>
       </Container>

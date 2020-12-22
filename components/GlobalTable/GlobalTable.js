@@ -4,7 +4,7 @@ import toNiceNum from '../../lib/toniceNum'
 import { useTranslation } from 'react-i18next';
 import DTO from './TableDTO';
 import DTOLastDay from './TabloDTOLastDay';
-import {Card, Button, Dropdown, InputGroup, ListGroup} from 'react-bootstrap'
+import {Card, Button, Dropdown, InputGroup, ListGroup, DropdownButton} from 'react-bootstrap'
 import { connect } from 'react-redux';
 import getHistory from '../../state/actions/getHistory'
 import Loading from '../Loading/Loading'
@@ -12,6 +12,8 @@ import Loading from '../Loading/Loading'
 const GlobalTable = ({countries, chosenCountrys, dispatch}) => { 
  
   let chosenCountry;
+
+ 
   
   if(chosenCountrys === undefined || chosenCountrys === null){    
     if(countries.length<1){      
@@ -23,7 +25,7 @@ const GlobalTable = ({countries, chosenCountrys, dispatch}) => {
     chosenCountry = chosenCountrys
   } 
    
-    
+  console.log(chosenCountry) 
   const { t } = useTranslation("countries", 'global');
 
   const root = useRef();
@@ -46,13 +48,14 @@ const GlobalTable = ({countries, chosenCountrys, dispatch}) => {
   const renderData = DTO(chosenCountry);
   const renderDataDaily = DTOLastDay(chosenCountry);
   let data; 
+  let headDropdownText;
   
   function handleClick (country) {
     dispatch(getHistory(country))
   }
 
   const globalLine = (key, value) => (
-      <ListGroup.Item style={{        
+      <ListGroup.Item style={{             
         width: "100%",
         padding: 2,
       }}>
@@ -80,8 +83,10 @@ const GlobalTable = ({countries, chosenCountrys, dispatch}) => {
     
     if (isTotalRender) {
       data = renderData;
+      headDropdownText = t('global:All Time');
     }else{
       data = renderDataDaily;
+      headDropdownText = t('global:Last Day');
     }
 
     
@@ -126,17 +131,21 @@ const GlobalTable = ({countries, chosenCountrys, dispatch}) => {
       </ListGroup.Item> 
     </ListGroup>;
     
-  return <Card ref={root} >
-    <Card.Title style={{color: "#000", margin: "auto", flexDirection: 'row'}}>
-      <Button onClick={renderTotal} className={styles["change-button"]}  variant="success">{t('global:All Time')}</Button>
-      <Button onClick={renderDaily} className={styles["change-button"]}  variant="success">{t('global:Last Day')}</Button>
-    </Card.Title>
+  return  <Card ref={root} >    
+    <Dropdown>
+      <Dropdown.Toggle style={{width: "100%", color: "#fff"}} variant="success" id="dropdown-basic">
+        {headDropdownText}
+    </Dropdown.Toggle>
+      <Dropdown.Menu>
+        <Dropdown.Item onClick={renderTotal}>{t('global:All Time')}</Dropdown.Item>
+        <Dropdown.Item onClick={renderDaily}>{t('global:Last Day')}</Dropdown.Item>
+      </Dropdown.Menu>
+    </Dropdown>
 
     {renderData && <div className className={styles.global}>
       {list}   
-    </div>}
-    
-</Card>
+    </div>}    
+  </Card>
 } 
 
 const GlobalTableStateToProps = state => {
