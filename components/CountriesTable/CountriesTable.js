@@ -15,11 +15,6 @@ const CountriesTable = ({countries, appState, dispatch}) => {
   const { t } = useTranslation('global');
   const conT = useTranslation("countries").t;
 
-
-  const handleChangeKey = key => {
-    dispatch(setKey(key))
-  }
-
   const _onSelect = (eventKey) => {
     dispatch(setKey(eventKey))
   }

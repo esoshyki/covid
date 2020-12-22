@@ -2,7 +2,7 @@ import Head from 'next/head'
 import styles from '../styles/Home.module.sass'
 import Layout from '../components/Layout/Layout'
 import GlobalTable from '../components/GlobalTable/GlobalTable'
-import { useEffect, useState,  } from 'react'
+import { useEffect, useState, } from 'react'
 import Map from '../components/Map/Map'
 import covidService from '../services/covid.service'
 import { Container, Row, Col } from 'react-bootstrap'
@@ -43,12 +43,11 @@ function Home({dispatch}) {
               <CountriesTable />
             </Col>
             <Col xs={6}>
-              {/* <Graphic /> */}
+              <Graphic />
             </Col>
           </Row>
         </Container>
 
-        
       </Layout>
 
       <footer className={styles.footer}>
@@ -58,7 +57,7 @@ function Home({dispatch}) {
   )
 }
 
-const mapStateToProps = state => { 
+const mapStateToProps = state => {
 
   return {
     countries: state.countries,
