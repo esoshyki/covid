@@ -1,4 +1,10 @@
-import { CHANGE_KEY, API_LOADING, API_DONE } from '../actions/actions'
+import { CHANGE_KEY, 
+  HISTORY_LOADING, 
+  HISTORY_GOT,
+  COUNTRIES_LOADING,
+  COUNTRIES_GOT,
+  CHOOSE_COUNTRY
+} from '../actions/actions'
 
 export const keys = {
   totalCases: "totalCases",
@@ -12,7 +18,9 @@ export const keys = {
 
 const inital = {
   key: keys.totalCases,
-  loading: false
+  historyLoading: false,
+  countriesLoading: false,
+  chosenCountry: null,
 }
 
 const appState = (state=inital, action) => {
@@ -22,18 +30,33 @@ const appState = (state=inital, action) => {
         ...state,
         key: action.payload
       }
-    case API_LOADING:
+    case HISTORY_LOADING:
       return {
         ...state,
-        loading: true
+        historyLoading: true
       }
-    case API_DONE:
+    case HISTORY_GOT:
       return {
         ...state,
-        loading: false
+        historyLoading: false
       }
-      default:
-        return state
+    case COUNTRIES_LOADING:
+      return {
+        ...state,
+        countriesLoading: true
+      }
+    case COUNTRIES_GOT:
+      return {
+        ...state,
+        countriesLoading: false
+      }
+    case CHOOSE_COUNTRY:
+      return {
+        ...state,
+        chosenCountry: action.payload
+      }
+    default:
+      return state
   }
 }
 

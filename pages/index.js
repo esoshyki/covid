@@ -17,21 +17,24 @@ import getHistory from '../state/actions/getHistory';
 
 function Home({countries, history, dispatch}) {
 
-  useEffect(() => {
-    if (countries.length === 0) {
-      dispatch(getCountries())
-    } else {
-      console.log(countries)
-    }
-  }, [countries])
+  useEffect(() => dispatch(getCountries()), [])
+  useEffect(() => dispatch(getHistory()), [])
 
-  useEffect(() => {
-    if (history.days && history?.days.length === 0) {
-      dispatch(getHistory(history.chosenCountry))
-    } else {
-      console.log(history)
-    }
-  }, [history])
+  // useEffect(() => {
+  //   if (countries.length === 0) {
+  //     dispatch(getCountries())
+  //   } else {
+
+  //   }
+  // }, [countries])
+
+  // useEffect(() => {
+  //   if (history.days && history?.days.length === 0) {
+  //     dispatch(getHistory(history.chosenCountry))
+  //   } else {
+  //     console.log(history)
+  //   }
+  // }, [history])
 
 
   return (

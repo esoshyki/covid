@@ -34,7 +34,7 @@ function Graphic({history, dispatch, appState}) {
   const { key } = appState;
 	const { chosenCountry } = history;
 	
-	const data = history.days ? [...history.days].reverse().map((day, idx) => {
+	const data = history ? [...history].reverse().map((day, idx) => {
 		return ({
 			x: idx,
 			y: (mappers[key](day)),
@@ -44,11 +44,7 @@ function Graphic({history, dispatch, appState}) {
 
 	const _onNearestX = (value) => {
 		console.log(value)
-		// const { date, y } = value;
-		// setCrosshairVelues([
-		// 	date,
-		// 	y
-		// ])
+
 	}
 
 	const _onMouseLeave = () => {
@@ -58,7 +54,7 @@ function Graphic({history, dispatch, appState}) {
   return (
 
     <Card>
-      {appState.loading && <Loading />}
+      {appState.historyLoading && <Loading />}
 
       <Card.Header style={{padding: 15}}>
         <h5 style={{color: "#000"}}>

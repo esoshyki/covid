@@ -6,7 +6,6 @@ import DTO from './TableDTO';
 import DTOLastDay from './TabloDTOLastDay';
 import {Card, Button, Dropdown, InputGroup, ListGroup} from 'react-bootstrap'
 import { connect } from 'react-redux';
-import chooseCountry from '../../state/actions/chooseCountry'
 
 const GlobalTable = ({worldData, setCountry, country, countries, chosenCountry, dispatch}) => {  
   const { t } = useTranslation("countries", 'global');
