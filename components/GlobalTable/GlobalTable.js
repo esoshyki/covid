@@ -7,22 +7,29 @@ import DTOLastDay from './TabloDTOLastDay';
 import {Card, Button, Dropdown, InputGroup, ListGroup} from 'react-bootstrap'
 import { connect } from 'react-redux';
 import getHistory from '../../state/actions/getHistory'
+import Loading from '../Loading/Loading'
 
-const GlobalTable = ({countries, chosenCountry, dispatch}) => { 
-  console.log(chosenCountry===null)
-  console.log(chosenCountry)
+const GlobalTable = ({countries, chosenCountrys, dispatch}) => { 
+ 
+  console.log('!!!!!!!!!!!')
   console.log(countries)
+  console.log(chosenCountrys)
 
-  if(chosenCountry === null){
-  return <div></div>}
+  let chosenCountry;
   
-  if(chosenCountry === undefined){
-    return <div></div>}
-
-  if(chosenCountry === null){
-    return <div></div>
-  }  
-  console.log(countries)
+  if(chosenCountrys === undefined || chosenCountrys === null){
+    
+    if(countries.length<1){
+      console.log('oops');
+      return <Loading />
+    }else{
+      console.log("это")
+      chosenCountry =countries.find(country => country.country === "All")      
+    }    
+  }else{
+    chosenCountry = chosenCountrys
+  } 
+   
     
   const { t } = useTranslation("countries", 'global');
 
@@ -44,7 +51,8 @@ const GlobalTable = ({countries, chosenCountry, dispatch}) => {
     setisTotalRender(true)
   }  
   const renderData = DTO(chosenCountry);
-  const renderDataDaily = DTOLastDay(chosenCountry);  
+  const renderDataDaily = DTOLastDay(chosenCountry);
+  let data; 
   
   function handleClick (country) {
     dispatch(getHistory(country))
@@ -73,117 +81,53 @@ const GlobalTable = ({countries, chosenCountry, dispatch}) => {
         </Card.Text>
 
       </ListGroup.Item>
-    )
+    )  
 
-    const countryLine = (key, value) => (
-      <ListGroup.Item style={{
-        width: "100%",
-        padding: 2,
-      }}>
-        <Card.Text 
-          as="span" 
-          style={{
-            color: "#000",
-            fontSize: 18
-            }}>
-          {t(key) + " : "}
-        </Card.Text>
-        <Card.Text 
-          as="span" 
-          style={{
-            color: "rgb(255, 85, 51)",
-            fontSize: 18
-            }}>
-          {toNiceNum("" + value)}
-        </Card.Text>
-
-      </ListGroup.Item>
-    )
-
-    let list;
-
+    
+    
     if (isTotalRender) {
-     list = 
-     <ListGroup className={styles["list-group"]}>
-      {Object.entries(renderData).map(([key, value]) => globalLine(key, value)) }
-      <ListGroup.Item
-        style={{
-          width: "100%",
-          padding: '5px',
-          fontSize: 18
-        }}
-        action 
-        onClick={findCountrie} 
-      >
-      <Button vairant="primary" style={{width: "100%", color: "#fff"}}>{ t(chosenCountry.country) || t('global:Allworld')}</Button>
-      </ListGroup.Item>        
-          {toFind && <div className={styles.countries}>      
-        <Dropdown className={styles.countries}>
-          <Dropdown.Toggle variant="primary" className={styles.countries}>
-            
-            <InputGroup className="mb-3">
-          
-          </InputGroup>
-          </Dropdown.Toggle>
-            <Dropdown.Menu className={styles.dropdown} show={'true'}>
-              <Dropdown.Item onClick={() => { findCountrie()}} key={'null'}>{t('global:Allworld') }</Dropdown.Item>
-              {countries 
-                .sort((a, b) => a.country > b.country ? 1 : -1)
-                .map(con => <Dropdown.Item 
-                            key={con.country}  
-                            onClick={() => {
-                            handleClick(con),
-                            findCountrie()} }>
-                          {t(con.country)}
-                          </Dropdown.Item>)}
-            </Dropdown.Menu>
-        </Dropdown>             
-    </div>}      
-    </ListGroup>;
-
-    } else {
-
-      list =   
-    <ListGroup className={styles["list-group"]}>
-      {Object.entries(renderDataDaily).map(([key, value]) => globalLine(key, value)) }      
-      <ListGroup.Item
-        style={{
-          width: "100%",
-          padding: '5px',
-          fontSize: 18
-        }}
-        action 
-        onClick={findCountrie} 
-      >
-       <Button vairant="primary" style={{width: "100%", color: "#fff"}}>{ t(chosenCountry.country) || t('global:Allworld')}</Button>
-      </ListGroup.Item>        
-          {toFind && <div className={styles.countries}>      
-        <Dropdown className={styles.countries}>
-          <Dropdown.Toggle variant="primary" className={styles.countries}>            
-            <InputGroup className="mb-3">          
-          </InputGroup>
-          </Dropdown.Toggle>
-            <Dropdown.Menu className={styles.dropdown} show={'true'}>
-              <Dropdown.Item onClick={() => { findCountrie()}} key={'null'}>{t('global:Allworld') }</Dropdown.Item>
-              {countries 
-                .sort((a, b) => a.country > b.country ? 1 : -1)
-                .map(con => <Dropdown.Item 
-                            key={con.country}  
-                            onClick={() => {
-                            handleClick(con),
-                            findCountrie()} }>
-                          {t(con.country)}
-                          </Dropdown.Item>)}
-            </Dropdown.Menu>
-        </Dropdown>             
-    </div>}      
-    </ListGroup>;
+      data = renderData;
+    }else{
+      data = renderDataDaily;
     }
 
+    
+    const list = 
+     <ListGroup className={styles["list-group"]}>
+      {Object.entries(data).map(([key, value]) => globalLine(key, value)) }
+      <ListGroup.Item
+        style={{
+          width: "100%",
+          padding: '5px',
+          fontSize: 18
+        }}
+        action 
+        onClick={findCountrie} 
+      >
+       <Dropdown>
+          <Dropdown.Toggle variant="success" id="dropdown-basic" style={{width: "100%", color: "#fff"}}>
+            { t(chosenCountry.country) || t('global:Allworld')}            
+          </Dropdown.Toggle>
+            <Dropdown.Menu className={styles.dropdown}>           
+              {countries 
+                .sort((a, b) => a.country > b.country ? 1 : -1)
+                .map(con => <Dropdown.Item 
+                            style={{width: "100%"}}
+                            key={con.country}  
+                            onClick={() => {
+                            handleClick(con),
+                            findCountrie()} }>
+                          {t(con.country)}
+                          </Dropdown.Item>)}
+            </Dropdown.Menu>
+        </Dropdown>  
+      </ListGroup.Item> 
+    </ListGroup>;
+    
   return <Card ref={root} >
     <Card.Title style={{color: "#000", margin: "auto", flexDirection: 'row'}}>
-      <Button onClick={renderTotal} className={styles["change-button"]}  variant="primary">{t('global:All Time')}</Button>
-      <Button onClick={renderDaily} className={styles["change-button"]}  variant="primary">{t('global:Last Day')}</Button>
+      <Button onClick={renderTotal} className={styles["change-button"]}  variant="success">{t('global:All Time')}</Button>
+      <Button onClick={renderDaily} className={styles["change-button"]}  variant="success">{t('global:Last Day')}</Button>
     </Card.Title>
 
     {renderData && <div className className={styles.global}>
@@ -199,7 +143,7 @@ const GlobalTableStateToProps = state => {
 
   return {
     countries: state.countries,
-    chosenCountry: state.appState.chosenCountry,      
+    chosenCountrys: state.appState.chosenCountry,      
   }
 }
 
