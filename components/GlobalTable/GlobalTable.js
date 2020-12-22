@@ -11,20 +11,13 @@ import Loading from '../Loading/Loading'
 
 const GlobalTable = ({countries, chosenCountrys, dispatch}) => { 
  
-  console.log('!!!!!!!!!!!')
-  console.log(countries)
-  console.log(chosenCountrys)
-
   let chosenCountry;
   
-  if(chosenCountrys === undefined || chosenCountrys === null){
-    
-    if(countries.length<1){
-      console.log('oops');
+  if(chosenCountrys === undefined || chosenCountrys === null){    
+    if(countries.length<1){      
       return <Loading />
-    }else{
-      console.log("это")
-      chosenCountry =countries.find(country => country.country === "All")      
+    }else{      
+      chosenCountry = countries.find(country => country.country === "All")      
     }    
   }else{
     chosenCountry = chosenCountrys
@@ -37,7 +30,7 @@ const GlobalTable = ({countries, chosenCountrys, dispatch}) => {
 
   const [toFind, setToFind] = useState(false);
   
-  const [isTotalRender, setisTotalRender] = useState(false)
+  const [isTotalRender, setisTotalRender] = useState(true)
  
   const findCountrie = async () => {
     setToFind(!toFind)
@@ -108,8 +101,17 @@ const GlobalTable = ({countries, chosenCountrys, dispatch}) => {
           <Dropdown.Toggle variant="success" id="dropdown-basic" style={{width: "100%", color: "#fff"}}>
             { t(chosenCountry.country) || t('global:Allworld')}            
           </Dropdown.Toggle>
-            <Dropdown.Menu className={styles.dropdown}>           
-              {countries 
+            <Dropdown.Menu className={styles.dropdown}>  
+              <Dropdown.Item  
+                style={{width: "100%"}} 
+                key={'AllWorld'}
+                onClick={() => {
+                handleClick(countries.find(country => country.country === "All")),
+                findCountrie()}}>
+                  {t('global:Allworld')}
+                </Dropdown.Item>         
+              {countries
+                .filter(a => a.country != a.continent)
                 .sort((a, b) => a.country > b.country ? 1 : -1)
                 .map(con => <Dropdown.Item 
                             style={{width: "100%"}}
@@ -135,9 +137,7 @@ const GlobalTable = ({countries, chosenCountrys, dispatch}) => {
     </div>}
     
 </Card>
-
 } 
-
 
 const GlobalTableStateToProps = state => {
 
