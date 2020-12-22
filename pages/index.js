@@ -12,18 +12,27 @@ import { useRouter } from 'next/router'
 import Error from '../components/Error/Error'
 import { useTranslation } from 'react-i18next';
 import { connect } from 'react-redux';
-import getSummary from '../state/actions/summary';
-import chooseCountry from '../state/actions/chooseCountry'
+import getCountries from '../state/actions/getCountries'
+import getHistory from '../state/actions/getHistory';
 
-function Home({ summary, countries, chosenCountry, error, dispatch }) {
+function Home({countries, history, dispatch}) {
 
   useEffect(() => {
-    if (Object.keys(summary).length === 0) {
-      dispatch(getSummary())
+    if (countries.length === 0) {
+      dispatch(getCountries())
     } else {
-      console.log(summary)
+      console.log(countries)
     }
-  }, [summary])
+  }, [countries])
+
+  useEffect(() => {
+    if (history.days && history?.days.length === 0) {
+      dispatch(getHistory(history.chosenCountry))
+    } else {
+      console.log(history)
+    }
+  }, [history])
+
 
   return (
     <Container>
@@ -33,38 +42,25 @@ function Home({ summary, countries, chosenCountry, error, dispatch }) {
       </Head>
 
       <Layout>
-        {error && <Error
-          type={t("APIerrorType")}
-          message={t("APIerrorMessage")}
-          callback={() => router.push('/')}
-          callbackDescription={t("tryAgarin")}
-        />}
-        {!error && <Container fluid>
+
+        <Container fluid>
           <Row>
             <Col xs={4}>
-              <GlobalTable
-                worldData={summary}
-                setCountry={chooseCountry}
-                country={chosenCountry}
-                countries={countries} />
+              {/* <GlobalTable /> */}
             </Col>
             <Col xs={8}>
-              <Map
-                population={summary.population}
-                chooseCountry={chooseCountry}
-              />
+              <Map />
             </Col>
           </Row>
-          <Row style={{ marginTop: 20 }}>
+          <Row style={{marginTop: 5}}>
             <Col xs={6}>
-              <CountriesTable countries={countries} />
+              {/* <CountriesTable /> */}
             </Col>
             <Col xs={6}>
-              <Graphic summary={summary} country={chosenCountry} countries={countries} />
+              <Graphic />
             </Col>
           </Row>
-        </Container>}
-
+        </Container>
 
       </Layout>
 
@@ -78,9 +74,8 @@ function Home({ summary, countries, chosenCountry, error, dispatch }) {
 const mapStateToProps = state => {
 
   return {
-    summary: state.summary,
     countries: state.countries,
-    chosenCountry: state.choseCountry
+    history: state.history
   }
 }
 

@@ -6,18 +6,18 @@ import { ComposableMap,
   Marker, 
   ZoomableGroup, 
   } from "react-simple-maps"
-import Coords from './Coords'
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger'
 import Tooltip from 'react-bootstrap/Tooltip'
 import { useTranslation } from 'react-i18next'
-import chooseCountry from '../../state/actions/chooseCountry'
+import getHistory from '../../state/actions/getHistory'
 import { connect } from 'react-redux';
+import Loading from '../Loading/Loading'
 
 const geoUrl =
   "https://raw.githubusercontent.com/zcreativelabs/react-simple-maps/master/topojson-maps/world-110m.json"
 
 
-const MapChart = ({countries, population, chosenCountry, setTooltipContent, dispatch}) => {
+const MapChart = ({countries, setTooltipContent, chosenCountry, appState, dispatch}) => {
 
   const { t } = useTranslation("global")
 
@@ -25,14 +25,17 @@ const MapChart = ({countries, population, chosenCountry, setTooltipContent, disp
   const [circleMode, setCircleMode] = useState(true)
   const [chosenNode, setChosenNode] = useState(null)
 
+  useEffect(() => {
+
+  }, [countries])
+
   const map = useRef()
 
   useEffect(() => {
-    const { country } = chosenCountry;
-    const newCoords = country ? Coords[country.CountryCode.toLowerCase()] : { lat: 0, long: 0}
+    const newCoords = chosenCountry ? {lat: chosenCountry.lat, long: chosenCountry.long }: { lat: 0, long: 0}
     const { lat, long} = newCoords;
-    setPosition({coordinates: [long, lat], zoom: country ? 8 : 1})
-    const conNode = country?.CountryCode ? document.querySelector("." + country?.CountryCode) : null
+    setPosition({coordinates: [long, lat], zoom: chosenCountry ? 8 : 1})
+    const conNode = chosenCountry?.ISO ? document.querySelector("." + chosenCountry?.ISO) : null
     chosenNode && chosenNode.classList.remove("chosen");
     conNode && conNode.classList.add('chosen');
     setChosenNode(conNode)
@@ -57,48 +60,35 @@ const MapChart = ({countries, population, chosenCountry, setTooltipContent, disp
     document.querySelector('.rsm-zoomable-group').classList.remove('transition')
   }
 
-  function handleClick (ISO) {
-    const country = countries.find(el => el.CountryCode.toLowerCase() === ISO.toLowerCase())
-    country && dispatch(chooseCountry(country))
+  function handleClick (country) {
+    country && dispatch(getHistory(country))
   }
 
   function changeMode (bool) {
     setCircleMode(bool)
   }
 
-  function createTooltipData ({country, ISO_A2, NAME}) {
-    const con = country || countries.find(el => el.CountryCode === ISO_A2);
+  function createTooltipData (country) {
+    
+      return country ? ({
+        totalCases: country.cases.total, 
+        totalDeaths: country.deaths.total, 
+        totalRecoverd: country.cases.recovered, 
+        newCases: country.cases.new, 
+        newDeaths: country.deaths.new, 
+        casesOnMillion: country.cases['1M_pop'], 
+        deathOnMillion: country.deaths['1M_pop'],
+        population: country.population,
+        NAME: country.country,
+        ISO_A2: country.ISO
+      }) : ""
+    }  
 
-    if (con) {
-      const { TotalConfirmed, NewConfirmed, TotalDeaths, NewDeaths, TotalRecovered, NewRecovered } = con;
-      return ({
-        TotalConfirmed, 
-        NewConfirmed, 
-        TotalDeaths, 
-        NewDeaths, 
-        TotalRecovered, 
-        NewRecovered, 
-        population: con.Premium?.CountryStats?.Population,
-        NAME: NAME || con.Country,
-        ISO_A2: ISO_A2 || con.ISO_A2
-      })
-    } else {
-      return NAME
-    }
+  function getColor (country) {
+    const total = country?.cases.total;
+    console.log(total * 0.0000055)
+    return total ? `rgb(${total * 0.0000500}, 20, 30)` : "#000"
   }
-
-  function getColor ({ISO_A2, key}) {
-    const con = countries.find(el => el.CountryCode === ISO_A2)
-    const target = con && con[key || "TotalConfirmed"];
-    const size = target ? (11 * ((9.5 ** 9 * (target ** (1/3)) / population))) : 10
-    return size
-  }
-
-  const _countries = countries && countries.map(el => ({
-    ...el,
-    coords: Coords[el.CountryCode.toLowerCase()],
-    ISO_A2: el.CountryCode.toLowerCase()}
-    ))
 
   const zoomEnd = (e) => {
     document.querySelector(".transition").style.transitionDuration = 0;
@@ -120,7 +110,7 @@ const MapChart = ({countries, population, chosenCountry, setTooltipContent, disp
         >         
         <button 
           className={styles.allWorld} 
-          onClick={() => dispatch(chooseCountry(null))}/>
+          onClick={() => dispatch(getHistory(null))}/>
       </OverlayTrigger>
 
       <div className={styles.mode}>
@@ -145,6 +135,7 @@ const MapChart = ({countries, population, chosenCountry, setTooltipContent, disp
          
       </div>
     <div className={styles.root}>
+      {appState.loading && <Loading />}
       <ComposableMap data-tip="" projectionConfig={{ scale: 200 }} fill={circleMode ? "yellow" : "black"} style={{
         backgroundColor: "#fff",
       }}
@@ -167,18 +158,21 @@ const MapChart = ({countries, population, chosenCountry, setTooltipContent, disp
           {({ geographies }) =>
             geographies.map(geo => {
               const { NAME, ISO_A2} = geo.properties;
-              const rgb = ISO_A2 !== -99 ? `rgba(${getColor({ISO_A2})}, 40, 20)` : null
+              const country = countries.find(con => con.ISO === ISO_A2)
+              if (!country) {
+                console.log(NAME, ISO_A2)
+              }
             return <Geography 
-                    onMouseEnter={(e) => setTooltipContent(createTooltipData({ISO_A2, NAME}))}
+                    onMouseEnter={(e) => setTooltipContent(createTooltipData(country))}
                     onMouseLeave={(e) => setTooltipContent("")}
-                    onClick={(e) => handleClick(ISO_A2)}
+                    onClick={(e) => handleClick(country)}
                     onMouseLeave={() => setTooltipContent(null)}
                     key={geo.rsmKey} 
                     geography={geo}
                     className={ISO_A2}
                     style={{
                       default: {
-                        fill: circleMode ? "#000" : rgb || "none",
+                        fill: circleMode ? "#000" : getColor(country),
                         outline: "none",
                       },
                       hover: {
@@ -189,19 +183,21 @@ const MapChart = ({countries, population, chosenCountry, setTooltipContent, disp
                         fille: "red",
                         outline: "none",
                       }
-                    }}/>
+                    }}
+                    />
                   })
           }
         </Geographies>
-          {_countries && _countries.map((con, idx) => {
-          const lat = con.coords?.lat;
-          const long = con.coords?.long;
-          const { TotalConfirmed } = con;
-          const size = 9.5 ** 9 * (TotalConfirmed ** (1/3)) / population
+          {countries && countries.map((con, idx) => {
+          const lat = con?.lat;
+          const long = con?.long;
+          const totalConfirmed = con.cases.total;
+          const size = totalConfirmed ** (0.5) / 100
           return ((long && lat) && circleMode) ? <Marker key={idx} coordinates={[long, lat]}>
             <circle 
-            onMouseEnter={() => setTooltipContent(createTooltipData({country: con}))}
+            onMouseEnter={() => setTooltipContent(createTooltipData(con))}
             onMouseLeave={() => setTooltipContent("")}
+            onClick={() => handleClick(con) }
             r={size / (position.zoom ** 0.5)} fill="#F53" />
           </Marker> : null})}
 
@@ -254,9 +250,9 @@ const MapChart = ({countries, population, chosenCountry, setTooltipContent, disp
 
 const mapStateToProps = state => {
   return {
-    population: state.summary.population,
     countries: state.countries,
-    chosenCountry: state.chosenCountry
+    chosenCountry: state.history.chosenCountry,
+    appState: state.appState
   }
 }
 

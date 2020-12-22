@@ -73,4 +73,25 @@ svg
   fill: $yellow !important
   outline: none !important
 
+@keyframes loading
+  0%
+    transform: rotate(0)
+  100%
+    transform: rotate(360deg)
+
+.loading
+  position: absolute
+  top: 0
+  left: 0
+  width: 100%
+  height: 100%
+  background-color: rgba(0, 0, 0, 0.3)
+  +flex()
+.loading-logo  
+  content: ""
+  width: 64px
+  height: 64px
+  background: url('/icons/loading.png')
+  background-size: cover
+  animation: loading 2s ease-in-out 0s infinite
 

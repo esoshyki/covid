@@ -6,9 +6,7 @@ import Card from 'react-bootstrap/Card'
 import { useTranslation } from 'react-i18next';
 import { connect } from 'react-redux';
 
-const Map = ({countries, population, chosenCountry}) => {
-
-  console.log(chosenCountry)
+const Map = ({countries, history}) => {
 
   const { t } = useTranslation("global");
   const conT = useTranslation("countries").t
@@ -63,7 +61,7 @@ const Map = ({countries, population, chosenCountry}) => {
 
   return (
     <Card data-type="warning" style={{width: '100%', height: "100%"}}>
-      {(!countries || !population) && <Spinner animation="border"/>} 
+      {(!countries) && <Spinner animation="border"/>} 
       {countries && <MapChart 
         setTooltipContent={setContent} 
         />}
@@ -78,9 +76,8 @@ const Map = ({countries, population, chosenCountry}) => {
 const mapStateToProps = state => {
 
   return {
-    population: state.summary.population,
     countries: state.countries,
-    chosenCountry: state.chosenCountry
+    history: state.history
   }
 }
 

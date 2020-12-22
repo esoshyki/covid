@@ -1,13 +1,11 @@
-import { CHANGE_COUNTRIES, COUNTRIES_ERROR } from '../actions/actions'
+import { GET_COUNTRIES } from '../actions/actions'
 
 const initial = [];
 
 const countries = (state=initial, action) => {
   switch (action.type) {
-    case CHANGE_COUNTRIES:
-      return action.payload
-    case COUNTRIES_ERROR:
-      return initial
+    case GET_COUNTRIES:
+      return [...action.payload]
     default:
       return state
   }
