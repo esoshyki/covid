@@ -45,6 +45,7 @@ export default function About () {
               </Card>
             </a>
           </Col>
+<<<<<<< HEAD
 
           <Col lg={4} md={12}>
             <a href="https://github.com/esoshyki" target="_blank" style={{
@@ -69,10 +70,15 @@ export default function About () {
 
           <Col lg={4} md={12}>
             <a href="https://github.com/esoshyki" target="_blank" style={{
+=======
+          <Col xs={4}>
+          <a href="https://github.com/Valeryaleshka" target="_blank" style={{
+>>>>>>> redux-valer
               textDecoration: 'none'
             }}>
               <Card >
                 <Card.Header style={{textAlign: "center"}}>
+<<<<<<< HEAD
                   Shyki
                 </Card.Header>
 
@@ -82,12 +88,28 @@ export default function About () {
 
                 <Card.Text style={{margin: 15}}>
                   {t("shykiCardText")}
+=======
+                  Valeron
+                </Card.Header>
+
+                <Card.Body style={{ padding: 0}}>
+                  <Card.Img src="https://images.wallpaperscraft.ru/image/avtomobil_neon_chelovek_137624_300x168.jpg" />
+                </Card.Body>
+
+                <Card.Text style={{margin: 15}}>
+                  {t("valeronCardText")}
+>>>>>>> redux-valer
                 </Card.Text>
 
               </Card>
             </a>
           </Col>
+<<<<<<< HEAD
 
+=======
+          
+          <Col xs={4}></Col>
+>>>>>>> redux-valer
         </Row>
       </Container>
     </Layout>

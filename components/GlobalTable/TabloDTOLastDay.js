@@ -1,15 +1,11 @@
-export default function DTOLastDay(obj, callback) {
-    const population = obj.population;
-  
-    const get100k = (value, x=0) => "" + (Math.round((+value * (10 ** 5) * (10 ** x)) / (+population))) / (10 ** x);  
-  
-    const DTO = {      
-      "NewConfirmed" : obj.NewConfirmed,
-      "NewDeaths" : obj.NewDeaths,
-      "NewRecovered" : obj.NewRecovered,      
-      "HundredKDailyConfirmed" : get100k(obj.NewConfirmed),
-      "HundredKDailyDead" : get100k(obj.NewDeaths),
-      "HundredKDailyRecovered" : get100k(obj.NewRecovered)      
+export default function DTOLastDay(obj, callback) {  
+    
+    const DTO = {
+      "totalCases" : obj.cases.new === null ? "-": obj.cases.new,
+      "totalDeaths" : obj.deaths.new === null ? "-": obj.deaths.new,
+      "totalRecoverd" : obj.cases.recovered === null ? "-": obj.cases.recovered,     
+      "casesOnMillion" : obj.cases["1M_pop"] === null ? "-": obj.cases["1M_pop"],
+      "deathOnMillion" : obj.deaths["1M_pop"] === null ? "-": obj.deaths["1M_pop"]         
     }
     
     return callback ? callback(DTO) : DTO

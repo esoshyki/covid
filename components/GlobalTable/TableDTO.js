@@ -1,15 +1,11 @@
 export default function DTO(obj, callback) {
-  const population = obj.population;
-
-  const get100k = (value, x=0) => "" + (Math.round((+value * (10 ** 5) * (10 ** x)) / (+population))) / (10 ** x);
-
+  
   const DTO = {
-    "TotalConfirmed" : obj.TotalConfirmed,
-    "TotalDeaths" : obj.TotalDeaths,
-    "TotalRecovered" : obj.TotalRecovered,    
-    "HundredKTotalConfirmed" : get100k(obj.TotalConfirmed),
-    "HundredKTotalDead" : get100k(obj.TotalDeaths),
-    "HundredKTotalRecovered" : get100k(obj.TotalRecovered),    
+    "totalCases" : obj.cases.total === null ? "-": obj.cases.total,
+    "totalDeaths" : obj.deaths.total === null ? "-": obj.deaths.total,
+    "totalRecoverd" : obj.cases.recovered === null ? "-": obj.cases.recovered,    
+    "casesOnMillion" : obj.cases["1M_pop"] === null ? "-": obj.cases["1M_pop"],
+    "deathOnMillion" : obj.deaths["1M_pop"] === null ? "-": obj.deaths["1M_pop"],    
   }
   
   return callback ? callback(DTO) : DTO
