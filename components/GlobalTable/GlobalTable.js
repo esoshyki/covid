@@ -10,7 +10,7 @@ import getHistory from '../../state/actions/getHistory'
 import Loading from '../Loading/Loading'
 import React from 'react'
 
-const GlobalTable = ({ countries, chosenCountrys, dispatch, history, appState }) => {
+const GlobalTable = ({ countries, chosenCountrys, dispatch}) => {
 
   let chosenCountry;
 
@@ -23,10 +23,7 @@ const GlobalTable = ({ countries, chosenCountrys, dispatch, history, appState })
   } else {
     chosenCountry = chosenCountrys
   }
-
-  console.log(history)
-  console.log(appState)
-
+  
   const { t } = useTranslation("countries", 'global');
   const root = useRef();
   const [toFind, setToFind] = useState(false);
