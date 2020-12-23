@@ -7,6 +7,7 @@ import CountriesTable from '../components/CountriesTable/CountriesTable'
 import { connect } from 'react-redux';
 import getCountries from '../state/actions/getCountries'
 import getHistory from '../state/actions/getHistory';
+import GlobalTable from '../components/GlobalTable/GlobalTable'
 
 function Home({dispatch}) {
 
