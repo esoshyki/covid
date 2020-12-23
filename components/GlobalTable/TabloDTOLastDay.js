@@ -9,8 +9,6 @@ export default function DTOLastDay(obj, callback) {
     } 
 
     const randomRecovered = Math.floor(Math.random() * 100);
-
-    console.log() 
   
     const DTO = {
       "totalCases" : obj.cases.new === null ? "-": +obj.cases.new,
