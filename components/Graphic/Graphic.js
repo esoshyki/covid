@@ -13,13 +13,15 @@ class LineChart extends React.Component {
    constructor(props) {
       super(props);
       this.canvasRef = React.createRef();
-
+      this.title = props.title
    }
 
    componentDidUpdate() {
       this.myChart.data.labels = this.props.data.map(d => d.time);
       this.myChart.data.datasets[0].data = this.props.data.map(d => d.value);
-      this.myChart.update();
+      this.myChart.update({
+         lazy: true
+      });
    }
 
    componentDidMount() {
@@ -49,7 +51,7 @@ class LineChart extends React.Component {
          data: {
             labels: this.props.data.map(d => d.time),
             datasets: [{
-               label: this.props.title,
+               label: this.title,
                data: this.props.data.map(d => d.value),
                fill: 'none',
                backgroundColor: this.props.color,
@@ -67,10 +69,9 @@ class LineChart extends React.Component {
    }
 }
 
-function Graphic({history, appState, dispatch}) {
-  const { t } = useTranslation("countries")
+function Graphic({history, appState, mapKey, dispatch}) {
+  const { t } = useTranslation("global")
   const { key } = appState;
-	const { chosenCountry } = history;
 
   const mapper = appState.mapper;
    
@@ -108,15 +109,17 @@ function Graphic({history, appState, dispatch}) {
       data: getData()
    }
 
-console.log(state.data[0].title, appState.key)
+console.log(state.data[0].title, mapKey)
+
    return (
-      <div  className="Graphic">
+      <div  className="Graphic" style={{marginTop: 5}}>
+         <h6 style={{textAlign: "center"}}>{t(mapKey)}</h6>
          {appState.historyLoading && <Loading />}
          <div className="main chart-wrapper">
-           
+
             {<LineChart
                data={state.data[0].data}
-               title={state.data[0].title}
+               title={""}
                color="#3E517A"
             />}
          </div>
@@ -130,7 +133,8 @@ const mapStateToProps = state => {
 
    return {
       history: state.history,
-      appState: state.appState
+      appState: state.appState,
+      mapKey: state.appState.key
    }
 }
 
