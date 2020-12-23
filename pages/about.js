@@ -10,9 +10,13 @@ import getCountries from '../state/actions/getCountries'
 import getHistory from '../state/actions/getHistory';
 import Card from 'react-bootstrap/Card'
 
-export default function About () {
+const About = ({lang}) => {
 
   const { t } = useTranslation("about")
+
+  useEffect(() => {
+    console.log(lang)
+  }, [lang])
 
   return (
     <Layout>
@@ -92,3 +96,13 @@ export default function About () {
     </Layout>
   )
 }
+
+About.getInitialProps = ctx => {
+  console.log(ctx.query)
+  return {
+    lang: ctx.query.lang
+  }
+}
+
+export default About
+

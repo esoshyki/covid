@@ -6,12 +6,12 @@ import { useState } from 'react'
 import Navbar from 'react-bootstrap/Navbar'
 import Image from 'react-bootstrap/Image'
 import Nav from 'react-bootstrap/Nav'
+import Clock from './Clock'
 
 const Header = () => {
 
   useTranslation();
-  const [language, setLanguage] = useState(i18n.language || 'en');
-
+  const [language, setLanguage] = useState('en');
   const [langIcon, setLongIcon] = useState(`english.png`)
 
   const handleChange = eventKey => {
@@ -50,6 +50,8 @@ const Header = () => {
         <Nav.Link href="/about">{t("about")}</Nav.Link>
       </Nav.Item>
     </Nav>
+
+    <Clock lang={language}/>
 
     <Dropdown 
       drop="left"
