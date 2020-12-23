@@ -61,7 +61,8 @@ export default {
       "lat": "-14.3333",
       "long": "-170.0000"
   },
-  "at": {
+  "Austria": {
+      ISO: "AT",
       "lat": "47.3333",
       "long": "13.3333"
   },

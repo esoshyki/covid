@@ -12,6 +12,7 @@ import ListGroupItem from 'react-bootstrap/ListGroupItem'
 import Button from 'react-bootstrap/Button'
 import Image from 'react-bootstrap/Image'
 import Loading from '../Loading/Loading'
+import toNiceNum from '../../lib/toniceNum'
 
 const CountriesTable = ({countries, appState, dispatch}) => {
 
@@ -63,9 +64,11 @@ const CountriesTable = ({countries, appState, dispatch}) => {
             <h6 style={{
               display: "inline-block", 
               color: "red",
-              marginLeft: 20,
-              fontSize: 12 
-              }}>{con.cases}</h6>
+              marginRight: 20,
+              marginTop: 10,
+              fontSize: 12,
+              float: 'right'
+              }}>{toNiceNum(con.cases)}</h6>
 
           </ListGroupItem>
         ))}
@@ -76,13 +79,6 @@ const CountriesTable = ({countries, appState, dispatch}) => {
   return (
     <Card style={{ width: '100%', height: 300, overflowY: "scroll"}}>
       {(appState.countriesLoading || loading) && <Loading />}
-      {/* <Card.Header 
-        style={{
-          color: "#000",
-          padding: 5
-          }}>
-          {t("сountryTable")}
-      </Card.Header> */}
       <Card.Body 
         style={{
           width: "100%",

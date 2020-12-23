@@ -53,7 +53,7 @@ const GlobalTable = ({ countries, chosenCountrys, dispatch}) => {
   }
 
   function handleClick(country) {
-    dispatch(getHistory(country))
+    dispatch(getHistory(country.country !== "All" ? country : null))
   }
 
   const globalLine = (key, value) => (
@@ -73,7 +73,8 @@ const GlobalTable = ({ countries, chosenCountrys, dispatch}) => {
         as="span"
         style={{
           color: "rgb(255, 85, 51)",
-          fontSize: 18
+          fontSize: 18,
+          marginLeft: 10
         }}>
         {toNiceNum("" + value)}
       </Card.Text>
@@ -116,7 +117,7 @@ const GlobalTable = ({ countries, chosenCountrys, dispatch}) => {
           <ul className="list-unstyled">
             {React.Children.toArray(children).filter(
               (child) =>
-                !value || child.props.children.toLowerCase().startsWith(value),
+                (!value || child.props.children.toLowerCase().startsWith(value.toLowerCase())) || child.props.children === "All",
             )}
           </ul>
         </div>
