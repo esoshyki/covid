@@ -46,7 +46,7 @@ class LineChart extends React.Component {
                   }
                ]
             },
-            aspectRatio: 1.4
+            aspectRatio: 1.2
          },
          data: {
             labels: this.props.data.map(d => d.time),
@@ -63,7 +63,6 @@ class LineChart extends React.Component {
          }
       });
    }
-
    render() {
       return <canvas ref={this.canvasRef} />;
    }
@@ -76,13 +75,11 @@ function Graphic({history, appState, mapKey, dispatch}) {
   const mapper = appState.mapper;
    
    const getRandomDateArray = (numItems) => {
-      // Create random array of objects (with date)
       let data = [];
       let timeUnuque = 0;
       history.filter((el) => {
          if (el.day !== timeUnuque){
             timeUnuque = el.day;
-            console.log(timeUnuque)
             return true
          } else {false}}
          ).forEach(element => {
@@ -109,8 +106,6 @@ function Graphic({history, appState, mapKey, dispatch}) {
       data: getData()
    }
 
-console.log(state.data[0].title, mapKey)
-
    return (
       <div  className="Graphic" style={{marginTop: 5}}>
          <h6 style={{textAlign: "center"}}>{t(mapKey)}</h6>
@@ -120,7 +115,7 @@ console.log(state.data[0].title, mapKey)
             {<LineChart
                data={state.data[0].data}
                title={""}
-               color="#3E517A"
+               color="#fb0051"
             />}
          </div>
       
@@ -128,9 +123,7 @@ console.log(state.data[0].title, mapKey)
    );
 }
 
-
 const mapStateToProps = state => {
-
    return {
       history: state.history,
       appState: state.appState,
