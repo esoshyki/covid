@@ -75,7 +75,7 @@ const GlobalTable = ({ countries, chosenCountrys, dispatch}) => {
           color: "rgb(255, 85, 51)",
           fontSize: 18
         }}>
-        {toNiceNum("" + value)}
+        {toNiceNum(value)}
       </Card.Text>
 
     </ListGroup.Item>
