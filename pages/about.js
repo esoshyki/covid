@@ -67,7 +67,26 @@ export default function About () {
             </a>
           </Col>
           
-          <Col lg={4}></Col>
+          <Col lg={4}>
+          <a href="https://github.com/bexon26" target="_blank" style={{
+              textDecoration: 'none'
+            }}>
+              <Card >
+                <Card.Header style={{textAlign: "center"}}>
+                  Bexon26
+                </Card.Header>
+
+                <Card.Body style={{ padding: 0, height:' 193px'}}>
+                  <Card.Img style={{objectFit: 'cover', width:'100%',height:' 193px'}} src="https://www.meme-arsenal.com/memes/50569ac974c29121ff9075e45a334942.jpg" />
+                </Card.Body>
+
+                <Card.Text style={{margin: 15}}>
+                  {t("bexonCardText")}
+                </Card.Text>
+
+              </Card>
+            </a>
+          </Col>
         </Row>
       </Container>
     </Layout>

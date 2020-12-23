@@ -16,7 +16,7 @@ function Home({dispatch}) {
 
   return (
       <Layout>
-        <Container fluid style={{padding: 0, paddingTop: 10}}>
+        <Container fluid style={{padding: 0, paddingTop: 10, backgroundColor: '#f1ffe5'}}>
           <Row>
             <Col lg={4} sm={false}>
               <GlobalTable />
@@ -26,10 +26,10 @@ function Home({dispatch}) {
             </Col>
           </Row>
           <Row style={{marginTop: 5}}>
-            <Col lg={6} sm={12}>
+            <Col lg={4} sm={12}>
               <CountriesTable />
             </Col>
-            <Col lg={6} sm={12}>
+            <Col lg={8} sm={12}>
               <Graphic />
             </Col>
           </Row>
