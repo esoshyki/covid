@@ -45,8 +45,8 @@ export default function About () {
               </Card>
             </a>
           </Col>
-          
-          <Col xs={4} md={12}>
+
+          <Col lg={4} md={12}>
           <a href="https://github.com/Valeryaleshka" target="_blank" style={{
               textDecoration: 'none'
             }}>
@@ -67,7 +67,7 @@ export default function About () {
             </a>
           </Col>
           
-          <Col xs={4}></Col>
+          <Col lg={4}></Col>
         </Row>
       </Container>
     </Layout>
