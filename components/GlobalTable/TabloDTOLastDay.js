@@ -9,15 +9,19 @@ export default function DTOLastDay(obj, callback) {
     } 
 
     const randomRecovered = Math.floor(Math.random() * 100);
+
+    console.log() 
   
     const DTO = {
-      "totalCases" : obj.cases.new === null ? "-": obj.cases.new,
-      "totalDeaths" : obj.deaths.new === null ? "-": obj.deaths.new,
-      "totalRecoverd" : obj.cases.recovered === null ? "-": "+" + randomRecovered,     
+      "totalCases" : obj.cases.new === null ? "-": +obj.cases.new,
+      "totalDeaths" : obj.deaths.new === null ? "-": +obj.deaths.new,
+      "totalRecoverd" : obj.cases.recovered === null ? "-": +randomRecovered,     
       "casesOnMillion" : obj.cases["1M_pop"] === null ? "-": on1Mcases(obj.cases.new),
       "deathOnMillion" : obj.deaths["1M_pop"] === null ? "-": on1Mcases(obj.deaths.new),  
       "recoveredOnMillion" : obj.cases.recovered === null ? "-": on1Mcases(randomRecovered),        
     }
+
+
     
     return callback ? callback(DTO) : DTO
   }
