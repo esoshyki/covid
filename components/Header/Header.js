@@ -7,8 +7,10 @@ import Navbar from 'react-bootstrap/Navbar'
 import Image from 'react-bootstrap/Image'
 import Nav from 'react-bootstrap/Nav'
 import Clock from './Clock'
+import { useRouter } from 'next/router'; 
 
 const Header = () => {
+  const router = useRouter();
 
   useTranslation();
   const [language, setLanguage] = useState('en');
@@ -30,6 +32,10 @@ const Header = () => {
     }
   }
 
+  function routeTo(address) {
+    router.push(`/${address}`)
+  }
+
   const { t } = useTranslation("global")
 
   return (
@@ -44,10 +50,10 @@ const Header = () => {
 
     <Nav className="justify-content-center" activeKey="/" style={{color: "#fff"}}>
       <Nav.Item >
-        <Nav.Link href="/">{t("home")}</Nav.Link>
+        <Nav.Link onClick={() => routeTo('')}>{t("home")}</Nav.Link>
       </Nav.Item>
       <Nav.Item>
-        <Nav.Link href="/about">{t("about")}</Nav.Link>
+        <Nav.Link onClick={() => routeTo('about')}>{t("about")}</Nav.Link>
       </Nav.Item>
     </Nav>
 
